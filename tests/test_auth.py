@@ -1,9 +1,15 @@
+import pytest
 from fastapi.testclient import TestClient
 from app.main import app
-from app.database import get_db, Base, engine
+from app.models import User, Base
+from app.database import engine, SessionLocal
 
-# Setup database for testing
-Base.metadata.create_all(bind=engine)
+@pytest.fixture(autouse=True)
+def clean_db():
+    # Drop and recreate tables before each test to ensure a clean state
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+    yield
 
 client = TestClient(app)
 
