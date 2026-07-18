@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Register() {
-    const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", password: "", confirmPassword: "" });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,6 +21,16 @@ export default function Register() {
         <h2 className="text-3xl font-black text-white mb-6 text-center tracking-widest">REGISTER</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+        {/* ADDED NAME FIELD */}
+        <div>
+        <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Full Name</label>
+        <input
+        type="text"
+        className="w-full bg-black/50 border border-gray-700 p-3 rounded-lg text-white focus:ring-2 focus:ring-blue-600 outline-none transition"
+        onChange={(e) => setFormData({...formData, name: e.target.value})}
+        required
+        />
+        </div>
         <div>
         <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Email</label>
         <input
