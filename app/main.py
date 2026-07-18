@@ -6,11 +6,27 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from . import models, schemas, auth, database
-from .database import engine, get_db
+from .database import engine, get_db,SessionLocal
 
 # Create the tables in PostgreSQL
 models.Base.metadata.create_all(bind=engine)
 
+def seed_admin():
+    db = SessionLocal()
+    admin_user = db.query(models.User).filter(models.User.email == "admin@admin.com").first()
+    if not admin_user:
+        hashed_pwd = auth.hash_password("admin123")
+        new_admin = models.User(
+            name="Super Admin",
+            email="admin@admin.com",
+            hashed_password=hashed_pwd,
+            is_admin=True
+        )
+        db.add(new_admin)
+        db.commit()
+    db.close()
+
+seed_admin() # Run the seeder
 app = FastAPI()
 
 # Allow React frontend to communicate with this API
@@ -39,7 +55,6 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @app.post("/api/auth/login", response_model=schemas.Token)
 def login_user(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    # Find user by email (OAuth2 uses the 'username' field for the identifier)
     user = db.query(models.User).filter(models.User.email == form_data.username).first()
 
     if not user or not auth.verify_password(form_data.password, user.hashed_password):
@@ -49,9 +64,9 @@ def login_user(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = D
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    # Generate JWT Token
     access_token = auth.create_access_token(data={"sub": user.email})
-    return {"access_token": access_token, "token_type": "bearer"}
+    # Now we also return whether this user is an admin
+    return {"access_token": access_token, "token_type": "bearer", "is_admin": user.is_admin}
 
 @app.get("/api/vehicles", response_model=List[schemas.VehicleResponse])
 def get_vehicles(db: Session = Depends(database.get_db), current_user: models.User = Depends(auth.get_current_user)):
@@ -86,3 +101,11 @@ def purchase_vehicle(
     vehicle.quantity -= 1
     db.commit()
     return {"message": "Vehicle purchased successfully", "remaining_stock": vehicle.quantity}
+
+@app.get("/api/users/me")
+def get_user_profile(current_user: models.User = Depends(auth.get_current_user)):
+    return {
+        "name": current_user.name,
+        "email": current_user.email,
+        "is_admin": current_user.is_admin
+    }

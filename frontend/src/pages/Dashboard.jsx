@@ -8,10 +8,11 @@ export default function Dashboard() {
     const [vehicles, setVehicles] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [categoryFilter, setCategoryFilter] = useState("");
-    const [isAdmin, setIsAdmin] = useState(false); // Toggle this to see Admin UI
+    //const [isAdmin, setIsAdmin] = useState(false); // Toggle this to see Admin UI
     const [error, setError] = useState("");
 
     // Admin Form State
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
     const [newVehicle, setNewVehicle] = useState({
         make: "", model: "", category: "", price: "", quantity: ""
     });
@@ -100,6 +101,7 @@ export default function Dashboard() {
     // 4. LOGOUT
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("isAdmin"); // Clear admin status on logout
         navigate("/login");
     };
 
@@ -117,13 +119,23 @@ export default function Dashboard() {
         {/* NAVBAR */}
         <nav className="bg-black text-white p-4 flex justify-between items-center shadow-lg">
         <h1 className="text-xl font-black tracking-widest">DEALERSHIP DASHBOARD</h1>
+
         <div className="flex gap-4 items-center">
-        {/* Mock Admin Toggle for testing */}
-        <label className="text-xs font-bold text-gray-400 flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" checked={isAdmin} onChange={() => setIsAdmin(!isAdmin)} />
-        ADMIN MODE
-        </label>
-        <button onClick={handleLogout} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm font-bold transition">
+
+        {/* CONDITIONAL ADMIN TEXT */}
+        {isAdmin && (
+            <span className="text-yellow-400 text-xs font-bold uppercase animate-pulse">
+            Admin Mode Active
+            </span>
+        )}
+
+        {/* Mock Admin Toggle */}
+
+
+        <button
+        onClick={handleLogout}
+        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm font-bold transition"
+        >
         Logout
         </button>
         </div>

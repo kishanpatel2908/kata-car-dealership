@@ -15,6 +15,12 @@ export default function Login() {
         formData.append("username", email);
         formData.append("password", password);
 
+        const response = await fetch("http://localhost:8000/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData
+        });
+
         try {
             const response = await fetch("http://localhost:8000/api/auth/login", {
                 method: "POST",
@@ -26,6 +32,7 @@ export default function Login() {
 
             if (response.ok) {
                 localStorage.setItem("token", data.access_token);
+                localStorage.setItem("isAdmin", data.is_admin);
                 navigate("/dashboard");
             } else {
                 setError(data.detail || "Invalid credentials");
