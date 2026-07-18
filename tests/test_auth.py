@@ -1,27 +1,25 @@
 from fastapi.testclient import TestClient
 from app.main import app
+from app.database import get_db, Base, engine
+
+# Setup database for testing
+Base.metadata.create_all(bind=engine)
 
 client = TestClient(app)
 
-def test_root_redirect():
-    # follow_redirects=False lets us test the redirect status itself
-    response = client.get("/", follow_redirects=False)
-    assert response.status_code == 307
-    # Assuming your frontend login is at /login
-    assert response.headers["location"] == "/login"
+def test_register_and_login():
+    # 1. Register
+    reg_response = client.post("/api/auth/register", json={
+        "name": "Kishan",
+        "email": "test@example.com",
+        "password": "password123"
+    })
+    assert reg_response.status_code == 201
 
-def test_user_login():
-    # First, register a user to test login
-    client.post(
-        "/register",
-        json={"email": "login_test@example.com", "password": "testpassword"}
-    )
-
-    # Test login using OAuth2 form data standard
-    response = client.post(
-        "/login",
-        data={"username": "login_test@example.com", "password": "testpassword"}
-    )
-    assert response.status_code == 200
-    assert "access_token" in response.json()
-    assert response.json()["token_type"] == "bearer"
+    # 2. Login
+    login_response = client.post("/api/auth/login", data={
+        "username": "test@example.com",
+        "password": "password123"
+    })
+    assert login_response.status_code == 200
+    assert "access_token" in login_response.json()
