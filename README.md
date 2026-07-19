@@ -38,6 +38,38 @@ This system allows users to view, search, and purchase vehicles from a live inve
 ## 📸 Screenshots
 
 
+### Homepage
+![Home Page](./images/HomePage.jpg)
+*The landing page for the Car Dealership application.*
+
+### Standard User Experience
+![User Dashboard](./images/User_Dashboard.png)
+*The main inventory dashboard from a standard user's perspective.*
+
+![User Search by Make/Model](./images/User_Dashboard_Mark⁄Model_Search.png)
+*Standard user filtering the inventory using the text search for vehicle Make or Model.*
+
+![User Price Range Filter](./images/User_Dashboard_Prive_Range_Filter.png)
+*Standard user filtering the inventory using the dynamic price range slider and category dropdown.*
+
+![User Adding Vehicle](./images/User_Dashboard_Inserting.png)
+*Standard user adding a new vehicle to the inventory system.*
+
+![User Updating Vehicle Details](./images/User_Dashboard_Upadte_Vehicle_Detail.png)
+*Standard user updating vehicle details. Notice the stock quantity remains safely read-only.*
+
+### Administrator Controls
+![Admin Dashboard](./images/Admin_Dashboard.png)
+*The inventory dashboard from an Administrator's perspective, featuring full CRUD controls (Restock, Edit, Delete).*
+
+![Admin Updating Vehicle Details](./images/Admin_Dashboard_Update_Details.png)
+*Admin editing vehicle details, including full access to modify the actual stock quantity.*
+
+![Admin Deleting Vehicle](./images/Admin_Dashboard_Delete.png)
+*Admin initiating a vehicle deletion with a browser confirmation prompt to prevent accidental data loss.*
+
+![Admin Dashboard After Deletion](./images/Admin_Dashboard_After_delete.png)
+*The Admin dashboard seamlessly reflecting the updated inventory after a successful deletion.*
 
 ---
 
