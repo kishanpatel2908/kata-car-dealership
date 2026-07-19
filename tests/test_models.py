@@ -1,18 +1,24 @@
-from app.models import User
-from sqlalchemy.orm import Session
-from app.database import Base, engine
+import pytest
 from app.models import User, Vehicle
+from app.database import SessionLocal, Base, engine
 
+@pytest.fixture
+def db_session():
+    # Setup: Create tables and a session
+    Base.metadata.create_all(bind=engine)
+    session = SessionLocal()
+    try:
+        yield session
+    finally:
+        # Teardown: Close session and drop tables
+        session.close()
+        Base.metadata.drop_all(bind=engine)
 
-def test_user_model_creation():
-    # Verify the User table schema is recognized
-    assert User.__tablename__ == "users"
-    assert hasattr(User, "email")
-    assert hasattr(User, "hashed_password")
-    assert hasattr(User, "name")
-
-def test_user_model_has_is_admin():
+def test_user_model_has_is_admin(db_session):
     user = User(name="Test", email="test@test.com", hashed_password="pwd")
+    db_session.add(user)
+    db_session.commit()
+    db_session.refresh(user)
     assert user.is_admin is False
 
 def test_vehicle_model_schema():

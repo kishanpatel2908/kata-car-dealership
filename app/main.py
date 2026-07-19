@@ -7,9 +7,20 @@ from sqlalchemy.orm import Session
 from typing import List
 from . import models, schemas, auth, database
 from .database import engine, get_db,SessionLocal
-
+from .auth import get_current_user, get_current_admin
 # Create the tables in PostgreSQL
 models.Base.metadata.create_all(bind=engine)
+
+app = FastAPI()
+
+# Allow React frontend to communicate with this API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS","*"],
+    allow_headers=["*"],
+)
 
 def seed_admin():
     db = SessionLocal()
@@ -27,16 +38,8 @@ def seed_admin():
     db.close()
 
 seed_admin() # Run the seeder
-app = FastAPI()
 
-# Allow React frontend to communicate with this API
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 @app.post("/api/auth/register", status_code=status.HTTP_201_CREATED)
 def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -109,3 +112,36 @@ def get_user_profile(current_user: models.User = Depends(auth.get_current_user))
         "email": current_user.email,
         "is_admin": current_user.is_admin
     }
+
+@app.put("/api/vehicles/{vehicle_id}", response_model=schemas.VehicleResponse)
+def update_vehicle(vehicle_id: int, vehicle_update: schemas.VehicleUpdate, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    # ONLY Admins can edit
+    if not current_user.is_admin:
+        raise HTTPException(status_code=403, detail="Not authorized")
+
+    vehicle = db.query(models.Vehicle).filter(models.Vehicle.id == vehicle_id).first()
+    if not vehicle:
+        raise HTTPException(status_code=404, detail="Vehicle not found")
+
+    # Update only the provided fields
+    update_data = vehicle_update.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(vehicle, key, value)
+
+    db.commit()
+    db.refresh(vehicle)
+    return vehicle
+
+@app.delete("/api/vehicles/{vehicle_id}")
+def delete_vehicle(
+    vehicle_id: int,
+    db: Session = Depends(database.get_db),
+    current_admin: models.User = Depends(auth.get_current_admin)
+):
+    vehicle = db.query(models.Vehicle).filter(models.Vehicle.id == vehicle_id).first()
+    if not vehicle:
+        raise HTTPException(status_code=404, detail="Vehicle not found")
+
+    db.delete(vehicle)
+    db.commit()
+    return {"message": "Vehicle deleted successfully"}

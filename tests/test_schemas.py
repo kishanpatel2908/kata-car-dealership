@@ -14,7 +14,7 @@ def test_user_create_schema():
         UserCreate(name="Kishan", password="password123")
 
 def test_token_schema():
-    token = Token(access_token="test_token", token_type="bearer")
+    token = Token(access_token="test_token", token_type="bearer",is_admin=False)
     assert token.access_token == "test_token"
 
 def test_vehicle_schema_orm_conversion():

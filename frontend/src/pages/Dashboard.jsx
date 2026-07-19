@@ -10,7 +10,8 @@ export default function Dashboard() {
     const [categoryFilter, setCategoryFilter] = useState("");
     //const [isAdmin, setIsAdmin] = useState(false); // Toggle this to see Admin UI
     const [error, setError] = useState("");
-
+    const [editingId, setEditingId] = useState(null);
+    const [editForm, setEditForm] = useState({});
     // Admin Form State
     const isAdmin = localStorage.getItem("isAdmin") === "true";
     const [newVehicle, setNewVehicle] = useState({
@@ -43,7 +44,10 @@ export default function Dashboard() {
             setError("Failed to fetch vehicles. Is the server running?");
         }
     };
-
+    const startEditing = (vehicle) => {
+        setEditingId(vehicle.id);
+        setEditForm({ ...vehicle });
+    };
     // 2. USER FUNCTION: PURCHASE VEHICLE
     const handlePurchase = async (vehicleId) => {
         const token = localStorage.getItem("token");
@@ -105,6 +109,66 @@ export default function Dashboard() {
         navigate("/login");
     };
 
+
+
+    // 5. ADMIN FUNCTION: DELETE VEHICLE
+    const handleDeleteVehicle = async (vehicleId) => {
+        console.log("Delete clicked for ID:", vehicleId);
+        if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
+
+        const token = localStorage.getItem("token");
+        try {
+            const response = await fetch(`http://localhost:8000/api/vehicles/${vehicleId}`, {
+                method: "DELETE",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            console.log("Response status:", response.status);
+            if (response.ok) {
+                setVehicles(vehicles.filter(v => v.id !== vehicleId));
+            } else {
+                const data = await response.json();
+                alert(data.detail || "Failed to delete vehicle");
+            }
+        } catch (err) {
+            alert("Network error during deletion");
+        }
+    };
+
+    // 6. ADMIN FUNCTION : Update vehicle
+    const handleUpdateVehicle = async (vehicleId) => {
+        const token = localStorage.getItem("token");
+
+        // CRITICAL: Cast numbers explicitly
+        const payload = {
+            ...editForm,
+            price: parseFloat(editForm.price),
+            quantity: parseInt(editForm.quantity)
+        };
+
+        try {
+            const response = await fetch(`http://localhost:8000/api/vehicles/${vehicleId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(payload) // Send the sanitized payload
+            });
+
+            if (response.ok) {
+                setVehicles(vehicles.map(v => v.id === vehicleId ? { ...v, ...payload } : v));
+                setEditingId(null);
+            } else {
+                const errorData = await response.json();
+                console.error("Server Error:", errorData);
+                alert("Failed to update: " + JSON.stringify(errorData.detail));
+            }
+        } catch (err) {
+            console.error("Fetch Error:", err);
+            alert("Network error");
+        }
+    };
+
     // SEARCH & FILTER LOGIC
     const filteredVehicles = vehicles.filter(v => {
         const matchesSearch = v.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -129,7 +193,7 @@ export default function Dashboard() {
             </span>
         )}
 
-        {/* Mock Admin Toggle */}
+
 
 
         <button
@@ -207,50 +271,96 @@ export default function Dashboard() {
         {/* INVENTORY GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredVehicles.map(vehicle => (
-            <div key={vehicle.id} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col border border-gray-100 hover:shadow-lg transition">
+            <div key={vehicle.id} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col border border-gray-100">
             <div className="p-6 flex-grow">
-            <div className="flex justify-between items-start mb-2">
-            <div>
-            <h3 className="text-2xl font-black text-gray-900">{vehicle.make}</h3>
-            <p className="text-lg text-gray-600">{vehicle.model}</p>
-            </div>
-            <span className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded font-bold uppercase">
-            {vehicle.category}
-            </span>
-            </div>
+
+            {/* CARD CONTENT */}
+            {editingId === vehicle.id ? (
+                <div className="space-y-2">
+                {/* Unified Header Row */}
+                <div className="flex justify-between items-start">
+                <div className="flex flex-col gap-1">
+                <input
+                className="text-2xl font-black text-gray-900 border-b-2 border-blue-500 outline-none w-auto"
+                style={{ width: `${Math.max(editForm.make?.length || 5, 5)}ch` }}
+                value={editForm.make}
+                onChange={e => setEditForm({...editForm, make: e.target.value})}
+                />
+                <input
+                className="text-lg text-gray-600 border-b-2 border-blue-500 outline-none w-auto"
+                style={{ width: `${Math.max(editForm.model?.length || 8, 8)}ch` }}
+                value={editForm.model}
+                onChange={e => setEditForm({...editForm, model: e.target.value})}
+                />
+                </div>
+
+                {/* Category Dropdown (Maintains position) */}
+                <select
+                className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded font-bold uppercase border border-gray-400"
+                value={editForm.category}
+                onChange={e => setEditForm({...editForm, category: e.target.value})}
+                >
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Sports">Sports</option>
+                <option value="Luxury">Luxury</option>
+                </select>
+                </div>
+
+                {/* ... rest of your price/stock inputs ... */}
+                </div>
+            ) : (
+                /* VIEW MODE (Keep this exactly as it is) */
+                <div className="flex justify-between items-start mb-2">
+                <div>
+                <h3 className="text-2xl font-black text-gray-900">{vehicle.make}</h3>
+                <p className="text-lg text-gray-600">{vehicle.model}</p>
+                </div>
+                <span className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded font-bold uppercase">{vehicle.category}</span>
+                </div>
+            )}
+
+
+            {/* PRICE & STOCK */}
             <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-end">
             <div>
             <p className="text-xs text-gray-500 uppercase font-bold">Price</p>
-            <p className="text-xl font-bold text-green-600">${vehicle.price.toLocaleString()}</p>
+            {editingId === vehicle.id ? (
+                <input type="number" className="text-xl font-bold text-green-600 border-b-2 border-blue-500 w-24 outline-none"
+                value={editForm.price} onChange={e => setEditForm({...editForm, price: e.target.value})} />
+            ) : (
+                <p className="text-xl font-bold text-green-600">${vehicle.price.toLocaleString()}</p>
+            )}
             </div>
             <div className="text-right">
             <p className="text-xs text-gray-500 uppercase font-bold">In Stock</p>
-            <p className={`text-xl font-black ${vehicle.quantity > 0 ? "text-blue-600" : "text-red-500"}`}>
-            {vehicle.quantity}
-            </p>
+            {editingId === vehicle.id ? (
+                <input type="number" className="text-xl font-black text-blue-600 border-b-2 border-blue-500 w-16 outline-none text-right"
+                value={editForm.quantity} onChange={e => setEditForm({...editForm, quantity: e.target.value})} />
+            ) : (
+                <p className={`text-xl font-black ${vehicle.quantity > 0 ? "text-blue-600" : "text-red-500"}`}>{vehicle.quantity}</p>
+            )}
             </div>
             </div>
             </div>
 
             {/* ACTION BUTTONS */}
             <div className="bg-gray-50 p-4 border-t flex justify-between gap-2">
-            <button
-            onClick={() => handlePurchase(vehicle.id)}
-            disabled={vehicle.quantity <= 0}
-            className={`flex-1 font-bold py-2 px-4 rounded uppercase tracking-wider text-sm transition ${
-                vehicle.quantity > 0
-                ? "bg-black text-white hover:bg-gray-800"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
-            >
-            {vehicle.quantity > 0 ? "Purchase" : "Out of Stock"}
-            </button>
-
-            {/* Admin Actions (Stubs) */}
-            {isAdmin && (
+            {editingId === vehicle.id ? (
                 <>
-                <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded font-bold text-xs">Edit</button>
-                <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded font-bold text-xs">Del</button>
+                <button onClick={() => handleUpdateVehicle(vehicle.id)} className="flex-1 bg-green-600 text-white font-bold py-2 rounded">Confirm</button>
+                <button onClick={() => setEditingId(null)} className="flex-1 bg-red-500 text-white font-bold py-2 rounded">Cancle</button>
+                </>
+            ) : (
+                <>
+                {/* PURCHASE BUTTON DISABLED IN EDIT MODE BY DEFAULT */}
+                <button onClick={() => handlePurchase(vehicle.id)} disabled={vehicle.quantity <= 0 || editingId !== null} className="flex-1 bg-black text-white font-bold py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed">Purchase</button>
+                {isAdmin && (
+                    <>
+                    <button onClick={() => startEditing(vehicle)} className="bg-yellow-500 text-white px-3 py-2 rounded font-bold text-xs">Edit</button>
+                    <button onClick={() => handleDeleteVehicle(vehicle.id)} className="bg-red-500 text-white px-3 py-2 rounded font-bold text-xs">Del</button>
+                    </>
+                )}
                 </>
             )}
             </div>
