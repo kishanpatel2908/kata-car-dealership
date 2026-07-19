@@ -4,7 +4,12 @@ from app.models import User
 
 @pytest.fixture
 def test_user(db_session):
-    user = User(name="Kishan", email="test@example.com", hashed_password="hashed_pwd")
+    # Check if user exists first to prevent UniqueViolation
+    existing_user = db_session.query(User).filter_by(email="test@example.com").first()
+    if existing_user:
+        return existing_user
+
+    user = models.User(name="Kishan", email="test@example.com", hashed_password="hashed_pwd")
     db_session.add(user)
     db_session.commit()
     db_session.refresh(user)

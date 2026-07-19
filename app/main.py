@@ -179,13 +179,22 @@ def delete_vehicle(
     return {"message": "Vehicle deleted successfully"}
 
 @app.post("/api/vehicles/{vehicle_id}/restock")
-def restock_vehicle(vehicle_id: int, quantity: int, db: Session = Depends(database.get_db), current_admin: models.User = Depends(auth.get_current_admin)):
+def restock_vehicle(
+    vehicle_id: int,
+    quantity: int = 1, # Accepts quantity from the URL query parameter
+    db: Session = Depends(database.get_db),
+    current_admin: models.User = Depends(auth.get_current_admin) # Requires Admin
+):
     vehicle = db.query(models.Vehicle).filter(models.Vehicle.id == vehicle_id).first()
+
     if not vehicle:
         raise HTTPException(status_code=404, detail="Vehicle not found")
+
+    # Increase the stock
     vehicle.quantity += quantity
     db.commit()
-    return {"message": "Restocked successfully", "new_quantity": vehicle.quantity}
+
+    return {"message": "Vehicle restocked successfully", "new_quantity": vehicle.quantity}
 
 @app.get("/api/vehicles/search", response_model=List[schemas.VehicleResponse])
 def search_vehicles(make: str = None, model: str = None, category: str = None, db: Session = Depends(database.get_db)):

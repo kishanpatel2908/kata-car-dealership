@@ -237,7 +237,27 @@ export default function Dashboard() {
             alert("Network error");
         }
     };
+    // 7. ADMIN FUNCTION: RESTOCK VEHICLE
+    const handleRestock = async (vehicleId) => {
+        const token = localStorage.getItem("token");
+        try {
+            const response = await fetch(`http://localhost:8000/api/vehicles/${vehicleId}/restock`, {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
 
+            if (response.ok) {
+                setVehicles(vehicles.map(v =>
+                v.id === vehicleId ? { ...v, quantity: v.quantity + 1 } : v
+                ));
+            } else {
+                const data = await response.json();
+                alert(data.detail || "Restock failed");
+            }
+        } catch (err) {
+            alert("Network error during restock");
+        }
+    };
     // SEARCH & FILTER LOGIC
     const filteredVehicles = vehicles.filter(v => {
         const matchesSearch = v.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -457,12 +477,18 @@ export default function Dashboard() {
                 </>
             ) : (
                 <>
+                {/* Purchase (All Users) */}
                 <button onClick={() => handlePurchase(vehicle.id)} disabled={vehicle.quantity <= 0 || editingId !== null} className="flex-1 bg-black text-white font-bold py-2 rounded text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">Purchase</button>
 
-                {/* Edit button is now available to EVERYONE */}
+                {/* Restock (Admins Only) */}
+                {isAdmin && (
+                    <button onClick={() => handleRestock(vehicle.id)} className="bg-blue-500 text-white px-3 py-2 rounded font-bold text-xs">Restock</button>
+                )}
+
+                {/* Edit (All Users) */}
                 <button onClick={() => startEditing(vehicle)} className="bg-yellow-500 text-white px-3 py-2 rounded font-bold text-xs">Edit</button>
 
-                {/* Delete button remains strictly for Admins */}
+                {/* Delete (Admins Only) */}
                 {isAdmin && (
                     <button onClick={() => handleDeleteVehicle(vehicle.id)} className="bg-red-500 text-white px-3 py-2 rounded font-bold text-xs">Del</button>
                 )}
