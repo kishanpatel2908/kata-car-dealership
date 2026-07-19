@@ -431,8 +431,16 @@ export default function Dashboard() {
             <div className="text-right">
             <p className="text-xs text-gray-500 uppercase font-bold">In Stock</p>
             {editingId === vehicle.id ? (
-                <input type="number" className="text-xl font-black text-blue-600 border-b-2 border-blue-500 w-16 outline-none text-right"
-                value={editForm.quantity} onChange={e => setEditForm({...editForm, quantity: e.target.value})} />
+                // Only Admins get the input field to edit quantity
+                isAdmin ? (
+                    <input type="number" className="text-xl font-black text-blue-600 border-b-2 border-blue-500 w-16 outline-none text-right"
+                    value={editForm.quantity} onChange={e => setEditForm({...editForm, quantity: e.target.value})} />
+                ) : (
+                    // Regular users just see the static quantity while editing
+                    <p className={`text-xl font-black ${vehicle.quantity > 0 ? "text-blue-600" : "text-red-500"}`}>
+                    {vehicle.quantity} <span className="text-[10px] text-gray-400 font-normal block">(Admin only)</span>
+                    </p>
+                )
             ) : (
                 <p className={`text-xl font-black ${vehicle.quantity > 0 ? "text-blue-600" : "text-red-500"}`}>{vehicle.quantity}</p>
             )}
@@ -450,11 +458,13 @@ export default function Dashboard() {
             ) : (
                 <>
                 <button onClick={() => handlePurchase(vehicle.id)} disabled={vehicle.quantity <= 0 || editingId !== null} className="flex-1 bg-black text-white font-bold py-2 rounded text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">Purchase</button>
+
+                {/* Edit button is now available to EVERYONE */}
+                <button onClick={() => startEditing(vehicle)} className="bg-yellow-500 text-white px-3 py-2 rounded font-bold text-xs">Edit</button>
+
+                {/* Delete button remains strictly for Admins */}
                 {isAdmin && (
-                    <>
-                    <button onClick={() => startEditing(vehicle)} className="bg-yellow-500 text-white px-3 py-2 rounded font-bold text-xs">Edit</button>
                     <button onClick={() => handleDeleteVehicle(vehicle.id)} className="bg-red-500 text-white px-3 py-2 rounded font-bold text-xs">Del</button>
-                    </>
                 )}
                 </>
             )}
