@@ -1,3 +1,10 @@
+# Live Website Link
+https://kata-car-dealership-six.vercel.app/
+
+# Admin Login
+Email:- admin@admin.com
+Password:- admin123
+
 
 # Car Dealership Inventory System 🚗
 
