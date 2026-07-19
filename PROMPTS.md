@@ -9367,3 +9367,8269 @@ Added TEST_REPORT.md, PROMPTS.md, and updated README.md with setup instructions,
 
 Co-authored-by: Gemini <gemini@google.com>
 Once you push this commit, your Kata submission is complete!
+
+
+
+A comprehensive README.md file that includes:
+
+• A clear explanation of the project.
+
+• Detailed instructions on how to set up and run the project locally (both backend and
+
+frontend).
+
+• Screenshots of your final application in action.
+
+• The mandatory "My AI Usage" section.
+
+Here is a complete, well-structured README.md template tailored to the application you just built. You can copy this directly into your repository.
+
+Markdown
+# Car Dealership Inventory System 🚗
+
+A full-stack, single-page application (SPA) and RESTful API built to manage a car dealership's inventory. This project was developed following Test-Driven Development (TDD) principles as part of a comprehensive software engineering Kata.
+
+## 📖 Project Overview
+
+This system allows users to view, search, and purchase vehicles from a live inventory, while providing administrative users with tools to manage that inventory. It features a robust FastAPI backend connected to a PostgreSQL database, paired with a responsive React frontend styled with Tailwind CSS.
+
+### Key Features
+*   **Role-Based Access Control (RBAC):** Secure JWT authentication distinguishing between Standard Users and Administrators.
+*   **Inventory Management:** 
+    *   *Admins:* Can add new vehicles, restock quantities, update vehicle details, and delete records.
+    *   *Users:* Can browse, search, edit vehicle details (excluding stock quantity), and "purchase" vehicles (which decreases stock).
+*   **Smart Search & Filtering:** Filter vehicles by make, model, category, and a dynamic price range slider.
+*   **Validation & Security:** Backend validation via Pydantic (preventing negative prices/quantities) and route-level dependency injection to secure admin-only actions.
+
+## 🛠️ Tech Stack
+
+**Backend:**
+*   Python 3.x
+*   FastAPI (REST API framework)
+*   SQLAlchemy & PostgreSQL (Database & ORM)
+*   Pytest & Pytest-cov (Testing)
+*   Python-JOSE & Passlib (JWT Authentication & Password Hashing)
+
+**Frontend:**
+*   React 19 (via Vite)
+*   Tailwind CSS (Styling)
+*   Vitest & React Testing Library (Testing)
+
+---
+
+## 📸 Screenshots
+
+*(Replace the placeholder links below with actual file paths to your screenshots once you add them to your repository)*
+
+![Dashboard View](./docs/dashboard-screenshot.png)
+*The main inventory dashboard showing available vehicles and search filters.*
+
+![Admin Controls](./docs/admin-screenshot.png)
+*Admin-only UI components for restocking and managing inventory.*
+
+---
+
+## 🚀 Local Setup Instructions
+
+### Prerequisites
+*   Node.js (v18+)
+*   Python (3.10+)
+*   PostgreSQL running locally
+
+### 1. Backend Setup (FastAPI)
+
+1. Clone the repository and navigate to the project root:
+   ```bash
+   git clone <your-repo-url>
+   cd kata_dealership
+Create and activate a virtual environment:
+
+Bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+Install backend dependencies:
+
+Bash
+pip install fastapi uvicorn sqlalchemy psycopg2-binary python-jose[cryptography] passlib[bcrypt] pydantic
+(Note: Adjust this to pip install -r requirements.txt if you have exported one).
+
+Configure your database connection in app/database.py or your .env file to point to your local PostgreSQL instance.
+
+Start the backend server:
+
+Bash
+uvicorn app.main:app --reload
+The API will be available at http://localhost:8000
+
+2. Frontend Setup (React)
+Open a new terminal tab and navigate to the frontend directory:
+
+Bash
+cd frontend
+Install frontend dependencies:
+
+Bash
+npm install
+Start the Vite development server:
+
+Bash
+npm run dev
+The application will be available at http://localhost:5173
+
+🧪 Testing
+This project adheres to TDD practices. To run the test suites locally:
+
+Backend Tests:
+Ensure your virtual environment is active, then run:
+
+Bash
+pip install pytest pytest-cov
+pytest -v --cov=app
+Frontend Tests:
+Navigate to the frontend directory and run:
+
+Bash
+npm run test -- --reporter verbose
+🤖 My AI Usage
+AI Tool Used: Gemini
+
+How I used it:
+I utilized Gemini primarily as a pair-programmer for debugging, environment configuration, and test suite setup. Specific instances include:
+
+Debugging masked CORS errors: Gemini helped me diagnose that a frontend CORS error was actually being caused by a backend 500 Internal Server Error triggered by an AttributeError in my FastAPI dependency injection (current_user).
+
+Role-Based Access Control (RBAC) UI: I used AI to help structure the React conditional rendering for standard users vs. admins, specifically ensuring standard users could edit vehicle details without modifying the stock quantity.
+
+Test Suite Configuration: I used Gemini to troubleshoot missing Python dependencies (python-jose, pytest-cov) and to correctly configure Vitest with a jsdom environment for the React frontend.
+
+Fixing Database Fixtures: We worked together to resolve an SQLAlchemy IntegrityError in my pytest suite by updating the database fixture to check for existing users before inserting, preventing unique constraint violations.
+
+Reflection:
+Using AI significantly sped up the debugging process, especially when dealing with misleading error messages (like the fake CORS error). It acted as a highly effective sounding board that helped me pinpoint syntax errors and configuration gaps much faster than I would have by manually digging through documentation.
+
+how to insert image in READ.md ?
+
+To insert an image into your README.md file, you use this standard Markdown syntax:
+
+Markdown
+![Alt Text](path_to_your_image)
+Here is the step-by-step process to add your screenshots for the Kata submission:
+
+1. Store the Images in Your Repository
+First, you need to save the screenshot files inside your project folder so they get uploaded to Git with the rest of your code.
+
+Create a new folder in the root of your project (where your README is) and name it images or docs.
+
+Move your screenshot files into that folder (e.g., dashboard.png and admin.png).
+
+2. Add the Markdown Syntax
+Open your README.md and replace the placeholder text with the actual path to your images. Since the images are inside your project, you use a relative path.
+
+Markdown
+## 📸 Screenshots
+
+![Dashboard View](./images/dashboard.png)
+*The main inventory dashboard showing available vehicles and search filters.*
+
+![Admin Controls](./images/admin.png)
+*Admin-only UI components for restocking and managing inventory.*
+![...] contains the Alt Text (what screen readers read, or what shows if the image breaks).
+
+(...) contains the File Path pointing to where the image lives relative to the README file.
+
+Pro-Tip: Resizing Images (Optional)
+Standard Markdown doesn't let you control the size of the image. If you preview your README and the screenshot is massive, you can use standard HTML instead to control the width:
+
+HTML
+<img src="./images/dashboard.png" alt="Dashboard View" width="600"/>
+upload this 10 images into READ.md ## 📸 Screenshots
+
+
+
+![Dashboard View](./images/dashboard.png)
+
+*The main inventory dashboard showing available vehicles and search filters.*
+
+
+
+![Admin Controls](./images/admin.png)
+
+*Admin-only UI components for restocking and managing inventory.*
+
+
+
+
+
+Here is the updated Markdown for your README.md file. I have organized all 10 of your screenshots into a clean, logical hierarchy with descriptive captions so anyone reviewing your project can clearly see the different features and Role-Based Access controls.
+
+Assuming you placed these images into a folder named images in your project root, you can copy and paste this exact block to replace the ## 📸 Screenshots section in your README:
+
+Markdown
+## 📸 Screenshots
+
+### Homepage
+![Home Page](./images/HomePage.jpg)
+*The landing page for the Car Dealership application.*
+
+### Standard User Experience
+![User Dashboard](./images/User_Dashboard.png)
+*The main inventory dashboard from a standard user's perspective.*
+
+![User Search by Make/Model](./images/User_Dashboard_Mark⁄Model_Search.png)
+*Standard user filtering the inventory using the text search for vehicle Make or Model.*
+
+![User Price Range Filter](./images/User_Dashboard_Prive_Range_Filter.png)
+*Standard user filtering the inventory using the dynamic price range slider and category dropdown.*
+
+![User Adding Vehicle](./images/User_Dashboard_Inserting.png)
+*Standard user adding a new vehicle to the inventory system.*
+
+![User Updating Vehicle Details](./images/User_Dashboard_Upadte_Vehicle_Detail.png)
+*Standard user updating vehicle details. Notice the stock quantity remains safely read-only.*
+
+### Administrator Controls
+![Admin Dashboard](./images/Admin_Dashboard.png)
+*The inventory dashboard from an Administrator's perspective, featuring full CRUD controls (Restock, Edit, Delete).*
+
+![Admin Updating Vehicle Details](./images/Admin_Dashboard_Update_Details.png)
+*Admin editing vehicle details, including full access to modify the actual stock quantity.*
+
+![Admin Deleting Vehicle](./images/Admin_Dashboard_Delete.png)
+*Admin initiating a vehicle deletion with a browser confirmation prompt to prevent accidental data loss.*
+
+![Admin Dashboard After Deletion](./images/Admin_Dashboard_After_delete.png)
+*The Admin dashboard seamlessly reflecting the updated inventory after a successful deletion.*
+(Optional - Brownie Points) A link to the deployed, live application on a platform like Vercel,
+
+Netlify, Heroku, or AWS.
+
+
+
+i have
+
+
+
+Skip To Content
+
+Dashboard
+
+Kishan Patel
+
+Account
+
+Dashboard
+
+Courses
+
+Calendar
+
+Inbox
+
+History
+
+2 unread release notes.2
+
+Help
+
+ALLv2EN-US-LTI13-178185
+
+Home
+
+Modules
+
+Discussions
+
+Grades
+
+Lucid (Whiteboard)
+
+AWS Academy Learner Lab [178185]
+
+Welcome Course Banner
+
+
+
+AWS Academy Learner Lab provides a long-running sandbox environment for ad hoc exploration of AWS services. Within this class, students will have access to a restricted set of AWS services. Not all AWS documentation walk-through or sample labs that operate in an AWS Production account will work in the Learner Lab environment. You will retain access to the AWS resources set up in this environment for the duration of this course. We limit your budget ($50USD), so you should exercise caution to prevent charges that will deplete your budget too quickly. If you exceed your budget, you will lose access to your environment and lose all of your work.
+
+
+
+Each session lasts for 4 hours by default, although you can extend a session to run longer by pressing the start button to reset your session timer. At the end of each session, any resources you created will persist. However, we automatically shut EC2 instances down. Other resources, such as RDS instances, keep running. Keep in mind that we do not stop some AWS features, so they can still incur charges between sessions. For example, an Elastic Load Balancer or a NAT. You may wish to delete those types of resources and recreate them as needed to test your work during a session. You will have access to this environment for the duration of the class that you are enrolled in. When the class ends, your access to the learner lab will also end.
+
+
+
+Educator / Teacher Only
+
+
+
+This sandbox is for educator designed project work, lab exercises, or practice that is created and tested within Learner Lab.
+
+
+
+Get Started
+
+Click to start
+
+Click for discussions
+
+
+
+Click to get help
+
+Select Modules to start the course.
+
+Use Discussions to connect with peers.
+
+
+
+Visit Course Support for help.
+
+To Do
+
+Recent Feedback
+
+Nothing for now
+
+That is awesome! Having access to an AWS Academy Learner Lab is a great resource. Deploying your application to AWS will definitely earn you those brownie points.
+
+However, before we build the AWS deployment strategy, I need to give you a very important warning about using the Learner Lab for a job interview/Kata submission:
+
+As your screenshot notes: "Each session lasts for 4 hours by default... we automatically shut EC2 instances down."
+If you deploy your app on an AWS Academy EC2 instance, the server will turn off 4 hours after you close the lab. If a recruiter or reviewer clicks your live link the next day, the site will be down, and they might assume your code is broken.
+
+Your Two Deployment Options:
+Option 1: The "Always On" Free Tier (Highly Recommended for Katas)
+You deploy your Database and Backend to Render.com (free), and your React Frontend to Vercel (free).
+
+Pros: Takes about 15 minutes, zero configuration, and the links stay alive 24/7 so reviewers can test your app at any time.
+
+Option 2: The AWS Academy EC2 Route
+You spin up a virtual server in your Learner Lab, install PostgreSQL, Python, and Node, and run everything from one machine.
+
+Pros: You get to brag that you deployed it on AWS.
+
+Cons: You will have to manually restart the lab and the server before your interview, and you'll have to send the reviewer the link right when they are ready to grade it.
+
+Which path would you like to take?
+
+If you want the "Always On" (Vercel/Render) route, I can give you the 3-step guide to doing that right now.
+If you want to use your AWS Learner Lab, let me know and I will write up the step-by-step guide to provisioning your EC2 instance and configuring the security groups!
+
+Render.com
+
+Excellent choice. Deploying on Render and Vercel is the industry standard for modern portfolio projects because it requires zero server maintenance and automatically updates every time you push code to GitHub.
+
+Before you deploy, you need to make two small tweaks to your codebase so it works in the cloud.
+
+Here is your 15-minute deployment guide.
+
+Step 1: Codebase Cloud Prep
+1. Generate requirements.txt (Backend)
+Render needs to know which Python packages to install. In your terminal, ensure your virtual environment is active, navigate to your backend root folder, and run:
+
+Bash
+pip freeze > requirements.txt
+2. Update CORS (Backend)
+Open your app/main.py file. You need to allow your future Vercel frontend to talk to your API. Find your CORSMiddleware configuration and update the allow_origins to include "*" (which allows any URL to connect for the sake of this Kata):
+
+Python
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Allow all origins for the deployed version
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+3. Use Environment Variables (Frontend)
+Your React app is currently hardcoded to look for http://localhost:8000. We need it to dynamically adapt to the cloud.
+Do a global search in your frontend folder for http://localhost:8000 (likely in Dashboard.jsx, Admin.jsx, Login.jsx, etc.) and replace it with this Vite environment variable:
+
+JavaScript
+// Change this:
+const response = await fetch("http://localhost:8000/api/vehicles");
+
+// To this:
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`);
+Commit and push these changes to your GitHub repository.
+
+Step 2: Deploy the PostgreSQL Database (Render)
+Go to Render.com and create a free account.
+
+Click New + in the top right corner and select PostgreSQL.
+
+Name your database (e.g., dealership-db).
+
+Select the Free tier and click Create Database.
+
+Once created, scroll down to the Connections section and copy the Internal Database URL (it looks like postgresql://user:pass@host/db).
+
+Step 3: Deploy the Backend API (Render)
+Click New + again and select Web Service.
+
+Connect your GitHub account and select your kata_dealership repository.
+
+Configure the service:
+
+Name: dealership-api
+
+Language: Python 3
+
+Build Command: pip install -r requirements.txt
+
+Start Command: uvicorn app.main:app --host 0.0.0.0 --port 10000
+
+Instance Type: Free
+
+Scroll down to Environment Variables and add your Database URL:
+
+Key: DATABASE_URL
+
+Value: (Paste the Internal Database URL you copied in Step 2)
+
+Click Create Web Service.
+
+Wait about 3–5 minutes for the build to finish. Once it says "Live", copy the custom URL Render gives you at the top left (e.g., [https://dealership-api-xyz.onrender.com](https://dealership-api-xyz.onrender.com)).
+
+Step 4: Deploy the Frontend (Vercel)
+Go to Vercel.com and log in with your GitHub account.
+
+Click Add New... > Project.
+
+Import your kata_dealership repository.
+
+Vercel is smart and will detect that it's a Vite/React app. Before you click Deploy, expand the Environment Variables dropdown.
+
+Add the API URL you got from Render:
+
+Name: VITE_API_URL
+
+Value: (Paste your Render backend URL here, e.g., [https://dealership-api-xyz.onrender.com](https://dealership-api-xyz.onrender.com). Make sure there is NO trailing slash / at the end).
+
+Click Deploy.
+
+In about 60 seconds, Vercel will give you a live URL. Click it, register a new user, and test out your fully deployed, full-stack application!
+
+Note on Free Tiers: Render automatically spins down free web services after 15 minutes of inactivity. When you (or a reviewer) visit the site for the first time in a while, it might take ~50 seconds for the backend to "wake up" and respond to the first API request.
+
+2026-07-19T11:36:44.899699263Z ==> Cloning from https://github.com/kishanpatel2908/kata-car-dealership
+
+2026-07-19T11:36:45.527958366Z ==> Checking out commit 4b7ed1b4f40acb9d63b53e117d8b33d5f85b5801 in branch main
+
+2026-07-19T11:36:47.167874517Z ==> Using Python version 3.14.3 (default)
+
+2026-07-19T11:36:47.196021782Z ==> Docs on specifying a Python version: https://render.com/docs/python-version
+
+2026-07-19T11:36:47.196145797Z ==> Installing Python version 3.14.3...
+
+2026-07-19T11:36:57.498454032Z ==> Using Poetry version 2.1.3 (default)
+
+2026-07-19T11:36:57.581701384Z ==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+
+2026-07-19T11:36:57.702237386Z ==> Running build command 'pip install -r requirements.txt'...
+
+2026-07-19T11:36:58.634439875Z
+
+2026-07-19T11:36:58.634472766Z [notice] A new release of pip is available: 25.3 -> 26.1.2
+
+2026-07-19T11:36:58.634480917Z [notice] To update, run: pip install --upgrade pip
+
+2026-07-19T11:36:58.634867893Z ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+
+2026-07-19T11:36:58.74046649Z ==> Build failed 😞
+
+2026-07-19T11:36:58.740488411Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+
+The error ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt' is happening because Render is looking for the requirements.txt file in the root folder of your repository, but it likely isn't there, or your project structure is different.
+
+Here is how to fix this:
+
+1. Check your Project Structure
+Render runs the build command from the root of your repository.
+
+If your requirements.txt is inside a subfolder (e.g., inside a folder named backend), you must update your Build Command in Render settings.
+
+Change the Build Command to:
+
+Bash
+cd backend && pip install -r requirements.txt
+(Replace backend with the actual folder name where your requirements.txt is located).
+
+2. Ensure requirements.txt is Committed
+If you already ran pip freeze > requirements.txt in your local terminal, you might have forgotten to add, commit, and push that new file to GitHub.
+
+Check your local folder:
+
+Is the file requirements.txt actually there?
+
+Run git status. If it shows as "untracked", you must do:
+
+Bash
+git add requirements.txt
+git commit -m "chore: add requirements.txt for deployment"
+git push origin main
+3. If you are using Poetry (Recommended)
+I noticed your Render logs say ==> Using Poetry version 2.1.3. If you intended to use Poetry instead of pip, you don't need a requirements.txt.
+
+If you prefer using Poetry:
+
+Change your Build Command on Render to:
+
+Bash
+poetry install
+Change your Start Command on Render to:
+
+Bash
+poetry run uvicorn app.main:app --host 0.0.0.0 --port 10000
+How to trigger a re-deploy:
+After you fix the path or push the missing file to GitHub:
+
+Go to your Render Dashboard.
+
+Click on your dealership-api service.
+
+Click Deploy > Deploy latest commit.
+
+Render will try the build again, and if it finds the file, it will proceed to the next step!
+
+there is no backend folder direct app,frontend,tests
+
+Got it. Since your files are located directly in the root of your repository, you don't need to cd into any subfolders.
+
+The Fix
+1. Verify the requirements.txt file location:
+Check your root folder in your file explorer. The requirements.txt file must be in the same folder as your app/ folder and tests/ folder.
+
+2. If the file is missing:
+If you don't see it, run this command in your project root:
+
+Bash
+pip freeze > requirements.txt
+3. If the file is there but Render still fails:
+You must ensure it is pushed to GitHub. Run these commands in your terminal:
+
+Bash
+git add requirements.txt
+git commit -m "chore: add requirements.txt for deployment"
+git push origin main
+4. Update your Render Build Command:
+Because your structure is app/ at the root, your Build Command on the Render dashboard should simply be:
+
+Bash
+pip install -r requirements.txt
+5. Update your Render Start Command:
+Your Start Command on the Render dashboard should be:
+
+Bash
+uvicorn app.main:app --host 0.0.0.0 --port 10000
+Once you have pushed the file to GitHub and updated these commands, go to the Render dashboard for your service and click Deploy > Deploy latest commit. It should now find the file and complete the build successfully.
+
+2026-07-19T11:41:42.213665244Z ==> Cloning from https://github.com/kishanpatel2908/kata-car-dealership
+
+2026-07-19T11:41:42.839972431Z ==> Checking out commit 5c6f25bb2371db27c1fda6786974dbab0a6bb4ed in branch main
+
+2026-07-19T11:41:44.219692189Z ==> Using Python version 3.14.3 (default)
+
+2026-07-19T11:41:44.21970448Z ==> Docs on specifying a Python version: https://render.com/docs/python-version
+
+2026-07-19T11:41:44.219828082Z ==> Installing Python version 3.14.3...
+
+2026-07-19T11:41:50.633326671Z ==> Using Poetry version 2.1.3 (default)
+
+2026-07-19T11:41:50.681047702Z ==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+
+2026-07-19T11:41:50.7552376Z ==> Running build command 'pip install -r requirements.txt'...
+
+2026-07-19T11:41:51.463838917Z Collecting asn1crypto==1.5.1 (from -r requirements.txt (line 1))
+
+2026-07-19T11:41:51.544042839Z   Downloading asn1crypto-1.5.1-py2.py3-none-any.whl.metadata (13 kB)
+
+2026-07-19T11:41:51.715884988Z Collecting autocommand==2.2.2 (from -r requirements.txt (line 2))
+
+2026-07-19T11:41:51.724688074Z   Downloading autocommand-2.2.2-py3-none-any.whl.metadata (15 kB)
+
+2026-07-19T11:41:51.807661438Z ERROR: Could not find a version that satisfies the requirement bcc==0.35.0 (from versions: 0.1.7, 0.1.8, 0.1.10)
+
+2026-07-19T11:41:51.9877818Z 
+
+2026-07-19T11:41:51.98779539Z [notice] A new release of pip is available: 25.3 -> 26.1.2
+
+2026-07-19T11:41:51.98779954Z [notice] To update, run: pip install --upgrade pip
+
+2026-07-19T11:41:51.988160558Z ERROR: No matching distribution found for bcc==0.35.0
+
+2026-07-19T11:41:52.065357864Z ==> Build failed 😞
+
+2026-07-19T11:41:52.065399225Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+
+The error No matching distribution found for bcc==0.35.0 occurs because bcc is a Linux system-level package (often related to eBPF/tracing tools) that cannot be installed via pip on Render's cloud servers.
+
+The Fix
+You likely ran pip freeze > requirements.txt on your local Ubuntu laptop, which included every system-level library installed on your computer. You need to clean this up.
+
+1. Clean your requirements.txt:
+Open your requirements.txt file in the project root. Delete the line that says bcc==0.35.0 (and any other lines that look like system tools, such as apt wrappers or driver-specific libraries).
+
+Your requirements.txt should only contain the libraries your FastAPI app actually uses. It should look something like this:
+
+Plaintext
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+pydantic
+pydantic-settings
+2. Update your repository:
+After saving the cleaned file:
+
+Bash
+git add requirements.txt
+git commit -m "chore: remove system-level dependencies from requirements.txt"
+git push origin main
+3. Trigger the deployment:
+Go to the Render dashboard for your dealership-api service and click Deploy > Deploy latest commit.
+
+Render will now only try to install the Python-specific libraries, and the build will succeed!
+
+asn1crypto==1.5.1
+
+autocommand==2.2.2
+
+bcc==0.35.0
+
+bcrypt==5.0.0
+
+blinker==1.9.0
+
+Brlapi==0.8.6
+
+certifi==2026.1.4
+
+chardet==5.2.0
+
+click==8.1.8
+
+command-not-found==0.3
+
+cryptography==46.0.5
+
+cupshelpers==1.0
+
+dasbus==1.7
+
+dbus-python==1.4.0
+
+distro==1.9.0
+
+distro-info==1.15
+
+gyp-next==0.16.2
+
+html5lib-modern==1.2
+
+httplib2==0.22.0
+
+idna==3.11
+
+inflect==7.5.0
+
+iniconfig==2.1.0
+
+jaraco.context==6.0.1
+
+jaraco.functools==4.1.0
+
+jaraco.text==4.0.0
+
+language-selector==0.1
+
+launchpadlib==2.1.0
+
+lazr.restfulclient==0.14.6
+
+lazr.uri==1.0.6
+
+linkify-it-py==2.0.3
+
+louis==3.36.0
+
+markdown-it-py==3.0.0
+
+mdurl==0.1.2
+
+mechanize==0.4.10
+
+more-itertools==10.8.0
+
+mutagen==1.47.0
+
+netaddr==1.3.0
+
+netifaces==0.11.0
+
+oauthlib==3.3.1
+
+olefile==0.47
+
+packaging==26.0
+
+pexpect==4.9.0
+
+pillow==12.1.1
+
+pluggy==1.6.0
+
+psutil==7.1.0
+
+ptyprocess==0.7.0
+
+pycairo==1.27.0
+
+pycryptodomex==3.20.0
+
+pycups==2.0.4
+
+Pygments==2.19.2
+
+PyGObject==3.56.2
+
+PyJWT==2.10.1
+
+pylibacl==0.7.2
+
+pyparsing==3.3.2
+
+PyQt6==6.10.2
+
+PyQt6_sip==13.11.0
+
+pytest==9.0.2
+
+python-apt==3.1.0+ubuntu1
+
+python-debian==1.0.1+ubuntu2
+
+pyxattr==0.8.1
+
+pyxdg==0.28
+
+PyYAML==6.0.3
+
+requests==2.32.5
+
+rich==13.9.4
+
+sentry-sdk==2.22.0
+
+setproctitle==1.3.7
+
+setuptools==78.1.1
+
+systemd-python==235
+
+tornado==6.5.4
+
+typeguard==4.4.4
+
+typing_extensions==4.15.0
+
+ubuntu-drivers-common==0.0.0
+
+ubuntu-pro-client==8001
+
+uc-micro-py==1.0.3
+
+ufw==0.36.2
+
+unattended-upgrades==0.1
+
+urllib3==2.6.3
+
+usb-creator==0.3.16
+
+wadllib==2.0.0
+
+webencodings==0.5.1
+
+websockets==15.0.1
+
+wheel==0.46.3
+
+xdg==5
+
+xkit==0.0.0
+
+yt-dlp==2026.3.17
+
+zipp==3.23.0
+
+zstandard==0.25.0
+
+This list confirms that your requirements.txt contains many system-level Ubuntu packages (like brlapi, command-not-found, python-apt, ufw, ubuntu-drivers-common) that will never install on a cloud server like Render because they don't exist in the Python Package Index (PyPI).
+
+The Fix
+You need to replace the entire content of your requirements.txt with only the dependencies that your actual application uses.
+
+Delete everything currently in requirements.txt and replace it with this:
+
+Plaintext
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+pydantic
+pydantic-settings
+Why this works:
+These are the only packages your code imports in main.py or your models.
+
+These packages are available on every cloud platform.
+
+By removing the Ubuntu/system packages, you stop the ERROR: Could not find a version... errors.
+
+Next Steps:
+Save the new, clean requirements.txt file.
+
+Commit and push the change:
+
+Bash
+git add requirements.txt
+git commit -m "fix: clean up requirements for deployment"
+git push origin main
+Go to your Render Dashboard and click Deploy > Deploy latest commit.
+
+Because your application only needs that short list of dependencies, the build will pass instantly!
+
+2026-07-19T11:45:28.646637827Z ==> Downloading cache...
+
+2026-07-19T11:45:28.692975669Z ==> Cloning from https://github.com/kishanpatel2908/kata-car-dealership
+
+2026-07-19T11:45:30.06577168Z ==> Checking out commit 41000b05cc82eab09591d52e48bc82cec34e684c in branch main
+
+2026-07-19T11:45:30.783857381Z ==> Downloaded 21MB in 1s. Extraction took 0s.
+
+2026-07-19T11:45:33.68824043Z ==> Using Python version 3.14.3 (default)
+
+2026-07-19T11:45:33.68825337Z ==> Docs on specifying a Python version: https://render.com/docs/python-version
+
+2026-07-19T11:45:33.688432444Z ==> Installing Python version 3.14.3...
+
+2026-07-19T11:45:42.83793325Z ==> Using Poetry version 2.1.3 (default)
+
+2026-07-19T11:45:42.881612882Z ==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+
+2026-07-19T11:45:42.946918247Z ==> Running build command 'pip install -r requirements.txt'...
+
+2026-07-19T11:45:43.488414877Z Collecting fastapi (from -r requirements.txt (line 1))
+
+2026-07-19T11:45:43.48986876Z   Using cached fastapi-0.139.2-py3-none-any.whl.metadata (26 kB)
+
+2026-07-19T11:45:43.530450223Z Collecting uvicorn (from -r requirements.txt (line 2))
+
+2026-07-19T11:45:43.531594839Z   Using cached uvicorn-0.51.0-py3-none-any.whl.metadata (6.6 kB)
+
+2026-07-19T11:45:43.806643775Z Collecting sqlalchemy (from -r requirements.txt (line 3))
+
+2026-07-19T11:45:43.807925143Z   Using cached sqlalchemy-2.0.51-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+
+2026-07-19T11:45:43.883187039Z Collecting psycopg2-binary (from -r requirements.txt (line 4))
+
+2026-07-19T11:45:43.884585551Z   Using cached psycopg2_binary-2.9.12-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+
+2026-07-19T11:45:44.001997206Z Collecting pydantic (from -r requirements.txt (line 7))
+
+2026-07-19T11:45:44.003442318Z   Using cached pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+
+2026-07-19T11:45:44.029900197Z Collecting pydantic-settings (from -r requirements.txt (line 8))
+
+2026-07-19T11:45:44.031427271Z   Using cached pydantic_settings-2.14.2-py3-none-any.whl.metadata (3.4 kB)
+
+2026-07-19T11:45:44.051839045Z Collecting python-jose[cryptography] (from -r requirements.txt (line 5))
+
+2026-07-19T11:45:44.053067983Z   Using cached python_jose-3.5.0-py2.py3-none-any.whl.metadata (5.5 kB)
+
+2026-07-19T11:45:44.073570189Z Collecting passlib[bcrypt] (from -r requirements.txt (line 6))
+
+2026-07-19T11:45:44.074678354Z   Using cached passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+
+2026-07-19T11:45:44.110192125Z Collecting starlette>=0.46.0 (from fastapi->-r requirements.txt (line 1))
+
+2026-07-19T11:45:44.111566776Z   Using cached starlette-1.3.1-py3-none-any.whl.metadata (6.4 kB)
+
+2026-07-19T11:45:44.146044544Z Collecting typing-extensions>=4.8.0 (from fastapi->-r requirements.txt (line 1))
+
+2026-07-19T11:45:44.147195779Z   Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+
+2026-07-19T11:45:44.164579296Z Collecting typing-inspection>=0.4.2 (from fastapi->-r requirements.txt (line 1))
+
+2026-07-19T11:45:44.165662511Z   Using cached typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+
+2026-07-19T11:45:44.182751511Z Collecting annotated-doc>=0.0.2 (from fastapi->-r requirements.txt (line 1))
+
+2026-07-19T11:45:44.183832095Z   Using cached annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+
+2026-07-19T11:45:44.209553158Z Collecting click>=7.0 (from uvicorn->-r requirements.txt (line 2))
+
+2026-07-19T11:45:44.210659893Z   Using cached click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+
+2026-07-19T11:45:44.229101173Z Collecting h11>=0.8 (from uvicorn->-r requirements.txt (line 2))
+
+2026-07-19T11:45:44.230197358Z   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+
+2026-07-19T11:45:44.362020154Z Collecting greenlet>=1 (from sqlalchemy->-r requirements.txt (line 3))
+
+2026-07-19T11:45:44.363310993Z   Using cached greenlet-3.5.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+
+2026-07-19T11:45:44.389304332Z Collecting ecdsa!=0.15 (from python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:45:44.390368995Z   Using cached ecdsa-0.19.2-py2.py3-none-any.whl.metadata (29 kB)
+
+2026-07-19T11:45:44.41484638Z Collecting rsa!=4.1.1,!=4.4,<5.0,>=4.0 (from python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:45:44.415898194Z   Using cached rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+
+2026-07-19T11:45:44.442880575Z Collecting pyasn1>=0.5.0 (from python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:45:44.44403041Z   Using cached pyasn1-0.6.4-py3-none-any.whl.metadata (8.4 kB)
+
+2026-07-19T11:45:44.641371996Z Collecting cryptography>=3.4.0 (from python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:45:44.643236767Z   Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+
+2026-07-19T11:45:44.70801951Z Collecting bcrypt>=3.1.0 (from passlib[bcrypt]->-r requirements.txt (line 6))
+
+2026-07-19T11:45:44.709462262Z   Using cached bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (10 kB)
+
+2026-07-19T11:45:44.730342007Z Collecting annotated-types>=0.6.0 (from pydantic->-r requirements.txt (line 7))
+
+2026-07-19T11:45:44.731712118Z   Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+
+2026-07-19T11:45:45.407966499Z Collecting pydantic-core==2.46.4 (from pydantic->-r requirements.txt (line 7))
+
+2026-07-19T11:45:45.409399541Z   Using cached pydantic_core-2.46.4-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+
+2026-07-19T11:45:45.452662955Z Collecting python-dotenv>=0.21.0 (from pydantic-settings->-r requirements.txt (line 8))
+
+2026-07-19T11:45:45.453839111Z   Using cached python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+
+2026-07-19T11:45:45.563861461Z Collecting cffi>=2.0.0 (from cryptography>=3.4.0->python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:45:45.565167261Z   Using cached cffi-2.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+
+2026-07-19T11:45:45.587984409Z Collecting pycparser (from cffi>=2.0.0->cryptography>=3.4.0->python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:45:45.589112024Z   Using cached pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+
+2026-07-19T11:45:45.612168867Z Collecting six>=1.9.0 (from ecdsa!=0.15->python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:45:45.613322633Z   Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+
+2026-07-19T11:45:45.650046761Z Collecting anyio<5,>=3.6.2 (from starlette>=0.46.0->fastapi->-r requirements.txt (line 1))
+
+2026-07-19T11:45:45.651378921Z   Using cached anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+
+2026-07-19T11:45:45.678254189Z Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette>=0.46.0->fastapi->-r requirements.txt (line 1))
+
+2026-07-19T11:45:45.679503227Z   Using cached idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+
+2026-07-19T11:45:45.690321948Z Using cached fastapi-0.139.2-py3-none-any.whl (130 kB)
+
+2026-07-19T11:45:45.691595746Z Using cached uvicorn-0.51.0-py3-none-any.whl (73 kB)
+
+2026-07-19T11:45:45.692819754Z Using cached sqlalchemy-2.0.51-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.3 MB)
+
+2026-07-19T11:45:45.696603168Z Using cached psycopg2_binary-2.9.12-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.3 MB)
+
+2026-07-19T11:45:45.700882983Z Using cached python_jose-3.5.0-py2.py3-none-any.whl (34 kB)
+
+2026-07-19T11:45:45.701982778Z Using cached rsa-4.9.1-py3-none-any.whl (34 kB)
+
+2026-07-19T11:45:45.703077652Z Using cached passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+
+2026-07-19T11:45:45.704670257Z Using cached pydantic-2.13.4-py3-none-any.whl (472 kB)
+
+2026-07-19T11:45:45.70613717Z Using cached pydantic_core-2.46.4-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+
+2026-07-19T11:45:45.708770609Z Using cached pydantic_settings-2.14.2-py3-none-any.whl (61 kB)
+
+2026-07-19T11:45:45.709836523Z Using cached annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+
+2026-07-19T11:45:45.710920607Z Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+
+2026-07-19T11:45:45.712003881Z Using cached bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+
+2026-07-19T11:45:45.71331458Z Using cached click-8.4.2-py3-none-any.whl (119 kB)
+
+2026-07-19T11:45:45.714503436Z Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl (4.7 MB)
+
+2026-07-19T11:45:45.719719383Z Using cached cffi-2.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+
+2026-07-19T11:45:45.721195136Z Using cached ecdsa-0.19.2-py2.py3-none-any.whl (150 kB)
+
+2026-07-19T11:45:45.722571126Z Using cached greenlet-3.5.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (663 kB)
+
+2026-07-19T11:45:45.72633542Z Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+
+2026-07-19T11:45:45.727521586Z Using cached pyasn1-0.6.4-py3-none-any.whl (84 kB)
+
+2026-07-19T11:45:45.728675922Z Using cached python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+
+2026-07-19T11:45:45.729707785Z Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+
+2026-07-19T11:45:45.730727178Z Using cached starlette-1.3.1-py3-none-any.whl (73 kB)
+
+2026-07-19T11:45:45.731824642Z Using cached anyio-4.14.2-py3-none-any.whl (125 kB)
+
+2026-07-19T11:45:45.73306115Z Using cached idna-3.18-py3-none-any.whl (65 kB)
+
+2026-07-19T11:45:45.734159004Z Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+
+2026-07-19T11:45:45.735279509Z Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+
+2026-07-19T11:45:45.736407684Z Using cached pycparser-3.0-py3-none-any.whl (48 kB)
+
+2026-07-19T11:45:45.820778934Z Installing collected packages: passlib, typing-extensions, six, python-dotenv, pycparser, pyasn1, psycopg2-binary, idna, h11, greenlet, click, bcrypt, annotated-types, annotated-doc, uvicorn, typing-inspection, sqlalchemy, rsa, pydantic-core, ecdsa, cffi, anyio, starlette, python-jose, pydantic, cryptography, pydantic-settings, fastapi
+
+2026-07-19T11:45:49.543861297Z 
+
+2026-07-19T11:45:49.546788872Z Successfully installed annotated-doc-0.0.4 annotated-types-0.7.0 anyio-4.14.2 bcrypt-5.0.0 cffi-2.1.0 click-8.4.2 cryptography-49.0.0 ecdsa-0.19.2 fastapi-0.139.2 greenlet-3.5.3 h11-0.16.0 idna-3.18 passlib-1.7.4 psycopg2-binary-2.9.12 pyasn1-0.6.4 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 pydantic-settings-2.14.2 python-dotenv-1.2.2 python-jose-3.5.0 rsa-4.9.1 six-1.17.0 sqlalchemy-2.0.51 starlette-1.3.1 typing-extensions-4.16.0 typing-inspection-0.4.2 uvicorn-0.51.0
+
+2026-07-19T11:45:49.551539548Z 
+
+2026-07-19T11:45:49.551552888Z [notice] A new release of pip is available: 25.3 -> 26.1.2
+
+2026-07-19T11:45:49.551555728Z [notice] To update, run: pip install --upgrade pip
+
+2026-07-19T11:45:50.832384906Z ==> Uploading build...
+
+2026-07-19T11:45:55.495678046Z ==> Uploaded in 2.6s. Compression took 2.1s
+
+2026-07-19T11:45:55.556177883Z ==> Build successful 🎉
+
+2026-07-19T11:45:59.063213276Z ==> Deploying...
+
+2026-07-19T11:45:59.124673532Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+
+2026-07-19T11:46:08.222654218Z ==> Running 'uvicorn app.main:app --host 0.0.0.0 --port 10000'
+
+2026-07-19T11:46:33.741503286Z ==> Exited with status 1
+
+2026-07-19T11:46:33.743955413Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+
+2026-07-19T11:46:30.83142193Z Traceback (most recent call last):
+
+2026-07-19T11:46:30.917458409Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/networks.py", line 966, in import_email_validator
+
+2026-07-19T11:46:30.91748919Z     import email_validator
+
+2026-07-19T11:46:30.91749558Z ModuleNotFoundError: No module named 'email_validator'
+
+2026-07-19T11:46:30.91750811Z 
+
+2026-07-19T11:46:30.917513001Z The above exception was the direct cause of the following exception:
+
+2026-07-19T11:46:30.917515781Z 
+
+2026-07-19T11:46:30.917519631Z Traceback (most recent call last):
+
+2026-07-19T11:46:30.920714858Z   File "/opt/render/project/src/.venv/bin/uvicorn", line 7, in <module>
+
+2026-07-19T11:46:30.920730528Z     sys.exit(main())
+
+2026-07-19T11:46:30.920734148Z              ~~~~^^
+
+2026-07-19T11:46:30.920737688Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 1569, in __call__
+
+2026-07-19T11:46:30.920741699Z     return self.main(*args, **kwargs)
+
+2026-07-19T11:46:30.920744939Z            ~~~~~~~~~^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:46:30.920748009Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 1490, in main
+
+2026-07-19T11:46:30.920752089Z     rv = self.invoke(ctx)
+
+2026-07-19T11:46:30.920755409Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 1353, in invoke
+
+2026-07-19T11:46:30.920759079Z     return ctx.invoke(self.callback, **ctx.params)
+
+2026-07-19T11:46:30.920762399Z            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:46:30.920765609Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 907, in invoke
+
+2026-07-19T11:46:30.920768619Z     return callback(*args, **kwargs)
+
+2026-07-19T11:46:30.920771629Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/main.py", line 440, in main
+
+2026-07-19T11:46:30.9207748Z     run(
+
+2026-07-19T11:46:30.92077808Z     ~~~^
+
+2026-07-19T11:46:30.92078124Z         app,
+
+2026-07-19T11:46:30.92078452Z         ^^^^
+
+2026-07-19T11:46:30.92078743Z     ...<48 lines>...
+
+2026-07-19T11:46:30.92079038Z         reset_contextvars=reset_contextvars,
+
+2026-07-19T11:46:30.9207936Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:46:30.92079656Z     )
+
+2026-07-19T11:46:30.92079958Z     ^
+
+2026-07-19T11:46:30.92080269Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/main.py", line 609, in run
+
+2026-07-19T11:46:30.9208057Z     config.load_app()
+
+2026-07-19T11:46:30.92080931Z     ~~~~~~~~~~~~~~~^^
+
+2026-07-19T11:46:30.92081237Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/config.py", line 427, in load_app
+
+2026-07-19T11:46:30.92081555Z     return import_from_string(self.app)
+
+2026-07-19T11:46:30.920818761Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/importer.py", line 19, in import_from_string
+
+2026-07-19T11:46:30.92082157Z     module = importlib.import_module(module_str)
+
+2026-07-19T11:46:30.920824481Z   File "/opt/render/project/python/Python-3.14.3/lib/python3.14/importlib/__init__.py", line 88, in import_module
+
+2026-07-19T11:46:30.920827351Z     return _bootstrap._gcd_import(name[level:], package, level)
+
+2026-07-19T11:46:30.920829901Z            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:46:30.920832641Z   File "<frozen importlib._bootstrap>", line 1398, in _gcd_import
+
+2026-07-19T11:46:30.920835191Z   File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+
+2026-07-19T11:46:30.920837791Z   File "<frozen importlib._bootstrap>", line 1342, in _find_and_load_unlocked
+
+2026-07-19T11:46:30.920873112Z   File "<frozen importlib._bootstrap>", line 938, in _load_unlocked
+
+2026-07-19T11:46:30.920877142Z   File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+
+2026-07-19T11:46:30.920880032Z   File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+
+2026-07-19T11:46:30.920883192Z   File "/opt/render/project/src/app/main.py", line 8, in <module>
+
+2026-07-19T11:46:30.920885992Z     from . import models, schemas, auth, database
+
+2026-07-19T11:46:30.920888752Z   File "/opt/render/project/src/app/schemas.py", line 5, in <module>
+
+2026-07-19T11:46:30.920891892Z     class UserCreate(BaseModel):
+
+2026-07-19T11:46:30.920895042Z     ...<2 lines>...
+
+2026-07-19T11:46:30.920897882Z         password: str
+
+2026-07-19T11:46:30.920903172Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_model_construction.py", line 256, in __new__
+
+2026-07-19T11:46:30.920906392Z     complete_model_class(
+
+2026-07-19T11:46:30.920909163Z     ~~~~~~~~~~~~~~~~~~~~^
+
+2026-07-19T11:46:30.920912213Z         cls,
+
+2026-07-19T11:46:30.920915273Z         ^^^^
+
+2026-07-19T11:46:30.920918183Z     ...<3 lines>...
+
+2026-07-19T11:46:30.920921083Z         create_model_module=_create_model_module,
+
+2026-07-19T11:46:30.920924023Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:46:30.920926873Z     )
+
+2026-07-19T11:46:30.920929863Z     ^
+
+2026-07-19T11:46:30.920933063Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_model_construction.py", line 667, in complete_model_class
+
+2026-07-19T11:46:30.920936053Z     schema = gen_schema.generate_schema(cls)
+
+2026-07-19T11:46:30.920949734Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 744, in generate_schema
+
+2026-07-19T11:46:30.920952954Z     schema = self._generate_schema_inner(obj)
+
+2026-07-19T11:46:30.920955614Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 1038, in _generate_schema_inner
+
+2026-07-19T11:46:30.920958044Z     return self._model_schema(obj)
+
+2026-07-19T11:46:30.920960694Z            ~~~~~~~~~~~~~~~~~~^^^^^
+
+2026-07-19T11:46:30.920963334Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 868, in _model_schema
+
+2026-07-19T11:46:30.920966454Z     {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+
+2026-07-19T11:46:30.920969114Z         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:46:30.920973174Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 1245, in _generate_md_field_schema
+
+2026-07-19T11:46:30.920975724Z     schema, metadata = self._common_field_schema(name, field_info, decorators)
+
+2026-07-19T11:46:30.920978084Z                        ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:46:30.920980684Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 1299, in _common_field_schema
+
+2026-07-19T11:46:30.920983374Z     schema = self._apply_annotations(
+
+2026-07-19T11:46:30.920985774Z         source_type,
+
+2026-07-19T11:46:30.920988694Z         annotations + validators_from_decorators,
+
+2026-07-19T11:46:30.920991225Z     )
+
+2026-07-19T11:46:30.920993505Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 2252, in _apply_annotations
+
+2026-07-19T11:46:30.920996075Z     schema = get_inner_schema(source_type)
+
+2026-07-19T11:46:30.920998585Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_schema_generation_shared.py", line 83, in __call__
+
+2026-07-19T11:46:30.921007245Z     schema = self._handler(source_type)
+
+2026-07-19T11:46:30.921009825Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 2228, in inner_handler
+
+2026-07-19T11:46:30.921012335Z     schema = self._generate_schema_from_get_schema_method(obj, source_type)
+
+2026-07-19T11:46:30.921014885Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py", line 931, in _generate_schema_from_get_schema_method
+
+2026-07-19T11:46:30.921017485Z     schema = get_schema(
+
+2026-07-19T11:46:30.921020125Z         source, CallbackGetCoreSchemaHandler(self._generate_schema_inner, self, ref_mode=ref_mode)
+
+2026-07-19T11:46:30.921022725Z     )
+
+2026-07-19T11:46:30.921025046Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/networks.py", line 1006, in __get_pydantic_core_schema__
+
+2026-07-19T11:46:30.921027795Z     import_email_validator()
+
+2026-07-19T11:46:30.921030355Z     ~~~~~~~~~~~~~~~~~~~~~~^^
+
+2026-07-19T11:46:30.921033086Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/pydantic/networks.py", line 968, in import_email_validator
+
+2026-07-19T11:46:30.921035626Z     raise ImportError("email-validator is not installed, run `pip install 'pydantic[email]'`") from e
+
+2026-07-19T11:46:30.921038906Z ImportError: email-validator is not installed, run `pip install 'pydantic[email]'`
+
+2026-07-19T11:46:38.119063393Z ==> Running 'uvicorn app.main:app --host 0.0.0.0 --port 10000'
+
+This is a common issue when using Pydantic’s EmailStr type. Pydantic requires an extra dependency to validate email addresses, which isn't installed by default.
+
+The Fix
+1. Update requirements.txt:
+You need to add email-validator to your list of dependencies. Open your requirements.txt file and update it to look like this:
+
+Plaintext
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+pydantic
+pydantic-settings
+email-validator
+2. Commit and push the changes:
+Run these commands in your terminal to save and upload the update:
+
+Bash
+git add requirements.txt
+git commit -m "fix: add email-validator for Pydantic"
+git push origin main
+3. Redeploy on Render:
+Go to your Render dashboard, select your dealership-api service, and click Deploy > Deploy latest commit.
+
+Once the build finishes and the server starts, it will have the email-validator module available, and your API will start successfully!
+
+2026-07-19T11:54:45.24576935Z Collecting cffi>=2.0.0 (from cryptography>=3.4.0->python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:54:45.247049107Z   Using cached cffi-2.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+
+2026-07-19T11:54:45.262785563Z Collecting pycparser (from cffi>=2.0.0->cryptography>=3.4.0->python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:54:45.263911972Z   Using cached pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+
+2026-07-19T11:54:45.282876774Z Collecting six>=1.9.0 (from ecdsa!=0.15->python-jose[cryptography]->-r requirements.txt (line 5))
+
+2026-07-19T11:54:45.283938159Z   Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+
+2026-07-19T11:54:45.313700356Z Collecting anyio<5,>=3.6.2 (from starlette>=0.46.0->fastapi->-r requirements.txt (line 1))
+
+2026-07-19T11:54:45.314752011Z   Using cached anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+
+2026-07-19T11:54:45.328726989Z Using cached fastapi-0.139.2-py3-none-any.whl (130 kB)
+
+2026-07-19T11:54:45.329855068Z Using cached uvicorn-0.51.0-py3-none-any.whl (73 kB)
+
+2026-07-19T11:54:45.330930193Z Using cached sqlalchemy-2.0.51-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.3 MB)
+
+2026-07-19T11:54:45.3344962Z Using cached psycopg2_binary-2.9.12-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.3 MB)
+
+2026-07-19T11:54:45.338711186Z Using cached python_jose-3.5.0-py2.py3-none-any.whl (34 kB)
+
+2026-07-19T11:54:45.339740858Z Using cached rsa-4.9.1-py3-none-any.whl (34 kB)
+
+2026-07-19T11:54:45.340870497Z Using cached passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+
+2026-07-19T11:54:45.342249701Z Using cached pydantic-2.13.4-py3-none-any.whl (472 kB)
+
+2026-07-19T11:54:45.343672017Z Using cached pydantic_core-2.46.4-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+
+2026-07-19T11:54:45.346393573Z Using cached pydantic_settings-2.14.2-py3-none-any.whl (61 kB)
+
+2026-07-19T11:54:45.347510931Z Using cached email_validator-2.3.0-py3-none-any.whl (35 kB)
+
+2026-07-19T11:54:45.348611377Z Using cached annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+
+2026-07-19T11:54:45.349712284Z Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+
+2026-07-19T11:54:45.350776509Z Using cached bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+
+2026-07-19T11:54:45.352035365Z Using cached click-8.4.2-py3-none-any.whl (119 kB)
+
+2026-07-19T11:54:45.353253239Z Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl (4.7 MB)
+
+2026-07-19T11:54:45.358053701Z Using cached cffi-2.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+
+2026-07-19T11:54:45.359214212Z Using cached dnspython-2.8.0-py3-none-any.whl (331 kB)
+
+2026-07-19T11:54:45.360516151Z Using cached ecdsa-0.19.2-py2.py3-none-any.whl (150 kB)
+
+2026-07-19T11:54:45.361635599Z Using cached greenlet-3.5.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (663 kB)
+
+2026-07-19T11:54:45.363179053Z Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+
+2026-07-19T11:54:45.364208775Z Using cached idna-3.18-py3-none-any.whl (65 kB)
+
+2026-07-19T11:54:45.365331963Z Using cached pyasn1-0.6.4-py3-none-any.whl (84 kB)
+
+2026-07-19T11:54:45.366400648Z Using cached python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+
+2026-07-19T11:54:45.36742416Z Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+
+2026-07-19T11:54:45.368439662Z Using cached starlette-1.3.1-py3-none-any.whl (73 kB)
+
+2026-07-19T11:54:45.369495906Z Using cached anyio-4.14.2-py3-none-any.whl (125 kB)
+
+2026-07-19T11:54:45.370600153Z Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+
+2026-07-19T11:54:45.371643117Z Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+
+2026-07-19T11:54:45.37267733Z Using cached pycparser-3.0-py3-none-any.whl (48 kB)
+
+2026-07-19T11:54:45.451123455Z Installing collected packages: passlib, typing-extensions, six, python-dotenv, pycparser, pyasn1, psycopg2-binary, idna, h11, greenlet, dnspython, click, bcrypt, annotated-types, annotated-doc, uvicorn, typing-inspection, sqlalchemy, rsa, pydantic-core, email-validator, ecdsa, cffi, anyio, starlette, python-jose, pydantic, cryptography, pydantic-settings, fastapi
+
+2026-07-19T11:54:51.120915648Z 
+
+2026-07-19T11:54:51.124064529Z Successfully installed annotated-doc-0.0.4 annotated-types-0.7.0 anyio-4.14.2 bcrypt-5.0.0 cffi-2.1.0 click-8.4.2 cryptography-49.0.0 dnspython-2.8.0 ecdsa-0.19.2 email-validator-2.3.0 fastapi-0.139.2 greenlet-3.5.3 h11-0.16.0 idna-3.18 passlib-1.7.4 psycopg2-binary-2.9.12 pyasn1-0.6.4 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 pydantic-settings-2.14.2 python-dotenv-1.2.2 python-jose-3.5.0 rsa-4.9.1 six-1.17.0 sqlalchemy-2.0.51 starlette-1.3.1 typing-extensions-4.16.0 typing-inspection-0.4.2 uvicorn-0.51.0
+
+2026-07-19T11:54:51.129478698Z 
+
+2026-07-19T11:54:51.129491169Z [notice] A new release of pip is available: 25.3 -> 26.1.2
+
+2026-07-19T11:54:51.129494769Z [notice] To update, run: pip install --upgrade pip
+
+2026-07-19T11:55:04.060226176Z ==> Uploading build...
+
+2026-07-19T11:55:08.967759962Z ==> Uploaded in 2.5s. Compression took 2.4s
+
+2026-07-19T11:55:09.036697811Z ==> Build successful 🎉
+
+2026-07-19T11:55:13.926047424Z ==> Deploying...
+
+2026-07-19T11:55:13.995313335Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+
+2026-07-19T11:55:25.024379529Z ==> Running 'uvicorn app.main:app --host 0.0.0.0 --port 10000'
+
+2026-07-19T11:55:45.17180379Z ==> Exited with status 1
+
+2026-07-19T11:55:45.174818904Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+
+2026-07-19T11:55:39.724122241Z Form data requires "python-multipart" to be installed. 
+
+2026-07-19T11:55:39.724138902Z You can install "python-multipart" with: 
+
+2026-07-19T11:55:39.724145102Z 
+
+2026-07-19T11:55:39.724151112Z pip install python-multipart
+
+2026-07-19T11:55:39.724156513Z 
+
+2026-07-19T11:55:39.727153918Z Traceback (most recent call last):
+
+2026-07-19T11:55:39.730523965Z   File "/opt/render/project/src/.venv/bin/uvicorn", line 7, in <module>
+
+2026-07-19T11:55:39.730540126Z     sys.exit(main())
+
+2026-07-19T11:55:39.730546267Z              ~~~~^^
+
+2026-07-19T11:55:39.730552477Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 1569, in __call__
+
+2026-07-19T11:55:39.730559827Z     return self.main(*args, **kwargs)
+
+2026-07-19T11:55:39.730565438Z            ~~~~~~~~~^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730571208Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 1490, in main
+
+2026-07-19T11:55:39.730577199Z     rv = self.invoke(ctx)
+
+2026-07-19T11:55:39.730582519Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 1353, in invoke
+
+2026-07-19T11:55:39.730589419Z     return ctx.invoke(self.callback, **ctx.params)
+
+2026-07-19T11:55:39.7305951Z            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.73060107Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/click/core.py", line 907, in invoke
+
+2026-07-19T11:55:39.7306072Z     return callback(*args, **kwargs)
+
+2026-07-19T11:55:39.730613331Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/main.py", line 440, in main
+
+2026-07-19T11:55:39.730619171Z     run(
+
+2026-07-19T11:55:39.730625261Z     ~~~^
+
+2026-07-19T11:55:39.730630892Z         app,
+
+2026-07-19T11:55:39.730636222Z         ^^^^
+
+2026-07-19T11:55:39.730641652Z     ...<48 lines>...
+
+2026-07-19T11:55:39.730647063Z         reset_contextvars=reset_contextvars,
+
+2026-07-19T11:55:39.730652853Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730658383Z     )
+
+2026-07-19T11:55:39.730663944Z     ^
+
+2026-07-19T11:55:39.730669424Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/main.py", line 609, in run
+
+2026-07-19T11:55:39.730675344Z     config.load_app()
+
+2026-07-19T11:55:39.730681035Z     ~~~~~~~~~~~~~~~^^
+
+2026-07-19T11:55:39.730686545Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/config.py", line 427, in load_app
+
+2026-07-19T11:55:39.730692245Z     return import_from_string(self.app)
+
+2026-07-19T11:55:39.730698346Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/uvicorn/importer.py", line 19, in import_from_string
+
+2026-07-19T11:55:39.730702106Z     module = importlib.import_module(module_str)
+
+2026-07-19T11:55:39.730705916Z   File "/opt/render/project/python/Python-3.14.3/lib/python3.14/importlib/__init__.py", line 88, in import_module
+
+2026-07-19T11:55:39.730709776Z     return _bootstrap._gcd_import(name[level:], package, level)
+
+2026-07-19T11:55:39.730713536Z            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730717367Z   File "<frozen importlib._bootstrap>", line 1398, in _gcd_import
+
+2026-07-19T11:55:39.730721177Z   File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+
+2026-07-19T11:55:39.730724907Z   File "<frozen importlib._bootstrap>", line 1342, in _find_and_load_unlocked
+
+2026-07-19T11:55:39.730728648Z   File "<frozen importlib._bootstrap>", line 938, in _load_unlocked
+
+2026-07-19T11:55:39.730742008Z   File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+
+2026-07-19T11:55:39.730756969Z   File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+
+2026-07-19T11:55:39.730759919Z   File "/opt/render/project/src/app/main.py", line 59, in <module>
+
+2026-07-19T11:55:39.73076245Z     @app.post("/api/auth/login", response_model=schemas.Token)
+
+2026-07-19T11:55:39.73076483Z      ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.73076731Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2955, in decorator
+
+2026-07-19T11:55:39.7307697Z     self.add_api_route(
+
+2026-07-19T11:55:39.73077213Z     ~~~~~~~~~~~~~~~~~~^
+
+2026-07-19T11:55:39.730785001Z         path,
+
+2026-07-19T11:55:39.730787481Z         ^^^^^
+
+2026-07-19T11:55:39.730791791Z     ...<23 lines>...
+
+2026-07-19T11:55:39.730796101Z         generate_unique_id_function=generate_unique_id_function,
+
+2026-07-19T11:55:39.730799932Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730803462Z     )
+
+2026-07-19T11:55:39.730807132Z     ^
+
+2026-07-19T11:55:39.730811112Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2890, in add_api_route
+
+2026-07-19T11:55:39.730814742Z     route = route_class(
+
+2026-07-19T11:55:39.730818663Z         self.prefix + path,
+
+2026-07-19T11:55:39.730822373Z     ...<27 lines>...
+
+2026-07-19T11:55:39.730825913Z         ),
+
+2026-07-19T11:55:39.730829613Z     )
+
+2026-07-19T11:55:39.730834524Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1179, in __init__
+
+2026-07-19T11:55:39.730838234Z     _populate_api_route_state(
+
+2026-07-19T11:55:39.730841214Z     ~~~~~~~~~~~~~~~~~~~~~~~~~^
+
+2026-07-19T11:55:39.730844264Z         cast(_APIRouteLike, self),
+
+2026-07-19T11:55:39.730847514Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730850624Z     ...<26 lines>...
+
+2026-07-19T11:55:39.730853685Z         strict_content_type=strict_content_type,
+
+2026-07-19T11:55:39.730856465Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730859525Z     )
+
+2026-07-19T11:55:39.730862255Z     ^
+
+2026-07-19T11:55:39.730865416Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1089, in _populate_api_route_state
+
+2026-07-19T11:55:39.730868526Z     ) = _build_dependant_with_parameterless_dependencies(
+
+2026-07-19T11:55:39.730871186Z         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+
+2026-07-19T11:55:39.730874136Z         path=route.path_format,
+
+2026-07-19T11:55:39.730876946Z         ^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730879826Z         call=route.endpoint,
+
+2026-07-19T11:55:39.730882617Z         ^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730885587Z         dependencies=route.dependencies,
+
+2026-07-19T11:55:39.730888547Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+2026-07-19T11:55:39.730891467Z     )
+
+2026-07-19T11:55:39.730894207Z     ^
+
+2026-07-19T11:55:39.730897797Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 846, in _build_dependant_with_parameterless_dependencies
+
+2026-07-19T11:55:39.730900798Z     dependant = get_dependant(path=path, call=call, scope="function")
+
+2026-07-19T11:55:39.730903628Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/dependencies/utils.py", line 334, in get_dependant
+
+2026-07-19T11:55:39.730906618Z     sub_dependant = get_dependant(
+
+2026-07-19T11:55:39.730909788Z         path=path,
+
+2026-07-19T11:55:39.730912758Z     ...<5 lines>...
+
+2026-07-19T11:55:39.730915598Z         scope=param_details.depends.scope,
+
+2026-07-19T11:55:39.730918439Z     )
+
+2026-07-19T11:55:39.730927409Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/dependencies/utils.py", line 311, in get_dependant
+
+2026-07-19T11:55:39.730930669Z     param_details = analyze_param(
+
+2026-07-19T11:55:39.7309337Z         param_name=param_name,
+
+2026-07-19T11:55:39.73093897Z     ...<2 lines>...
+
+2026-07-19T11:55:39.73094215Z         is_path_param=is_path_param,
+
+2026-07-19T11:55:39.73094516Z     )
+
+2026-07-19T11:55:39.73094817Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/dependencies/utils.py", line 535, in analyze_param
+
+2026-07-19T11:55:39.73095113Z     ensure_multipart_is_installed()
+
+2026-07-19T11:55:39.730953961Z     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+
+2026-07-19T11:55:39.730957571Z   File "/opt/render/project/src/.venv/lib/python3.14/site-packages/fastapi/dependencies/utils.py", line 120, in ensure_multipart_is_installed
+
+2026-07-19T11:55:39.730961091Z     raise RuntimeError(multipart_not_installed_error) from None
+
+2026-07-19T11:55:39.730964001Z RuntimeError: Form data requires "python-multipart" to be installed. 
+
+2026-07-19T11:55:39.730967251Z You can install "python-multipart" with: 
+
+2026-07-19T11:55:39.730970091Z 
+
+2026-07-19T11:55:39.730973022Z pip install python-multipart
+
+2026-07-19T11:55:39.730975692Z 
+
+2026-07-19T11:55:49.688370622Z ==> Running 'uvicorn app.main:app --host 0.0.0.0 --port 10000'
+
+It looks like your login route (or another authentication endpoint) is using OAuth2PasswordRequestForm, which FastAPI requires you to explicitly install the python-multipart library to support.
+
+The Fix
+1. Update requirements.txt:
+Open your requirements.txt file and add the missing dependency:
+
+Plaintext
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+pydantic
+pydantic-settings
+email-validator
+python-multipart
+2. Commit and push the change:
+In your terminal, run:
+
+Bash
+git add requirements.txt
+git commit -m "fix: add python-multipart for form data support"
+git push origin main
+3. Redeploy:
+Go to your Render dashboard, select your dealership-api service, and click Deploy > Deploy latest commit.
+
+Once this build finishes, your FastAPI application will have all the necessary libraries to handle form data and will start successfully. You are now just one successful startup away from a live API!
+
+Using cached passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+
+Using cached pydantic-2.13.4-py3-none-any.whl (472 kB)
+
+Using cached pydantic_core-2.46.4-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+
+Using cached pydantic_settings-2.14.2-py3-none-any.whl (61 kB)
+
+Using cached email_validator-2.3.0-py3-none-any.whl (35 kB)
+
+Using cached python_multipart-0.0.32-py3-none-any.whl (30 kB)
+
+Using cached annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+
+Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+
+Using cached bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+
+Using cached click-8.4.2-py3-none-any.whl (119 kB)
+
+Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl (4.7 MB)
+
+Using cached cffi-2.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+
+Using cached dnspython-2.8.0-py3-none-any.whl (331 kB)
+
+Using cached ecdsa-0.19.2-py2.py3-none-any.whl (150 kB)
+
+Using cached greenlet-3.5.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (663 kB)
+
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+
+Using cached idna-3.18-py3-none-any.whl (65 kB)
+
+Using cached pyasn1-0.6.4-py3-none-any.whl (84 kB)
+
+Using cached python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+
+Using cached starlette-1.3.1-py3-none-any.whl (73 kB)
+
+Using cached anyio-4.14.2-py3-none-any.whl (125 kB)
+
+Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+
+Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+
+Using cached pycparser-3.0-py3-none-any.whl (48 kB)
+
+Installing collected packages: passlib, typing-extensions, six, python-multipart, python-dotenv, pycparser, pyasn1, psycopg2-binary, idna, h11, greenlet, dnspython, click, bcrypt, annotated-types, annotated-doc, uvicorn, typing-inspection, sqlalchemy, rsa, pydantic-core, email-validator, ecdsa, cffi, anyio, starlette, python-jose, pydantic, cryptography, pydantic-settings, fastapi
+
+
+
+Successfully installed annotated-doc-0.0.4 annotated-types-0.7.0 anyio-4.14.2 bcrypt-5.0.0 cffi-2.1.0 click-8.4.2 cryptography-49.0.0 dnspython-2.8.0 ecdsa-0.19.2 email-validator-2.3.0 fastapi-0.139.2 greenlet-3.5.3 h11-0.16.0 idna-3.18 passlib-1.7.4 psycopg2-binary-2.9.12 pyasn1-0.6.4 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 pydantic-settings-2.14.2 python-dotenv-1.2.2 python-jose-3.5.0 python-multipart-0.0.32 rsa-4.9.1 six-1.17.0 sqlalchemy-2.0.51 starlette-1.3.1 typing-extensions-4.16.0 typing-inspection-0.4.2 uvicorn-0.51.0
+
+
+
+[notice] A new release of pip is available: 25.3 -> 26.1.2
+
+[notice] To update, run: pip install --upgrade pip
+
+==> Uploading build...
+
+==> Uploaded in 2.5s. Compression took 1.8s
+
+==> Build successful 🎉
+
+==> Deploying...
+
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+
+==> Running 'uvicorn app.main:app --host 0.0.0.0 --port 10000'
+
+INFO: Started server process [57]
+
+INFO: Waiting for application startup.
+
+INFO: Application startup complete.
+
+INFO: Uvicorn running on http://0.0.0.0:10000 (Press CTRL+C to quit)
+
+INFO: 127.0.0.1:48038 - "HEAD / HTTP/1.1" 404 Not Found
+
+==> Your service is live 🎉
+
+INFO: 35.197.38.255:0 - "GET / HTTP/1.1" 404 Not Found
+
+==>
+
+==> ///////////////////////////////////////////////////////////
+
+==>
+
+==> Available at your primary URL https://dealership-api-m991.onrender.com
+
+==>
+
+==> ///////////////////////////////////////////////////////////
+
+Congratulations, Kishan! Your backend is officially live and stable on Render.
+
+The 404 Not Found you see when you visit the main URL is actually a good sign—it means the server is running perfectly, but it doesn't have a route defined at the root path (/).
+
+Next Steps to Finalize Your Submission:
+Test your API:
+Since your app is live at [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com), try navigating to your documentation route to confirm everything is connected to the database:
+
+Visit: [https://dealership-api-m991.onrender.com/docs](https://dealership-api-m991.onrender.com/docs)
+
+This should load the Swagger UI, where you can test your login and inventory endpoints.
+
+Deploy your Frontend:
+Now go to Vercel, create a new project, connect your GitHub repository, and remember to add the Environment Variable we discussed:
+
+Key: VITE_API_URL
+
+Value: [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com) (Note: No trailing slash!)
+
+Final Cleanup:
+
+Make sure the README.md file has your new live Vercel URL and the live Render API URL included in the setup section.
+
+Double-check that all 10 images are displaying correctly in your README.
+
+Push those final changes to GitHub.
+
+You have successfully completed the development, testing, and deployment phases of your Kata. You're ready to submit! Do you need help with anything else before you wrap this up?
+
+Skip to content
+
+Back
+
+New Project
+
+
+
+
+
+
+
+Congratulations!
+
+You just deployed a new project to  Kishan.
+
+
+
+Install Coding Agent Plugin
+
+
+
+
+
+|
+
+
+
+Turn your coding agent into a Vercel expert. Simply copy and run this in your terminal to install the plugin. Available for Claude, Cursor and Codex.
+
+npx plugins add vercel/vercel-plugin
+
+Next Steps
+
+
+
+
+
+Instant Previews
+
+Push a new branch to preview changes instantly
+
+
+
+Add Domain
+
+Add a custom domain to your project
+
+
+
+
+
+Enable Speed Insights
+
+Track how users experience your site over time
+
+
+
+Choose a Plan
+
+You have officially successfully deployed both the backend and frontend of your application!
+
+Your project is now fully live on Vercel. You can now take the URL provided by Vercel and add it to your README.md as the "Live Application Link" to complete the final requirement of your Kata submission.
+
+Final Steps to Complete Your Submission:
+Verify Deployment: Click the link provided by your Vercel dashboard to ensure the frontend is successfully communicating with your Render backend.
+
+Update README: Add the Vercel link and the Render API link to your README.md so the reviewer can access your work.
+
+Final Commit: Ensure all your markdown files (README.md, TEST_REPORT.md, PROMPTS.md) and the project images are committed and pushed to your GitHub repository.
+
+Submit: Your project is now complete and ready for submission.
+
+Would you like me to help you draft the final commit message to wrap this up, or are you all set to push your changes and submit?
+
+how to connet to my project?
+
+To connect to your project now that it is deployed, follow these steps:
+
+1. Accessing Your Frontend (The Live App)
+Your frontend is hosted on Vercel.
+
+Log in to your Vercel Dashboard.
+
+Find your project in the list and click on the Deployment URL (it will look like your-project-name.vercel.app).
+
+This is the live URL you should share with others to view your application.
+
+2. Testing Your Backend (The API)
+Your backend is hosted on Render.
+
+Log in to your Render Dashboard.
+
+Find your dealership-api service.
+
+You can access your live API documentation by appending /docs to your Render URL (e.g., [https://dealership-api-m991.onrender.com/docs](https://dealership-api-m991.onrender.com/docs)). This will open the Swagger UI, allowing you to test your login and inventory endpoints directly.
+
+3. Connecting Them
+If you need to verify they are connected:
+
+Ensure your Vercel project's Environment Variable VITE_API_URL is set to [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com).
+
+When you interact with the dashboard on your Vercel URL, it will send requests to that Render URL to fetch and update vehicle data.
+
+If you run into any connection issues, check that the URL in your Vercel environment variables does not have a trailing slash (/) at the end.
+
+This Serverless Function has crashed.
+
+Your connection is working correctly.
+
+Vercel is working correctly.
+
+500: INTERNAL_SERVER_ERROR
+
+Code: FUNCTION_INVOCATION_FAILED
+
+ID: bom1::bpbhv-1784462818095-89e76ea2b431
+
+If you are a visitor, contact the website owner or try again later.
+
+If you are the owner, learn how to fix the error and check the logs.
+
+A 500: INTERNAL_SERVER_ERROR with FUNCTION_INVOCATION_FAILED means that while your Vercel frontend is up, it is failing when it tries to talk to your backend API or perform a server-side task.
+
+Since your backend is live on Render, this is almost certainly a communication or configuration issue between the two. Here is how to fix it:
+
+1. Check Vercel Function Logs
+This is the most important step to see exactly why it crashed:
+
+Go to your Vercel Dashboard.
+
+Click on your project.
+
+Click the Logs tab.
+
+Look for the 500 error timestamp. Click on that log entry; it will show you the specific Python/Node error (e.g., "Connection refused," "401 Unauthorized," or a timeout).
+
+2. Common Causes & Fixes
+Render "Spin Down" Timeout:
+Because you are using the Render Free Tier, the backend spins down after inactivity. If your Vercel frontend requests data, and the backend is "waking up," it can take too long, causing the Vercel function to time out and crash.
+
+The Fix: Try refreshing your page twice. If it works on the second try, the backend just needed to wake up.
+
+Incorrect VITE_API_URL:
+If you have a trailing slash (e.g., [https://...onrender.com/](https://...onrender.com/)), it can sometimes cause request routing failures.
+
+The Fix: Go to your Vercel Project Settings > Environment Variables and ensure your VITE_API_URL is exactly [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com) (no / at the end). Click Save, then go to Deployments and click Redeploy.
+
+CORS Issues:
+If the backend is rejecting the request, Vercel might report a 500 if it can't handle the error response correctly.
+
+The Fix: Ensure your app/main.py still has the CORSMiddleware configured to allow "*" as we set up during the deployment prep.
+
+How to proceed:
+Check the Logs tab in Vercel. If you see an error message there, paste it here, and I will tell you exactly which line of code is failing!
+
+TimeStatusHostRequestMessages
+
+TimeMethodStatusHostRequestMessage
+
+
+
+
+
+Jul 19 17:37:00.31
+
+GET
+
+500kata-car-dealership-six.vercel.app
+
+
+
+
+
+/favicon.ico
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:36:58.09
+
+GET
+
+500kata-car-dealership-six.vercel.app
+
+
+
+
+
+/
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:35:43.38
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/favicon.png
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:35:42.97
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/favicon.png
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:35:42.07
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/favicon.ico
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:35:41.69
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/favicon.ico
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:35:40.74
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:35:40.37
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:34:41.77
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+
+
+Jul 19 17:34:41.55
+
+GET
+
+500kata-car-dealership-9h0aeb48r-kishan0204g.vercel.app
+
+
+
+
+
+/
+
+", line 999, in exec_module
+
+
+File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+
+File "/var/task/app/main.py", line 12, in <module>
+
+
+models.Base.metadata.create_all(bind=engine)
+
+
+File "/var/task/_vendor/sqlalchemy/sql/schema.py", line 5930, in create_all
+
+
+bind._run_ddl_visitor(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3269, in _run_ddl_visitor
+
+
+with self.begin() as conn:
+
+
+^^^^^^^^^^^^
+
+
+File "/var/lang/lib/python3.12/contextlib.py", line 137, in __enter__
+
+
+return next(self.gen)
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3259, in begin
+
+
+with self.connect() as conn:
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3295, in connect
+
+
+return self._connection_cls(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 146, in __init__
+
+
+Connection._handle_dbapi_exception_noconnection(
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 2450, in _handle_dbapi_exception_noconnection
+
+
+raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 144, in __init__
+
+
+self._dbapi_connection = engine.raw_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/base.py", line 3319, in raw_connection
+
+
+return self.pool.connect()
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 448, in connect
+
+
+return _ConnectionFairy._checkout(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 1272, in _checkout
+
+
+fairy = _ConnectionRecord.checkout(pool)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 712, in checkout
+
+
+rec = pool._do_get()
+
+
+^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 178, in _do_get
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/impl.py", line 176, in _do_get
+
+
+return self._create_connection()
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 389, in _create_connection
+
+
+return _ConnectionRecord(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 674, in __init__
+
+
+self.__connect()
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 900, in __connect
+
+
+with util.safe_reraise():
+
+
+^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+
+
+raise exc_value.with_traceback(exc_tb)
+
+
+File "/var/task/_vendor/sqlalchemy/pool/base.py", line 896, in __connect
+
+
+self.dbapi_connection = connection = pool._invoke_creator(self)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/create.py", line 667, in connect
+
+
+return dialect.connect(*cargs_tup, **cparams)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/sqlalchemy/engine/default.py", line 630, in connect
+
+
+return self.loaded_dbapi.connect(*cargs, **cparams) # type: ignore[no-any-return] # NOQA: E501
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+File "/var/task/_vendor/psycopg2/__init__.py", line 122, in connect
+
+
+conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+
+
+Is the server running on that host and accepting TCP/IP connections?
+
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+
+The logs indicate that your Vercel deployment is trying to run the entire backend application inside the Vercel serverless environment.
+
+Crucially, the error (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed confirms that your application is attempting to connect to a local PostgreSQL database that does not exist in the Vercel cloud environment.
+
+The Problem
+You have deployed your backend code to Vercel. Vercel is designed for frontend applications; it is not meant to host long-running Python backend services or database servers. Your API should stay on Render (where you already have it working), and Vercel should only host your frontend.
+
+The Solution
+1. Stop Trying to Deploy the Backend to Vercel
+You do not need to host the backend code on Vercel. Your Vercel project should only contain your frontend code (the src folder, package.json, etc.).
+
+2. Configure Your Frontend Correctly
+Your Vercel deployment is currently crashing because it's trying to execute your backend's main.py.
+
+If you uploaded your entire project (frontend + backend) to the same Vercel repository, Vercel is likely trying to run the backend as a "Serverless Function."
+
+Fix: Ensure your Vercel project is pointed only at your frontend directory in the Vercel Project Settings > Root Directory.
+
+3. Update Environment Variables
+Your frontend code is currently configured to connect to localhost. You must ensure it uses the Render URL we generated earlier.
+
+Go to your Vercel Project Settings > Environment Variables.
+
+Ensure you have VITE_API_URL set to [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com).
+
+Crucial: Ensure your frontend code is actually using this variable. Check your Dashboard.jsx or wherever you make your fetch() calls. It should look like this:
+
+JavaScript
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`);
+4. The "Connection Refused" Root Cause
+The reason you see Connection refused is that your code in app/main.py has a line models.Base.metadata.create_all(bind=engine). This code runs every time the server starts. Because Vercel is trying to run your backend, it executes this line, tries to connect to localhost:5432, and crashes because there is no database running there.
+
+Summary of what to do:
+
+Keep your backend on Render. It is already live and working there.
+
+Update your Vercel Project to only build the frontend directory.
+
+Ensure your frontend uses VITE_API_URL to talk to the Render backend, rather than trying to start its own database connection.
+
+Once you point Vercel only at the frontend folder, the "Internal Server Error" will disappear because Vercel will stop trying to run your backend's database initialization code!
+
+how to solve tis?
+
+The error you are seeing occurs because you have uploaded your entire project (which includes both your backend Python code and your React frontend) to Vercel. Vercel is attempting to run your backend main.py as a serverless function, which is failing because that environment does not have access to your database.
+
+To solve this and get your project working, follow these steps:
+
+1. Separate Your Frontend and Backend
+Vercel should only host your React frontend, while your API should remain on Render.
+
+In Vercel: Go to your Project Settings.
+
+Look for the Root Directory setting.
+
+Change it to point directly to your frontend folder (e.g., set the root directory to frontend).
+
+This instructs Vercel to ignore your backend files and only build the React application.
+
+2. Verify Your API Connection
+Your frontend must talk to your live Render API, not try to run its own database connection.
+
+Environment Variable: Ensure VITE_API_URL is set to [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com) in your Vercel Environment Variables settings.
+
+Code Check: Ensure your frontend code is using that variable to make requests. It should look like this:
+
+JavaScript
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`);
+If you find any hardcoded http://localhost:8000 strings in your code, replace them with the code above.
+
+3. Why the "Connection Refused" Error Will Stop
+The error Connection refused happens because your main.py contains database initialization code (models.Base.metadata.create_all) that triggers as soon as the file is executed. By changing the Root Directory in Vercel to only include the frontend folder, Vercel will stop executing main.py entirely, which eliminates the database connection attempt and resolves the 500 error.
+
+Once you save the Root Directory setting, go to the Deployments tab in Vercel and click Redeploy. Your frontend will then load successfully and communicate correctly with your backend on Render.
+
+
+
+
+
+kishan29082000-9572
+
+Just now
+
+Status
+
+Error
+
+Latest
+
+Duration
+
+
+
+3sJust now
+
+Environment
+
+
+
+Production
+
+Domains
+
+
+
+kata-car-dealership-git-main-kishan0204g.vercel.app
+
+
+
+kata-car-dealership-nrkkzripw-kishan0204g.vercel.app
+
+Source
+
+
+
+main
+
+
+
+8db6686
+
+fix: add python-multipart for form data support
+
+
+
+Deployment Settings
+
+3 Recommendations
+
+
+
+Build Logs
+
+3s
+
+
+
+9 lines
+
+1
+
+
+
+CtrlF
+
+17:42:54.819 
+
+Running build in Washington, D.C., USA (East) – iad1
+
+17:42:54.820 
+
+Build machine configuration: 2 cores, 8 GB
+
+17:42:54.833 
+
+Cloning github.com/kishanpatel2908/kata-car-dealership (Branch: main, Commit: 8db6686)
+
+17:42:54.834 
+
+Skipping build cache, deployment was triggered without cache.
+
+17:42:55.173 
+
+Cloning completed: 340.000ms
+
+17:42:55.631 
+
+Running "vercel build"
+
+17:42:55.649 
+
+Vercel CLI 56.2.0
+
+17:42:55.908 
+
+Error: No FastAPI entrypoint found. Set "tool.vercel.entrypoint" in pyproject.toml or define an entrypoint in one of: app.py, index.py, server.py, main.py, wsgi.py, asgi.py, src/app.py, src/index.py, src/server.py, src/main.py, src/wsgi.py, src/asgi.py, app/app.py, app/index.py, app/server.py, app/main.py, app/wsgi.py, app/asgi.py, api/app.py, api/index.py, api/server.py, api/main.py, api/wsgi.py, api/asgi.py.
+
+17:42:55.909 
+
+Learn More: https://vercel.com/docs/frameworks/backend/fastapi#exporting-the-fastapi-application
+
+It looks like you are still trying to build the backend on Vercel, which is why it is looking for an "entrypoint" for FastAPI.
+
+To solve this once and for all, you need to tell Vercel to ignore your backend entirely.
+
+The Correct Fix: "Root Directory" Setting
+Vercel is scanning your entire repository and trying to "guess" how to build it. Since it sees your backend files, it is getting confused.
+
+Log in to your Vercel Dashboard.
+
+Click on your Project.
+
+Go to the Settings tab at the top.
+
+On the left sidebar, click General.
+
+Scroll down to the Root Directory section.
+
+Click Edit.
+
+Type frontend (or the name of your folder that contains package.json).
+
+Click Save.
+
+What happens now:
+
+Vercel will now only look inside that folder.
+
+It will see your package.json and know it is a React app.
+
+It will completely ignore the app/ folder, the main.py file, and all those backend-related errors.
+
+Vercel will successfully build your frontend and serve it.
+
+One final check:
+Since you are pointing Vercel to the frontend folder, make sure that your Environment Variables (Settings -> Environment Variables) are still set there.
+
+Once you change the Root Directory and click Save, Vercel will trigger a new deployment. Because it will only build the frontend, it will be fast, and the build will succeed!
+
+Skip to content
+
+FindF
+
+
+
+Settings
+
+General
+
+Build and Deployment
+
+Environments
+
+Git
+
+Deployment Protection
+
+Passport
+
+BetaFunctions
+
+Cron Jobs
+
+Microfrontends
+
+Project Members
+
+Drains
+
+Security
+
+Networking
+
+Activity
+
+Advanced
+
+
+
+
+
+kishan29082000-9572
+
+
+
+
+
+
+
+
+
+Project Settings
+
+
+
+Build and Deployment
+
+Framework Settings
+
+
+
+When using a framework for a new project, it will be automatically detected. As a result, several project settings are automatically configured to achieve the best result. You can override them below.
+
+Framework Preset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Learn more about Build and Development Settings
+
+Root Directory
+
+
+
+The directory within your project, where your code is located. Leave this field empty if your code is not located in a subdirectory.
+
+Include files outside the root directory in the Build Step
+
+.
+
+Skip deployments
+
+when there are no changes to the root directory or its dependencies.
+
+Learn more about Root Directory
+
+Ignored Build Step
+
+
+
+Vercel skips builds for commits with a previously deployed SHA. Override with a shell command that exits 1 (build) or 0 (skip).
+
+Behavior
+
+Automatic
+
+Only build production
+
+Only build pre-production
+
+Only build if there are changes
+
+Only build if there are changes in a folder
+
+Don’t build anything
+
+Run my Bash script
+
+Run my Node script
+
+Custom
+
+
+
+Learn more about Ignored Build Step
+
+Node.js Version
+
+
+
+The Node.js version used during builds and for Serverless Functions. Redeploy to apply changes.
+
+24.x
+
+22.x
+
+20.x
+
+
+
+Learn more about Node.js Version
+
+On-Demand Concurrent Builds
+
+
+
+Skip the build queue and build deployments immediately. Usage costs apply per build minute.
+
+Run all builds immediately
+
+Skip the queue for all builds
+
+Run up to one build per branch
+
+New deployments within a branch are queued
+
+Disable on-demand concurrent builds
+
+Builds are queued, maximum of one at a time
+
+This feature is available on the Pro plan
+
+Build Machine
+
+
+
+The next deployment of this project will fallback to Standard build machines, because your team has not selected a default build machine.
+
+
+
+
+
+Your next deployment will build with a Standard machine.
+
+Learn more about build machine types
+
+and pricing
+
+Deployment Checks
+
+
+
+No checks configured
+
+Use events or statuses from your checks provider to determine when a deployment is promoted to Production.
+
+
+
+Learn more about Deployment Checks
+
+Rolling Releases
+
+
+
+Roll out changes gradually by defining a traffic percentage for each stage.
+
+This feature is available on the Pro plan
+
+Prioritize Production Builds
+
+
+
+Run Production builds before Pre-Production builds.
+
+Enabled
+
+Learn more about Prioritize Production Builds
+
+Enable Speed Insights
+
+
+
+17:41:00
+
+0
+
+You are in the right place! Since you are in the General settings under Build and Deployment, follow these exact steps to fix the "No FastAPI entrypoint found" error:
+
+Locate "Root Directory": You will see a text box under the "Root Directory" section that is currently empty (or has a .).
+
+Edit it: Click into that text box and type frontend (exactly as it appears in your repository folder structure).
+
+Save: Scroll down to the bottom of that section and click the Save button.
+
+Redeploy:
+
+Once saved, Vercel will prompt you to redeploy.
+
+Click the Deploy or Redeploy button.
+
+What will happen now:
+Vercel will ignore the root folder where your main.py and backend files live.
+
+Because it only looks inside the frontend folder, it will only see your React/Vite configuration.
+
+The "No FastAPI entrypoint found" error will disappear because Vercel will no longer attempt to treat your backend code as a serverless function.
+
+Important: Once this deployment succeeds, your site will be live! If you see a blank page or errors, double-check your Environment Variables in the Vercel dashboard to ensure VITE_API_URL is still set to your Render backend URL.
+
+Framework Settings
+
+
+
+When using a framework for a new project, it will be automatically detected. As a result, several project settings are automatically configured to achieve the best result. You can override them below.
+
+Framework Preset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Learn more about Build and Development Settings
+
+Root Directory
+
+
+
+The directory within your project, where your code is located. Leave this field empty if your code is not located in a subdirectory.
+
+Include files outside the root directory in the Build Step
+
+.
+
+Skip deployments
+
+when there are no changes to the root directory or its dependencies.
+
+Learn more about Root Directory
+
+Ignored Build Step
+
+
+
+Vercel skips builds for commits with a previously deployed SHA. Override with a shell command that exits 1 (build) or 0 (skip).
+
+Behavior
+
+Automatic
+
+Only build production
+
+Only build pre-production
+
+Only build if there are changes
+
+Only build if there are changes in a folder
+
+Don’t build anything
+
+Run my Bash script
+
+Run my Node script
+
+Custom
+
+
+
+Learn more about Ignored Build Step
+
+Node.js Version
+
+
+
+The Node.js version used during builds and for Serverless Functions. Redeploy to apply changes.
+
+24.x
+
+22.x
+
+20.x
+
+
+
+Learn more about Node.js Version
+
+On-Demand Concurrent Builds
+
+
+
+Skip the build queue and build deployments immediately. Usage costs apply per build minute.
+
+Run all builds immediately
+
+Skip the queue for all builds
+
+Run up to one build per branch
+
+New deployments within a branch are queued
+
+Disable on-demand concurrent builds
+
+Builds are queued, maximum of one at a time
+
+This feature is available on the Pro plan
+
+Build Machine
+
+
+
+The next deployment of this project will fallback to Standard build machines, because your team has not selected a default build machine.
+
+
+
+
+
+Your next deployment will build with a Standard machine.
+
+Learn more about build machine types
+
+and pricing
+
+Deployment Checks
+
+
+
+No checks configured
+
+Use events or statuses from your checks provider to determine when a deployment is promoted to Production.
+
+
+
+Learn more about Deployment Checks
+
+Rolling Releases
+
+
+
+Roll out changes gradually by defining a traffic percentage for each stage.
+
+This feature is available on the Pro plan
+
+Prioritize Production Builds
+
+
+
+Run Production builds before Pre-Production builds.
+
+Enabled
+
+Learn more about Prioritize Production Builds
+
+I see you are still on the settings page. To resolve the build error you encountered, please follow these steps exactly:
+
+Find the "Root Directory" text box: It is the first input field under the section titled "Root Directory".
+
+Enter the folder name: Type frontend into that box.
+
+Save the changes: Scroll to the bottom of the page and click the Save button.
+
+Redeploy: Once saved, Vercel should prompt you to redeploy, or you can go to the Deployments tab and click Redeploy on the latest commit.
+
+By setting the Root Directory to frontend, Vercel will focus only on your React files, ignore the backend main.py file, and stop trying to build your FastAPI application. This will stop the "No FastAPI entrypoint found" error and allow your frontend to deploy successfully.
+
+After the deployment finishes, your site should be live and properly communicating with your Render backend. Do you need help with anything else once the deployment completes?
+
+Sources:
+
+Vercel Project Settings Documentation: https://vercel.com/docs/frameworks/backend/fastapi#exporting-the-fastapi-application
+
+Root Directory
+
+
+
+The directory within your project, where your code is located. Leave this field empty if your code is not located in a subdirectory.
+
+Include files outside the root directory in the Build Step
+
+.
+
+Skip deployments
+
+when there are no changes to the root directory or its dependencies.
+
+It looks like you are looking at the "Root Directory" settings in Vercel. Since you are still seeing the "No FastAPI entrypoint found" error, this means Vercel is still trying to scan your entire project for a backend.
+
+To fix this, please follow these steps:
+
+Enter the Directory Name: Click inside the input box under "Root Directory" and type the name of the folder where your frontend code resides (e.g., frontend).
+
+Save Changes: Scroll to the bottom of the page and click the Save button.
+
+Trigger Redeployment: After saving, go to the Deployments tab in your Vercel project dashboard and click Redeploy on the latest commit.
+
+By setting the Root Directory to frontend, Vercel will focus only on your React files and ignore your backend files entirely, which stops the build error.
+
+Once the deployment completes, your frontend will be live and will communicate with your Render backend using the VITE_API_URL environment variable you configured.
+
+Are you able to save that setting successfully and trigger the redeployment?
+
+Perfect, you have typed frontend correctly into the Root Directory box. Now, look closely at your screenshot:
+
+The "Save" button is greyed out (disabled).
+
+This is happening because you still have "Include files outside the root directory in the Build Step" enabled. Vercel is preventing you from saving this change while that option is enabled because it could lead to build errors.
+
+To fix this and save your settings:
+Toggle the switch for "Include files outside the root directory in the Build Step" to Disabled (turn it off).
+
+Once you disable that switch, the Save button in the bottom right will turn solid/active.
+
+Click Save.
+
+After saving, go to the Deployments tab in your Vercel project and click Redeploy on your latest commit.
+
+Once you do this, Vercel will correctly focus only on the frontend folder, stop trying to build your backend, and your deployment will succeed!
+
+Sources:
+
+Vercel Project Settings Documentation: https://vercel.com/docs/frameworks/backend/fastapi#exporting-the-fastapi-application
+
+Deployments
+
+
+
+
+
+
+
+
+
+
+
+fix: add python-multipart for form data support
+
+Error
+
+2s
+
+
+
+Production
+
+Redeploy of 2KriJjSEd
+
+Just now
+
+
+
+fix: add python-multipart for form data support
+
+Error
+
+3s
+
+
+
+Production
+
+Redeploy of 2KriJjSEd
+
+5m ago
+
+
+
+fix: add python-multipart for form data support
+
+Ready
+
+17s
+
+
+
+Production
+
+8db6686
+
+
+
+main
+
+14m ago
+
+
+
+Deployment Retention is enabled for this project — some deployments will be deleted after a set time period. Learn more
+
+It looks like you are seeing several failed deployment attempts. Now that you have successfully saved the frontend root directory setting, the Vercel builder should be looking only at your React project.
+
+If you are still seeing an "Error" status, we need to see the new build logs for one of these recent failed attempts.
+
+Please do the following:
+Click on the deployment marked "Error" that happened "Just now".
+
+Once that deployment page opens, click on the "Build Logs" tab.
+
+Copy the last 10-15 lines of that log (where the error message is) and paste them here.
+
+Why this is happening:
+Since we changed the root directory to frontend, Vercel is no longer trying to build your backend. If it is still failing, it is likely because:
+
+Missing Dependencies: Your React package.json needs its dependencies installed (e.g., npm install needs to run).
+
+Vite Configuration: Your vite.config.js or package.json might have a build script that Vercel is struggling to execute.
+
+Once you paste those new logs, I can tell you exactly what command or file is causing this specific frontend build to fail.
+
+17:48:33.907 Running build in Washington, D.C., USA (East) – iad1
+
+17:48:33.908 Build machine configuration: 2 cores, 8 GB
+
+17:48:33.921 Cloning github.com/kishanpatel2908/kata-car-dealership (Branch: main, Commit: 8db6686)
+
+17:48:33.923 Skipping build cache, deployment was triggered without cache.
+
+17:48:34.260 Cloning completed: 337.000ms
+
+17:48:39.359 Running "vercel build"
+
+17:48:39.376 Vercel CLI 56.2.0
+
+17:48:39.630 Error: No FastAPI entrypoint found. Set "tool.vercel.entrypoint" in pyproject.toml or define an entrypoint in one of: app.py, index.py, server.py, main.py, wsgi.py, asgi.py, src/app.py, src/index.py, src/server.py, src/main.py, src/wsgi.py, src/asgi.py, app/app.py, app/index.py, app/server.py, app/main.py, app/wsgi.py, app/asgi.py, api/app.py, api/index.py, api/server.py, api/main.py, api/wsgi.py, api/asgi.py.
+
+17:48:39.631 Learn More: https://vercel.com/docs/frameworks/backend/fastapi#exporting-the-fastapi-application
+
+It appears Vercel is still trying to build your project as a FastAPI application despite your Root Directory setting. This usually happens if Vercel still detects backend files (like app/main.py) inside the directory it is currently scanning.
+
+To fix this, we need to ensure Vercel ignores the backend files entirely, even inside the frontend root.
+
+The Solution: Vercel Ignored Build Step
+You can explicitly tell Vercel to treat this as a static/frontend-only project by using an Ignored Build Step.
+
+Go to your Vercel Project Settings.
+
+Go to General > Build and Deployment.
+
+Scroll down to Ignored Build Step.
+
+Change the behavior to Custom.
+
+In the command box that appears, paste this command:
+
+Bash
+echo "This is a frontend-only project"
+Save the settings.
+
+Redeploy your project.
+
+If that still doesn't work:
+Vercel is likely detecting a pyproject.toml file or backend files in your repository that trigger the FastAPI build. You can force Vercel to build your project as a frontend application by creating a file named vercel.json in the root of your repository with these contents:
+
+JSON
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": null
+}
+(Note: Change npm install && npm run build to whatever command you use to build your frontend locally, and ensure frontend/dist matches the folder your frontend build tool creates.)
+
+By adding this vercel.json file, you override Vercel's automatic detection and force it to run the specific build commands for your frontend while ignoring the backend. After you add this file, commit and push it to GitHub, and Vercel will pick it up automatically.
+
+Deployment Canceled
+
+Created
+
+
+
+kishan29082000-9572
+
+Just now
+
+Status
+
+Canceled
+
+Latest
+
+Duration
+
+
+
+2sJust now
+
+Environment
+
+
+
+Production
+
+Domains
+
+
+
+kata-car-dealership-git-main-kishan0204g.vercel.app
+
+
+
+kata-car-dealership-egyh6ew2l-kishan0204g.vercel.app
+
+Source
+
+
+
+main
+
+
+
+8db6686
+
+fix: add python-multipart for form data support
+
+
+
+Deployment Settings
+
+3 Recommendations
+
+
+
+Build Logs
+
+1s
+
+
+
+5 lines
+
+CtrlF
+
+17:50:37.753 
+
+Running build in Washington, D.C., USA (East) – iad1
+
+17:50:37.754 
+
+Build machine configuration: 2 cores, 8 GB
+
+17:50:37.780 
+
+Cloning github.com/kishanpatel2908/kata-car-dealership (Branch: main, Commit: 8db6686)
+
+17:50:37.783 
+
+Skipping build cache, deployment was triggered without cache.
+
+17:50:38.456 
+
+Cloning completed: 674.000ms
+
+It appears the deployment was canceled before it could even try to build. To move forward, we need to bypass Vercel's automatic "FastAPI detection" which is interfering with your project.
+
+Please perform these steps exactly to force a clean frontend-only build:
+
+1. Create a vercel.json file
+Create a new file named vercel.json in the very top (root) of your GitHub repository (at the same level as your frontend and app folders). Paste this code into it:
+
+JSON
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": null
+}
+2. Commit and Push
+In your terminal, run these commands to push the new configuration:
+
+Bash
+git add vercel.json
+git commit -m "chore: force static frontend build via vercel.json"
+git push origin main
+3. Clear the Root Directory
+Because we are now using vercel.json to tell Vercel to look inside the frontend folder, you should reset your "Root Directory" setting to be empty (leave it blank). This avoids conflicts between the UI setting and the vercel.json file.
+
+Go back to your Vercel Settings > General > Build & Deployment.
+
+Clear the text box for Root Directory so it is completely empty.
+
+Click Save.
+
+4. Trigger a new deployment
+After pushing the vercel.json file and clearing the root directory setting:
+
+Go to your Vercel Dashboard.
+
+It should automatically trigger a new build. If it doesn't, click Deployments and click Redeploy on your latest commit.
+
+This will force Vercel to ignore your backend files and build only your frontend using the specific commands defined in vercel.json. Once this finishes, your frontend will be live!
+
+Created
+
+
+
+kishan29082000-9572
+
+Just now
+
+Status
+
+Canceled
+
+Latest
+
+Duration
+
+
+
+1sJust now
+
+Environment
+
+
+
+Production
+
+Domains
+
+
+
+kata-car-dealership-git-main-kishan0204g.vercel.app
+
+
+
+kata-car-dealership-kp3z8xz33-kishan0204g.vercel.app
+
+Source
+
+
+
+main
+
+
+
+8db6686
+
+fix: add python-multipart for form data support
+
+
+
+Deployment Settings
+
+3 Recommendations
+
+
+
+Build Logs
+
+1s
+
+
+
+8 lines
+
+CtrlF
+
+17:52:47.032 
+
+Running build in Washington, D.C., USA (East) – iad1
+
+17:52:47.033 
+
+Build machine configuration: 2 cores, 8 GB
+
+17:52:47.046 
+
+Cloning github.com/kishanpatel2908/kata-car-dealership (Branch: main, Commit: 8db6686)
+
+17:52:47.047 
+
+Skipping build cache, deployment was triggered without cache.
+
+17:52:47.380 
+
+Cloning completed: 334.000ms
+
+17:52:47.637 
+
+Running "echo "This is a frontend-only project""
+
+17:52:47.649 
+
+This is a frontend-only project
+
+17:52:47.650 
+
+The Deployment has been canceled as a result of running the command defined in the "Ignored Build Step" setting.
+
+My apologies! I gave you an "Ignored Build Step" command that was too aggressive, and it told Vercel to stop the build entirely.
+
+Let's fix this so Vercel builds your site.
+
+1. Re-enable the Build
+Go to your Vercel Project Settings.
+
+Go to General > Build & Deployment.
+
+Find Ignored Build Step and set it back to Automatic (this is the default behavior and what you need).
+
+Save the settings.
+
+2. Ensure your vercel.json is correct
+You previously created a vercel.json file. Ensure it is in the root of your repository with this exact content (this tells Vercel how to build the frontend while ignoring the backend files):
+
+JSON
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": null
+}
+3. Final Deployment Trigger
+After saving the Ignored Build Step back to Automatic:
+
+Go to the Deployments tab in Vercel.
+
+Click Redeploy on your latest commit.
+
+Why this will work now:
+By setting Ignored Build Step to Automatic, Vercel will now follow the instructions in your vercel.json file. Since vercel.json tells Vercel to cd frontend and build there, it will successfully ignore your backend files and build your React app.
+
+Give that a try and let me know the result of this build!
+
+This Serverless Function has crashed.
+
+Your connection is working correctly.
+
+Vercel is working correctly.
+
+500: INTERNAL_SERVER_ERROR
+
+Code: FUNCTION_INVOCATION_FAILED
+
+ID: bom1::fpl7k-1784463934836-74bdabf526b6
+
+If you are a visitor, contact the website owner or try again later.
+
+If you are the owner, learn how to fix the error and check the logs.
+
+
+
+17:54:08.400 Running build in Washington, D.C., USA (East) – iad1
+
+17:54:08.401 Build machine configuration: 2 cores, 8 GB
+
+17:54:08.419 Cloning github.com/kishanpatel2908/kata-car-dealership (Branch: main, Commit: 8db6686)
+
+17:54:08.421 Skipping build cache, deployment was triggered without cache.
+
+17:54:08.790 Cloning completed: 370.000ms
+
+17:54:09.151 Running "vercel build"
+
+17:54:09.171 Vercel CLI 56.2.0
+
+17:54:09.677 No Python version specified in .python-version, pyproject.toml, or Pipfile.lock. Using python version: 3.12
+
+17:54:09.719 Using uv 0.10.11
+
+17:54:09.720 Creating virtual environment at "/vercel/path0/.vercel/python/.venv"...
+
+17:54:10.176 Installing required dependencies from requirements.txt...
+
+17:54:11.690 Compiling Python bytecode...
+
+17:54:17.811 Build Completed in /vercel/output [8s]
+
+17:54:18.133 Deploying outputs...
+
+17:54:29.955 Deployment completed
+
+17:54:30.122 Creating build cache...
+
+The logs confirm that Vercel is still trying to deploy your backend as a serverless function. You see this because Vercel detected a requirements.txt file and is automatically creating a Python virtual environment to run it.
+
+The 500: INTERNAL_SERVER_ERROR happens because Vercel is still trying to execute your backend code in an environment where it cannot connect to your database.
+
+The definitive fix:
+We must tell Vercel to explicitly treat this as a Static Frontend project and ignore everything else.
+
+Delete the vercel.json file you previously created, as it is being overridden by Vercel's automatic framework detection.
+
+Go to your Vercel Project Settings:
+
+Navigate to General > Build & Deployment.
+
+Root Directory: Set this to frontend.
+
+Framework Preset: Change this from "FastAPI" (or "Other") to "Vite" (or "Create React App" if that is what you used). This is critical.
+
+Use an Ignored Build Step to stop backend detection:
+
+Under Ignored Build Step, select Custom.
+
+Paste this command exactly:
+
+Bash
+git diff HEAD^ HEAD --quiet .
+This command tells Vercel: "Only build if there are changes in this folder." Since your backend files are outside the frontend root directory, Vercel will now safely ignore them.
+
+Save all settings.
+
+Go to the Deployments tab and click "Redeploy" on the latest commit.
+
+Why this works:
+By changing the Framework Preset to "Vite" and setting the Root Directory to frontend, you are forcing Vercel to use the Node.js builder (for React) instead of the Python builder (for FastAPI). This will make the "No FastAPI entrypoint found" error and the "Serverless Function crash" disappear immediately, as Vercel will no longer attempt to run any Python code.
+
+When using a framework for a new project, it will be automatically detected. As a result, several project settings are automatically configured to achieve the best result. You can override them below.
+
+
+
+Configuration Settings in the current Production deployment differ from your current Project Settings.
+
+
+
+Production Overrides
+
+kata-car-dealership-4rri8b5f0-kishan0204g.vercel.app
+
+
+
+Project Settings
+
+Learn more about Build and Development Settings
+
+The warning "Configuration Settings in the current Production deployment differ from your current Project Settings" means that the settings currently saved in your Vercel Dashboard (like the "Root Directory" or "Build Command") are not the same as the settings that were used to create your last successful deployment.
+
+In your case, this is actually expected behavior because you just manually changed the "Root Directory" to frontend. Vercel is simply notifying you that your new intended configuration is different from the old configuration currently running in Production.
+
+How to resolve this:
+To clear this warning and apply your new changes, you must synchronize the settings by triggering a new deployment.
+
+Redeploy: Since you have already updated the "Root Directory" to frontend and saved it, go to the Deployments tab in your Vercel project dashboard.
+
+Trigger a new build: Click Redeploy on the latest commit.
+
+Wait for the Build: Vercel will now use your new "Root Directory" setting to build the project. Once the deployment finishes successfully, Vercel will consider your new settings to be the "current" production configuration, and the warning message will disappear.
+
+Note: If the build fails again, it is because Vercel might still be "stuck" on old overrides from your previous attempts. If you continue to see the error after a successful redeploy, look at the top of the "Framework Settings" section for a yellow warning box about "Production Overrides" and click it to clear any lingering old settings.
+
+18:00:23.809 Running build in Washington, D.C., USA (East) – iad1
+
+18:00:23.810 Build machine configuration: 2 cores, 8 GB
+
+18:00:23.827 Cloning github.com/kishanpatel2908/kata-car-dealership (Branch: main, Commit: 70bae06)
+
+18:00:23.829 Skipping build cache, deployment was triggered without cache.
+
+It looks like your latest deployment has started! Since you successfully set the Root Directory to frontend and (hopefully) configured the Framework Preset to Vite or Create React App, the build should now proceed by looking only inside that directory.
+
+What to monitor right now:
+The Build Logs: Stay on the Build Logs tab in your Vercel dashboard.
+
+Success Indicators: You want to see logs that look like npm install, npm run build, and Building for production....
+
+What to ignore: You should no longer see any references to FastAPI, pip, python, or requirements.txt.
+
+If the build completes successfully, your site will be live. If it fails, please copy and paste the last few lines of the Build Logs here so I can help you troubleshoot the final step!
+
+Sources:
+
+Vercel Deployment Logs Dashboard
+
+Vercel Framework Backend Documentation
+
+Vercel Project Settings/Root Directory Documentation
+
+Vite/Frontend Build Process Documentation
+
+Vercel Serverless Function/Python Documentation
+
+This Serverless Function has crashed.
+
+Your connection is working correctly.
+
+Vercel is working correctly.
+
+500: INTERNAL_SERVER_ERROR
+
+Code: FUNCTION_INVOCATION_FAILED
+
+ID: bom1::g7bxp-1784464273061-c301acb0aa34
+
+If you are a visitor, contact the website owner or try again later.
+
+If you are the owner, learn how to fix the error and check the logs.
+
+The error FUNCTION_INVOCATION_FAILED with a 500 status indicates that Vercel is still attempting to execute your backend code as a serverless function. Because your backend is intended to run on Render, this configuration is causing Vercel to crash as it tries (and fails) to initialize a database connection on its own internal environment.
+
+To resolve this, you must force Vercel to treat your project as a static frontend only and stop it from scanning for backend files.
+
+1. Configure for Frontend Only
+Go to your Vercel Project Settings and ensure these specific configurations are set:
+
+Root Directory: Set this to frontend (or the folder containing your React package.json).
+
+Framework Preset: Change this from "FastAPI" or "Other" to "Vite" (or your specific React framework). This prevents Vercel from searching for a Python entrypoint.
+
+Ignored Build Step: Set this to "Automatic".
+
+2. Remove Backend Configuration
+Since you are using Render for your backend, you should remove any configurations that trigger Python builds in Vercel:
+
+Ensure there is no vercel.json file in your root that specifies Python or FastAPI configurations.
+
+If you have a requirements.txt file in your root folder, Vercel will automatically attempt to build it as a backend. Move your requirements.txt into your backend folder (or rename it if you don't want it detected) so Vercel does not see it when it scans the repository.
+
+3. Verify the Frontend Build
+Once these changes are saved, go to the Deployments tab and click Redeploy. Your build logs should now show commands like npm install and npm run build instead of pip install or python commands.
+
+Database Connectivity: Your frontend will communicate with your Render backend via the VITE_API_URL environment variable you previously configured. Ensure this is set in Settings > Environment Variables.
+
+Deploy MERN Stack app using Render, Vercel and mongoDB Atlas
+
+This video provides a clear walkthrough of how to correctly separate a full-stack project by hosting the frontend on Vercel and the backend service on Render.
+
+Deploy MERN Stack app using Render, Vercel and mongoDB Atlas
+Code With Arjun · 7.2K views
+
+
+
+
+Deployment Canceled
+
+Created
+
+
+
+kishan29082000-9572
+
+Just now
+
+Status
+
+Canceled
+
+Latest
+
+Duration
+
+
+
+1sJust now
+
+Environment
+
+
+
+Production
+
+Domains
+
+
+
+kata-car-dealership-git-main-kishan0204g.vercel.app
+
+
+
+kata-car-dealership-fvbwzjqob-kishan0204g.vercel.app
+
+Source
+
+
+
+main
+
+
+
+70bae06
+
+commit
+
+
+
+Deployment Settings
+
+3 Recommendations
+
+
+
+Build Logs
+
+1s
+
+
+
+5 lines
+
+CtrlF
+
+18:02:18.892 
+
+Running build in Washington, D.C., USA (East) – iad1
+
+18:02:18.893 
+
+Build machine configuration: 2 cores, 8 GB
+
+18:02:18.913 
+
+Cloning github.com/kishanpatel2908/kata-car-dealership (Branch: main, Commit: 70bae06)
+
+18:02:18.915 
+
+Skipping build cache, deployment was triggered without cache.
+
+18:02:19.613 
+
+Cloning completed: 700.000ms
+
+The deployment is currently being canceled because your Ignored Build Step setting is configured to a custom command that is likely returning an exit code of 0, which tells Vercel to abort the build.
+
+To fix this and get your frontend deployed, follow these steps to reset your build settings:
+
+1. Reset the Ignored Build Step
+Go to your Vercel Project Settings.
+
+Select General > Build & Deployment.
+
+Locate the Ignored Build Step setting.
+
+Change the dropdown/behavior back to Automatic.
+
+Click Save.
+
+2. Verify Root Directory and Framework
+Ensure your settings look like this:
+
+Root Directory: Set to frontend.
+
+Framework Preset: Ensure this is set to Vite (or your specific React framework) to prevent Vercel from trying to build the project as a FastAPI backend.
+
+3. Remove the vercel.json interference
+If you previously added a vercel.json file to your root directory, it may be causing a conflict with the new settings.
+
+Delete the vercel.json file from your GitHub repository to let the Vercel dashboard settings take full control.
+
+Commit and push this change to your main branch.
+
+4. Trigger a Clean Redeploy
+Once you have reset the Ignored Build Step to Automatic and saved your settings, go to your project's Deployments tab.
+
+Click the ... (three dots) next to the latest failed deployment.
+
+Select Redeploy.
+
+Important: In the redeploy dialog, ensure that "Use project's Ignore Build Step" is checked.
+
+This will allow Vercel to correctly identify your React project within the frontend folder and deploy it as a static site, bypassing the Python/FastAPI build process entirely.
+
+Network error. Is the server running?
+
+
+
+Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login:1  Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/register:1  Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login:1  Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login:1  Failed to load resource: the server responded with a status of 404 ()
+
+The error $%7Bimport.meta.env.VITE_API_URL%7D indicates that your code is literally trying to use the string ${import.meta.env.VITE_API_URL} instead of the actual value.
+
+This happens because Vite is not performing the replacement, likely because the environment variable is not being injected correctly during the build process.
+
+Why this is happening
+Build-Time Injection: Vite replaces import.meta.env variables at build time. If Vercel doesn't have the variable in its project settings before it starts building, the replacement fails.
+
+Missing Prefix: Ensure the variable in your Vercel project settings is named exactly VITE_API_URL. If it is missing the VITE_ prefix, Vite will ignore it and it will not be bundled into your frontend.
+
+Redeploy Required: Environment variables in Vercel are only applied to new deployments. If you added the variable after a build started (or finished), the app will still be using the old, undefined value.
+
+How to fix it
+Add/Verify Variable: Go to your Vercel Project Settings > Environment Variables. Ensure VITE_API_URL exists and has the value of your Render backend URL (e.g., [https://your-api-service.onrender.com](https://your-api-service.onrender.com)).
+
+Check Usage in Code: Ensure your code is using the template literal correctly. It should look like this in your JavaScript/React files:
+
+JavaScript
+// Correct way to use it
+const apiUrl = import.meta.env.VITE_API_URL;
+fetch(`${apiUrl}/api/auth/login`);
+If you previously wrote it as a single string inside backticks like "${import.meta.env.VITE_API_URL}", it might be causing issues depending on your build setup; try assigning it to a variable first.
+
+Force a Redeploy: After saving the variable in the Vercel dashboard, go to the Deployments tab and click Redeploy on your latest commit. The build must run again for the environment variable to be bundled into the JavaScript code.
+
+How to Fix Vercel Environment Variables Not Working
+
+This video explains how to troubleshoot Vercel environment variable issues and ensure your application can correctly access them during the build process.
+
+How to Fix Vercel Environment Variables Not Working Full Guide 2026
+How To Solve Pro · 39 views
+
+
+requests.js:1  POST https://kata-car-dealership-six.vercel.app/$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login 404 (Not Found)
+
+_$initInterceptor.s.fetch @ requests.js:1
+
+(anonymous) @ 200.js:1
+
+onSubmit @ index-w_wIKtFl.js:11
+
+yd @ index-w_wIKtFl.js:8
+
+(anonymous) @ index-w_wIKtFl.js:8
+
+hn @ index-w_wIKtFl.js:8
+
+wd @ index-w_wIKtFl.js:8
+
+up @ index-w_wIKtFl.js:9
+
+cp @ index-w_wIKtFl.js:9
+
+requests.js:1  POST https://kata-car-dealership-six.vercel.app/$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login 404 (Not Found)
+
+_$initInterceptor.s.fetch @ requests.js:1
+
+(anonymous) @ 200.js:1
+
+onSubmit @ index-w_wIKtFl.js:11
+
+await in onSubmit
+
+yd @ index-w_wIKtFl.js:8
+
+(anonymous) @ index-w_wIKtFl.js:8
+
+hn @ index-w_wIKtFl.js:8
+
+wd @ index-w_wIKtFl.js:8
+
+up @ index-w_wIKtFl.js:9
+
+cp @ index-w_wIKtFl.js:9
+
+The error message confirms that your code is not correctly replacing ${import.meta.env.VITE_API_URL} with the actual URL. The browser is literally trying to go to a path that starts with those characters, which is why it returns a 404 (Not Found).
+
+This happens because the environment variable was not successfully injected during the build process.
+
+Immediate Steps to Fix
+1. Check your Vercel Environment Variables
+Vite only injects variables that start with VITE_.
+
+Go to Project Settings > Environment Variables.
+
+Ensure the key is exactly VITE_API_URL.
+
+Ensure the value is your full Render URL, for example: [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com) (ensure there is no trailing slash).
+
+2. Update your requests.js (The Code Fix)
+The way you are constructing your URL in requests.js is failing. Instead of putting the template string directly into the fetch call, try defining it as a constant first to ensure Vite picks it up.
+
+Change your requests.js code to this:
+
+JavaScript
+// At the top of your requests.js file
+const API_URL = import.meta.env.VITE_API_URL;
+
+// Then use it like this:
+export const login = async (data) => {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    // ... rest of your config
+  });
+  return response.json();
+};
+3. Crucial: Perform a Clean Redeploy
+Environment variables are only applied when the build starts. If you just changed the variable in the dashboard, the old "broken" build is still running in production.
+
+After updating the variable and the code, commit and push your changes to GitHub.
+
+Go to the Deployments tab in Vercel.
+
+Click the ... menu for the latest deployment and select Redeploy.
+
+Important: In the redeploy pop-up, make sure "Use existing Build Cache" is UNCHECKED. This forces Vercel to rebuild the entire project and properly inject the environment variable.
+
+If you still see the ${...} string in your browser console after this, it means Vite is still not seeing your VITE_API_URL variable at all during the build.
+
+where is request.js?
+
+Based on the error logs from your browser console, requests.js is the file handling your API communications.
+
+Since the path wasn't explicitly saved in our recent conversations, you can locate it by following these steps in your code editor (like VS Code):
+
+How to find requests.js:
+Use the Search Feature: Press Ctrl + P (or Cmd + P on Mac) and type requests.js. This will instantly show you the file path within your project structure.
+
+Check the src folder: In most React/Vite projects, utility files like this are typically located in src/utils/, src/services/, or simply src/.
+
+Look in your frontend directory: Since you have configured your Vercel project to use the frontend folder as the root directory, requests.js will definitely be located somewhere inside the frontend/ folder.
+
+Once you open the file, look for the code responsible for your fetch calls, and ensure you are using the const API_URL = import.meta.env.VITE_API_URL; pattern we discussed to correctly pass the URL to your API.
+
+Are you able to find it using the search command in your editor?
+
+there is no request.js\
+
+If requests.js doesn't exist, your API handling logic is likely defined in a different file. Since your browser console shows errors originating from requests.js:1, it is possible that the file is being dynamically generated during the build, or it is named differently in your source code.
+
+How to find the correct file
+Since the browser is telling you exactly where the error is coming from, follow these steps to find the real file:
+
+Use VS Code Global Search:
+
+Press Ctrl + Shift + F (Windows/Linux) or Cmd + Shift + F (Mac).
+
+This opens the Search All Files sidebar.
+
+Search for a string you know is in your API code, such as fetch or VITE_API_URL.
+
+This will show you every file in your project that contains those terms. Look through the results to find the file that contains your login or register logic.
+
+Check the "Network" Tab:
+
+Open your browser's Developer Tools (F12).
+
+Go to the Network tab.
+
+Find the failed request that shows the 404 error (the one with the ${import.meta.env.VITE_API_URL} string).
+
+Click on that request and look at the Initiator column. If you hover over the filename there, it will show you the exact path to the file triggering that request.
+
+Common Locations:
+
+If you don't find requests.js, check these common folders in your frontend directory:
+
+src/api/
+
+src/services/
+
+src/utils/
+
+src/hooks/
+
+Once you find the file:
+Once you locate the file containing your fetch calls, replace the broken line with this standard Vite approach:
+
+JavaScript
+// At the top of the file
+const API_URL = import.meta.env.VITE_API_URL;
+
+// Use it in your fetch call
+fetch(`${API_URL}/api/auth/login`, { ... });
+If you still can't find it, please open one of your main files (like App.jsx or index.js) and share the code snippet where you handle the login or register requests. I can then tell you exactly how to rewrite that specific section.
+
+Vite Environment Variables Explained
+
+This video is relevant because it explains how Vite handles environment variables and how to correctly use import.meta.env to prevent the exact issue you are facing.
+
+/run/media/kishan/765cf64b-6197-47e4-adba-3497b71d189f/Software-Downloads/kata_dealership/frontend/node_modules/undici/lib/core/request.js
+
+
+
+/run/media/kishan/765cf64b-6197-47e4-adba-3497b71d189f/Software-Downloads/kata_dealership/frontend/node_modules/undici/lib/web/fetch/request.js
+
+
+
+which one?
+
+Neither of those files is the one you need to edit.
+
+Those files are inside your node_modules folder, which contains the library code that your project uses. You should never edit files in node_modules because any changes you make will be deleted the next time you run npm install, and they aren't part of your actual application code.
+
+How to find the correct file
+The error in your browser console is pointing to requests.js, but it's likely being bundled by your build tool (Vite) and might not be exactly named requests.js in your source code.
+
+Search your src folder:
+Go to your terminal inside the frontend folder and run this command:
+
+Bash
+grep -r "VITE_API_URL" .
+This will search every single file in your project for that environment variable. It will tell you exactly which file in your src/ directory is using it.
+
+Look for your API logic:
+Since you have a car dealership app, look for files in your src folder that likely handle API calls. They might be named:
+
+api.js
+
+auth.js
+
+services.js
+
+axiosConfig.js
+
+Or simply check where you defined your login/register functions (e.g., inside Login.jsx or Register.jsx).
+
+Once you run the grep command:
+It will output something like this:
+./src/services/api.js: const url = import.meta.env.VITE_API_URL
+
+That file path is the one you need to open and fix.
+
+Please run that grep command in your terminal and tell me what the output is. That will pinpoint exactly which file contains the broken code.
+
+POST https://kata-car-dealership-six.vercel.app/$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login 404 (Not Found)
+
+_$initInterceptor.s.fetch @ requests.js:1
+
+(anonymous) @ 200.js:1
+
+onSubmit @ index-w_wIKtFl.js:11
+
+yd @ index-w_wIKtFl.js:8
+
+(anonymous) @ index-w_wIKtFl.js:8
+
+hn @ index-w_wIKtFl.js:8
+
+wd @ index-w_wIKtFl.js:8
+
+up @ index-w_wIKtFl.js:9
+
+cp @ index-w_wIKtFl.js:9
+
+requests.js:1  POST https://kata-car-dealership-six.vercel.app/$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login 404 (Not Found)
+
+_$initInterceptor.s.fetch @ requests.js:1
+
+(anonymous) @ 200.js:1
+
+onSubmit @ index-w_wIKtFl.js:11
+
+await in onSubmit
+
+yd @ index-w_wIKtFl.js:8
+
+(anonymous) @ index-w_wIKtFl.js:8
+
+hn @ index-w_wIKtFl.js:8
+
+wd @ index-w_wIKtFl.js:8
+
+up @ index-w_wIKtFl.js:9
+
+cp @ index-w_wIKtFl.js:9
+
+The error $%7Bimport.meta.env.VITE_API_URL%7D appearing in your browser console is the "URL-encoded" version of ${import.meta.env.VITE_API_URL}. This means your code is literally sending that string to the server instead of the actual API URL because Vite failed to replace the variable during the build process.
+
+Why this is happening
+Static Replacement: Vite replaces import.meta.env variables at build time. If the build tool cannot find a value for VITE_API_URL during the build, the replacement does not happen, and the code remains as a literal string.
+
+Variable Scope: Variables must be prefixed with VITE_ to be exposed to your client-side code.
+
+Build-Time Requirement: Environment variables are embedded into your build artifacts. Changes made to environment variables on your hosting provider (like Vercel) require a new deployment (rebuild) to take effect.
+
+How to fix it
+1. Verify and Set the Environment Variable
+Ensure VITE_API_URL is correctly configured in your Vercel project settings:
+
+Navigate to your project in the Vercel dashboard.
+
+Go to Settings > Environment Variables.
+
+Add VITE_API_URL with your full backend URL (e.g., [https://your-api.onrender.com](https://your-api.onrender.com)).
+
+Ensure there are no extra spaces or quotes.
+
+2. Update your Code
+Ensure you are referencing the variable exactly as import.meta.env.VITE_API_URL. Avoid dynamic access (like import.meta.env[key]), as this prevents Vite from performing the static replacement.
+
+Example of correct usage in your code:
+
+JavaScript
+const API_URL = import.meta.env.VITE_API_URL;
+
+// Use it in your fetch call
+fetch(`${API_URL}/api/auth/login`, {
+  method: 'POST',
+  // ...
+});
+3. Trigger a Clean Rebuild
+Simply changing the variable in the dashboard is not enough; you must force a rebuild so Vite can inject the new value.
+
+In the Vercel dashboard, go to the Deployments tab.
+
+Click the "..." (three dots) next to your latest deployment and select Redeploy.
+
+Crucial: If there is an option to "Use existing Build Cache," make sure to uncheck it. This forces Vercel to perform a fresh build, ensuring the environment variable is correctly injected.
+
+Debugging Tip
+You can verify if the variable is being injected by adding console.log(import.meta.env); to your src/main.js or App.js file. After redeploying, check the browser console; if you see VITE_API_URL: undefined, then Vite is still not finding the variable during the build.
+
+kishan@kishan-ubuntu:/run/media/kishan/765cf64b-6197-47e4-adba-3497b71d189f/Software-Downloads/kata_dealership$ cd frontend/
+
+kishan@kishan-ubuntu:/run/media/kishan/765cf64b-6197-47e4-adba-3497b71d189f/Software-Downloads/kata_dealership/frontend$ cd src
+
+kishan@kishan-ubuntu:/run/media/kishan/765cf64b-6197-47e4-adba-3497b71d189f/Software-Downloads/kata_dealership/frontend/src$ grep -r "VITE_API_URL" .
+
+./pages/Dashboard.jsx:            const response = await fetch("${import.meta.env.VITE_API_URL}/api/vehicles", {
+
+./pages/Dashboard.jsx:            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}/purchase`, {
+
+./pages/Dashboard.jsx:            const response = await fetch("${import.meta.env.VITE_API_URL}/api/vehicles", {
+
+./pages/Dashboard.jsx:            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}`, {
+
+./pages/Dashboard.jsx:            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}`, {
+
+./pages/Dashboard.jsx:            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}/restock`, {
+
+./pages/Login.jsx:        const response = await fetch("${import.meta.env.VITE_API_URL}/api/auth/login", {
+
+./pages/Login.jsx:            const response = await fetch("${import.meta.env.VITE_API_URL}/api/auth/login", {
+
+./pages/Register.jsx:            const response = await fetch("${import.meta.env.VITE_API_URL}/api/auth/register", {
+
+kishan@kishan-ubuntu:/run/media/kishan/765cf64b-6197-47e4-adba-3497b71d189f/Software-Downloads/kata_dealership/frontend/src$
+
+You have found the exact files causing the issue!
+
+The problem is that in many of your fetch calls, you are using double quotes (") with a dollar sign inside them. In JavaScript, this does not perform "string interpolation"—it literally treats the code as plain text.
+
+The Fix
+You need to change all occurrences of "${import.meta.env.VITE_API_URL}/... to use backticks (the key to the left of the 1 key) instead.
+
+Example Correction
+Change this (Incorrect):
+
+JavaScript
+const response = await fetch("${import.meta.env.VITE_API_URL}/api/auth/login", { ... });
+To this (Correct):
+
+JavaScript
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, { ... });
+Steps to Apply:
+Open Dashboard.jsx, Login.jsx, and Register.jsx in your code editor.
+
+Replace every instance of "${import.meta.env.VITE_API_URL} with ${import.meta.env.VITE_API_URL} (make sure you use backticks ` instead of double quotes ").
+
+Save all files.
+
+Commit and Push your changes to GitHub:
+
+Bash
+git add .
+git commit -m "fix: correct template literal syntax for API URLs"
+git push origin main
+Redeploy on Vercel, ensuring you uncheck "Use existing Build Cache" in the redeploy dialog.
+
+Once you switch to backticks, Vite will correctly recognize the variable, replace it with your VITE_API_URL value during the build, and your 404 errors will disappear.
+
+Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login:1  Failed to load resource: the server responded with a status of 404 ()
+
+login:1  Failed to load resource: the server responded with a status of 404 ()
+
+The errors you are seeing occur because your code is literally trying to request a URL that starts with ${import.meta.env.VITE_API_URL}. This happens because JavaScript strings wrapped in double quotes (") do not perform variable substitution; they treat the ${...} syntax as plain text.
+
+To fix this, you must change these double quotes to backticks (`) (the character typically located above the Tab key or to the left of the 1 key) to enable template literal string interpolation.
+
+Steps to Resolve
+Update your files: Open src/pages/Dashboard.jsx, src/pages/Login.jsx, and src/pages/Register.jsx.
+
+Fix the syntax: Locate every instance of the fetch calls and replace the double quotes surrounding the URL with backticks.
+
+Change this (Incorrect): fetch("${import.meta.env.VITE_API_URL}/api/auth/login", { ... })
+
+To this (Correct): fetch(${import.meta.env.VITE_API_URL}/api/auth/login, { ... })
+
+Commit and push: Save your files and push these changes to your GitHub repository.
+
+Redeploy: Go to your Vercel dashboard and trigger a new deployment. Ensure you uncheck "Use existing Build Cache" to guarantee that the changes are processed and the environment variable is correctly injected into your code.
+
+Once these changes are pushed and redeployed, Vite will be able to correctly replace the VITE_API_URL variable with your actual Render backend URL during the build process.
+
+Are you able to successfully make these changes in your editor?
+
+import { useState, useEffect } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+const PriceRangeSlider = ({ min, max, minVal, maxVal, onChange }) => {
+
+    // Calculate percentages to color the active track between the two handles
+
+    const minPercent = ((minVal - min) / (max - min)) * 100;
+
+    const maxPercent = ((maxVal - min) / (max - min)) * 100;
+
+
+
+    return (
+
+        <div className="flex flex-col w-full md:w-64 pt-2">
+
+        <label className="text-sm font-bold text-[#0a2540] mb-1">Price</label>
+
+        <div className="text-sm font-bold text-[#0a2540] mb-3">
+
+        ₹{minVal.toLocaleString()} – ₹{maxVal.toLocaleString()}+
+
+        </div>
+
+
+
+        {/* Slider Container */}
+
+        <div className="relative h-1.5 bg-gray-200 rounded-lg flex items-center">
+
+        {/* Active Blue Track */}
+
+        <div
+
+        className="absolute h-1.5 bg-[#20609C] rounded-lg"
+
+        style={{ left: `${minPercent}%`, width: `${maxPercent - minPercent}%` }}
+
+        ></div>
+
+
+
+        {/* Min Input Handle */}
+
+        <input
+
+        type="range"
+
+        min={min}
+
+        max={max}
+
+        value={minVal}
+
+        step={1000}
+
+        onChange={(e) => {
+
+            const value = Math.min(Number(e.target.value), maxVal - 1000);
+
+            onChange({ min: value, max: maxVal });
+
+        }}
+
+        className="absolute w-full h-1.5 appearance-none pointer-events-none bg-transparent [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-[5px] [&::-webkit-slider-thumb]:border-[#20609C] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer"
+
+        />
+
+
+
+        {/* Max Input Handle */}
+
+        <input
+
+        type="range"
+
+        min={min}
+
+        max={max}
+
+        value={maxVal}
+
+        step={1000}
+
+        onChange={(e) => {
+
+            const value = Math.max(Number(e.target.value), minVal + 1000);
+
+            onChange({ min: minVal, max: value });
+
+        }}
+
+        className="absolute w-full h-1.5 appearance-none pointer-events-none bg-transparent [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-[5px] [&::-webkit-slider-thumb]:border-[#20609C] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer"
+
+        />
+
+        </div>
+
+        </div>
+
+    );
+
+};
+
+export default function Dashboard() {
+
+    const navigate = useNavigate();
+
+
+
+    // App State
+
+    const [vehicles, setVehicles] = useState([]);
+
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const [categoryFilter, setCategoryFilter] = useState("");
+
+    //const [isAdmin, setIsAdmin] = useState(false); // Toggle this to see Admin UI
+
+    const [error, setError] = useState("");
+
+    const [editingId, setEditingId] = useState(null);
+
+    const [editForm, setEditForm] = useState({});
+
+    const [priceRange, setPriceRange] = useState({ min: 0, max: 10000000 });
+
+    // Admin Form State
+
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
+
+    const [newVehicle, setNewVehicle] = useState({
+
+        make: "", model: "", category: "", price: "", quantity: ""
+
+    });
+
+
+
+    // 1. PROTECTED ROUTE CHECK & FETCH DATA
+
+    useEffect(() => {
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+
+            navigate("/login");
+
+            return;
+
+        }
+
+        fetchVehicles(token);
+
+    }, [navigate]);
+
+
+
+    const fetchVehicles = async (token) => {
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`, {
+
+                headers: { "Authorization": `Bearer ${token}` }
+
+            });
+
+            if (response.ok) {
+
+                const data = await response.json();
+
+                setVehicles(data);
+
+            } else if (response.status === 401) {
+
+                localStorage.removeItem("token");
+
+                navigate("/login");
+
+            }
+
+        } catch (err) {
+
+            setError("Failed to fetch vehicles. Is the server running?");
+
+        }
+
+    };
+
+    const startEditing = (vehicle) => {
+
+        setEditingId(vehicle.id);
+
+        setEditForm({ ...vehicle });
+
+    };
+
+    // 2. USER FUNCTION: PURCHASE VEHICLE
+
+    const handlePurchase = async (vehicleId) => {
+
+        const token = localStorage.getItem("token");
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}/purchase`, {
+
+                method: "POST",
+
+                headers: { "Authorization": `Bearer ${token}` }
+
+            });
+
+
+
+            if (response.ok) {
+
+                // Update local state to instantly reflect reduced quantity
+
+                setVehicles(vehicles.map(v =>
+
+                v.id === vehicleId ? { ...v, quantity: v.quantity - 1 } : v
+
+                ));
+
+            } else {
+
+                const data = await response.json();
+
+                alert(data.detail || "Purchase failed");
+
+            }
+
+        } catch (err) {
+
+            alert("Network error during purchase");
+
+        }
+
+    };
+
+
+
+    const handleAddVehicle = async (e) => {
+
+        e.preventDefault();
+
+        const token = localStorage.getItem("token");
+
+
+
+        // Safely parse numbers. Default quantity to 0 for non-admins.
+
+        const payload = {
+
+            ...newVehicle,
+
+            price: parseFloat(newVehicle.price) || 0,
+
+            quantity: isAdmin ? (parseInt(newVehicle.quantity) || 0) : 0
+
+        };
+
+
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`, {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                    "Authorization": `Bearer ${token}`
+
+                },
+
+                body: JSON.stringify(payload)
+
+            });
+
+
+
+            const data = await response.json();
+
+
+
+            if (response.ok) {
+
+                setVehicles([...vehicles, data]);
+
+                setNewVehicle({ make: "", model: "", category: "", price: "", quantity: "" });
+
+            } else {
+
+                // Safely handle FastAPI array errors
+
+                const errorMessage = Array.isArray(data.detail)
+
+                ? data.detail.map(err => `${err.loc.join('.')}: ${err.msg}`).join(', ')
+
+                : data.detail;
+
+                alert(errorMessage || "Failed to add vehicle");
+
+            }
+
+        } catch (err) {
+
+            alert("Network error");
+
+        }
+
+    };
+
+
+
+    // 4. LOGOUT
+
+    const handleLogout = () => {
+
+        localStorage.removeItem("token");
+
+        localStorage.removeItem("isAdmin"); // Clear admin status on logout
+
+        navigate("/login");
+
+    };
+
+
+
+
+
+
+
+    // 5. ADMIN FUNCTION: DELETE VEHICLE
+
+    const handleDeleteVehicle = async (vehicleId) => {
+
+        console.log("Delete clicked for ID:", vehicleId);
+
+        if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
+
+
+
+        const token = localStorage.getItem("token");
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}`, {
+
+                method: "DELETE",
+
+                headers: { "Authorization": `Bearer ${token}` }
+
+            });
+
+            console.log("Response status:", response.status);
+
+            if (response.ok) {
+
+                setVehicles(vehicles.filter(v => v.id !== vehicleId));
+
+            } else {
+
+                const data = await response.json();
+
+                alert(data.detail || "Failed to delete vehicle");
+
+            }
+
+        } catch (err) {
+
+            alert("Network error during deletion");
+
+        }
+
+    };
+
+
+
+    // 6. ADMIN FUNCTION : Update vehicle
+
+    const handleUpdateVehicle = async (vehicleId) => {
+
+        const token = localStorage.getItem("token");
+
+
+
+        // CRITICAL: Safely parse numbers and exclude quantity if not admin
+
+        const payload = {
+
+            ...editForm,
+
+            price: parseFloat(editForm.price) || 0,
+
+        };
+
+
+
+        if (isAdmin) {
+
+            payload.quantity = parseInt(editForm.quantity) || 0;
+
+        } else {
+
+            // Remove quantity from payload entirely so backend doesn't reject it
+
+            delete payload.quantity;
+
+        }
+
+
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}`, {
+
+                method: "PUT",
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                    "Authorization": `Bearer ${token}`
+
+                },
+
+                body: JSON.stringify(payload)
+
+            });
+
+
+
+            const data = await response.json();
+
+
+
+            if (response.ok) {
+
+                setVehicles(vehicles.map(v => v.id === vehicleId ? { ...v, ...data } : v));
+
+                setEditingId(null);
+
+            } else {
+
+                // Safely handle FastAPI array errors
+
+                const errorMessage = Array.isArray(data.detail)
+
+                ? data.detail.map(err => `${err.loc.join('.')}: ${err.msg}`).join(', ')
+
+                : data.detail;
+
+                console.error("Server Error:", data);
+
+                alert("Failed to update: " + errorMessage);
+
+            }
+
+        } catch (err) {
+
+            console.error("Fetch Error:", err);
+
+            alert("Network error");
+
+        }
+
+    };
+
+    // 7. ADMIN FUNCTION: RESTOCK VEHICLE
+
+    const handleRestock = async (vehicleId) => {
+
+        const token = localStorage.getItem("token");
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}/restock`, {
+
+                method: "POST",
+
+                headers: { "Authorization": `Bearer ${token}` }
+
+            });
+
+
+
+            if (response.ok) {
+
+                setVehicles(vehicles.map(v =>
+
+                v.id === vehicleId ? { ...v, quantity: v.quantity + 1 } : v
+
+                ));
+
+            } else {
+
+                const data = await response.json();
+
+                alert(data.detail || "Restock failed");
+
+            }
+
+        } catch (err) {
+
+            alert("Network error during restock");
+
+        }
+
+    };
+
+    // SEARCH & FILTER LOGIC
+
+    const filteredVehicles = vehicles.filter(v => {
+
+        const matchesSearch = v.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
+
+        v.model.toLowerCase().includes(searchQuery.toLowerCase());
+
+        const matchesCategory = categoryFilter ? v.category === categoryFilter : true;
+
+
+
+        // Price range logic
+
+        const min = priceRange.min === "" ? 0 : parseFloat(priceRange.min);
+
+        const max = priceRange.max === "" ? Infinity : parseFloat(priceRange.max);
+
+        const matchesPrice = v.price >= min && v.price <= max;
+
+
+
+        return matchesSearch && matchesCategory && matchesPrice;
+
+    });
+
+
+
+    return (
+
+        <div className="min-h-screen bg-gray-100 font-sans pb-10">
+
+
+
+        {/* NAVBAR */}
+
+        <nav className="bg-black text-white p-4 flex justify-between items-center shadow-lg">
+
+        <h1 className="text-xl font-black tracking-widest">DEALERSHIP DASHBOARD</h1>
+
+
+
+        <div className="flex gap-4 items-center">
+
+
+
+        {/* CONDITIONAL ADMIN TEXT */}
+
+        {isAdmin && (
+
+            <span className="text-yellow-400 text-xs font-bold uppercase animate-pulse">
+
+            Admin Mode Active
+
+            </span>
+
+        )}
+
+
+
+
+
+
+
+
+
+        <button
+
+        onClick={handleLogout}
+
+        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm font-bold transition"
+
+        >
+
+        Logout
+
+        </button>
+
+        </div>
+
+        </nav>
+
+
+
+        <div className="max-w-7xl mx-auto px-4 mt-8">
+
+        {error && <div className="bg-red-100 text-red-700 p-4 rounded mb-6">{error}</div>}
+
+
+
+        {/* ADMIN SECTION: ADD VEHICLE */}
+
+        {
+
+             <div className="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-blue-600">
+
+             <h2 className="text-lg font-bold mb-4 text-gray-800">Admin Controls: Add Inventory</h2>
+
+            <form onSubmit={handleAddVehicle} className="flex flex-wrap gap-4 items-end">
+
+            <div className="flex-1 min-w-[150px]">
+
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Make</label>
+
+            <input type="text" required className="w-full border p-2 rounded" value={newVehicle.make} onChange={e => setNewVehicle({...newVehicle, make: e.target.value})} placeholder="e.g. Porsche" />
+
+            </div>
+
+            <div className="flex-1 min-w-[150px]">
+
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Model</label>
+
+            <input type="text" required className="w-full border p-2 rounded" value={newVehicle.model} onChange={e => setNewVehicle({...newVehicle, model: e.target.value})} placeholder="e.g. 911 GT3" />
+
+            </div>
+
+            <div className="flex-1 min-w-[150px]">
+
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Category</label>
+
+            <select
+
+            required
+
+            className="w-full border p-2 rounded"
+
+            value={newVehicle.category || ""}
+
+            onChange={e => setNewVehicle({...newVehicle, category: e.target.value})}
+
+            >
+
+            <option value="" disabled>Select Category</option>
+
+            <option value="Sedan">Sedan</option>
+
+            <option value="SUV">SUV</option>
+
+            <option value="Sports">Sports</option>
+
+            <option value="Luxury">Luxury</option>
+
+            </select>
+
+            </div>
+
+            <div className="w-24">
+
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Price (₹)</label>
+
+            <input type="number" required className="w-full border p-2 rounded" value={newVehicle.price} onChange={e => setNewVehicle({...newVehicle, price: e.target.value})} />
+
+            </div>
+
+            {isAdmin && (
+
+                <div className="w-20">
+
+                <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Qty</label>
+
+                <input type="number" required className="w-full border p-2 rounded" value={newVehicle.quantity} onChange={e => setNewVehicle({...newVehicle, quantity: e.target.value})} />
+
+                </div>
+
+            )}
+
+            <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded h-[42px] transition">
+
+            Add
+
+            </button>
+
+            </form>
+
+            </div>
+
+            }
+
+
+
+
+
+
+
+        {/* SEARCH AND FILTER */}
+
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+
+
+
+        {/* Left Side: Search */}
+
+        <div className="flex-1 w-full md:max-w-md">
+
+        <input
+
+        type="text"
+
+        placeholder="Search make or model..."
+
+        className="p-3 border rounded shadow-sm w-full focus:ring-2 focus:ring-blue-500 outline-none"
+
+        value={searchQuery}
+
+        onChange={(e) => setSearchQuery(e.target.value)}
+
+        />
+
+        </div>
+
+
+
+        {/* Right Side: Price Range & Category */}
+
+        <div className="flex flex-col md:flex-row items-center gap-8 w-full md:w-auto">
+
+
+
+        {/* The Custom Price Range Slider */}
+
+        <PriceRangeSlider
+
+        min={0}
+
+        max={10000000} // Set your absolute maximum price here
+
+        minVal={priceRange.min === "" ? 0 : priceRange.min}
+
+        maxVal={priceRange.max === "" ? 10000000 : priceRange.max}
+
+        onChange={setPriceRange}
+
+        />
+
+
+
+        {/* Category Dropdown (Far Right) */}
+
+        <select
+
+        className="p-3 border rounded shadow-sm outline-none w-full md:w-48 bg-gray-50"
+
+        value={categoryFilter}
+
+        onChange={(e) => setCategoryFilter(e.target.value)}
+
+        >
+
+        <option value="">All Categories</option>
+
+        <option value="Sedan">Sedan</option>
+
+        <option value="SUV">SUV</option>
+
+        <option value="Sports">Sports</option>
+
+        <option value="Luxury">Luxury</option>
+
+        </select>
+
+        </div>
+
+        </div>
+
+
+
+        {/* INVENTORY GRID */}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {filteredVehicles.map((vehicle) => (
+
+            <div key={vehicle.id} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col border border-gray-100">
+
+            <div className="p-6 flex-grow">
+
+
+
+            {/* CARD CONTENT */}
+
+            {editingId === vehicle.id ? (
+
+                <div className="space-y-2">
+
+                <div className="flex justify-between items-start">
+
+                <div className="flex flex-col gap-1">
+
+                <input
+
+                className="text-2xl font-black text-gray-900 border-b-2 border-blue-500 outline-none w-auto"
+
+                style={{ width: `${Math.max(editForm.make?.length || 5, 5)}ch` }}
+
+                value={editForm.make}
+
+                onChange={e => setEditForm({...editForm, make: e.target.value})}
+
+                />
+
+                <input
+
+                className="text-lg text-gray-600 border-b-2 border-blue-500 outline-none w-auto"
+
+                style={{ width: `${Math.max(editForm.model?.length || 8, 8)}ch` }}
+
+                value={editForm.model}
+
+                onChange={e => setEditForm({...editForm, model: e.target.value})}
+
+                />
+
+                </div>
+
+                <select
+
+                className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded font-bold uppercase border border-gray-400"
+
+                value={editForm.category || "Sedan"}
+
+                onChange={e => setEditForm({...editForm, category: e.target.value})}
+
+                >
+
+                <option value="Sedan">Sedan</option>
+
+                <option value="SUV">SUV</option>
+
+                <option value="Sports">Sports</option>
+
+                <option value="Luxury">Luxury</option>
+
+                </select>
+
+                </div>
+
+                </div>
+
+            ) : (
+
+                <div className="flex justify-between items-start mb-2">
+
+                <div>
+
+                <h3 className="text-2xl font-black text-gray-900">{vehicle.make}</h3>
+
+                <p className="text-lg text-gray-600">{vehicle.model}</p>
+
+                </div>
+
+                <span className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded font-bold uppercase">{vehicle.category}</span>
+
+                </div>
+
+            )}
+
+
+
+            {/* PRICE & STOCK (Always visible) */}
+
+            <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-end">
+
+            <div>
+
+            <p className="text-xs text-gray-500 uppercase font-bold">Price</p>
+
+            {editingId === vehicle.id ? (
+
+                <input type="number" className="text-xl font-bold text-green-600 border-b-2 border-blue-500 w-24 outline-none"
+
+                value={editForm.price} onChange={e => setEditForm({...editForm, price: e.target.value})} />
+
+            ) : (
+
+                <p className="text-xl font-bold text-green-600">₹{vehicle.price.toLocaleString()}</p>
+
+            )}
+
+            </div>
+
+            <div className="text-right">
+
+            <p className="text-xs text-gray-500 uppercase font-bold">In Stock</p>
+
+            {editingId === vehicle.id ? (
+
+                // Only Admins get the input field to edit quantity
+
+                isAdmin ? (
+
+                    <input type="number" className="text-xl font-black text-blue-600 border-b-2 border-blue-500 w-16 outline-none text-right"
+
+                    value={editForm.quantity} onChange={e => setEditForm({...editForm, quantity: e.target.value})} />
+
+                ) : (
+
+                    // Regular users just see the static quantity while editing
+
+                    <p className={`text-xl font-black ${vehicle.quantity > 0 ? "text-blue-600" : "text-red-500"}`}>
+
+                    {vehicle.quantity} <span className="text-[10px] text-gray-400 font-normal block">(Admin only)</span>
+
+                    </p>
+
+                )
+
+            ) : (
+
+                <p className={`text-xl font-black ${vehicle.quantity > 0 ? "text-blue-600" : "text-red-500"}`}>{vehicle.quantity}</p>
+
+            )}
+
+            </div>
+
+            </div>
+
+            </div>
+
+
+
+            {/* ACTION BUTTONS */}
+
+            <div className="bg-gray-50 p-4 border-t flex justify-between gap-2">
+
+            {editingId === vehicle.id ? (
+
+                <>
+
+                <button onClick={() => handleUpdateVehicle(vehicle.id)} className="flex-1 bg-green-600 text-white font-bold py-2 rounded text-sm">Confirm</button>
+
+                <button onClick={() => setEditingId(null)} className="flex-1 bg-red-500 text-white font-bold py-2 rounded text-sm">Cancel</button>
+
+                </>
+
+            ) : (
+
+                <>
+
+                {/* Purchase (All Users) */}
+
+                <button onClick={() => handlePurchase(vehicle.id)} disabled={vehicle.quantity <= 0 || editingId !== null} className="flex-1 bg-black text-white font-bold py-2 rounded text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">Purchase</button>
+
+
+
+                {/* Restock (Admins Only) */}
+
+                {isAdmin && (
+
+                    <button onClick={() => handleRestock(vehicle.id)} className="bg-blue-500 text-white px-3 py-2 rounded font-bold text-xs">Restock</button>
+
+                )}
+
+
+
+                {/* Edit (All Users) */}
+
+                <button onClick={() => startEditing(vehicle)} className="bg-yellow-500 text-white px-3 py-2 rounded font-bold text-xs">Edit</button>
+
+
+
+                {/* Delete (Admins Only) */}
+
+                {isAdmin && (
+
+                    <button onClick={() => handleDeleteVehicle(vehicle.id)} className="bg-red-500 text-white px-3 py-2 rounded font-bold text-xs">Del</button>
+
+                )}
+
+                </>
+
+            )}
+
+            </div>
+
+            </div>
+
+        ))}
+
+        </div>
+
+
+
+        </div>
+
+        </div>
+
+    );
+
+}
+
+import { useState } from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+
+
+
+export default function Login() {
+
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("");
+
+    const [password, setPassword] = useState("");
+
+    const [error, setError] = useState("");
+
+
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        setError("");
+
+
+
+        const formData = new URLSearchParams();
+
+        formData.append("username", email);
+
+        formData.append("password", password);
+
+
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+
+            method: "POST",
+
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+
+            body: formData
+
+        });
+
+
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+
+                method: "POST",
+
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+
+                body: formData,
+
+            });
+
+
+
+            const data = await response.json();
+
+
+
+            if (response.ok) {
+
+                localStorage.setItem("token", data.access_token);
+
+                localStorage.setItem("isAdmin", data.is_admin);
+
+                navigate("/dashboard");
+
+            } else {
+
+                setError(data.detail || "Invalid credentials");
+
+            }
+
+        } catch (err) {
+
+            setError("Network error. Is the server running?");
+
+        }
+
+    };
+
+
+
+    return (
+
+        <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden px-6">
+
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-600 rounded-full blur-[120px] opacity-20"></div>
+
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500 rounded-full blur-[120px] opacity-20"></div>
+
+
+
+        <div className="relative z-10 bg-gray-900/80 backdrop-blur-xl p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-800">
+
+        <h2 className="text-3xl font-black text-white mb-6 text-center tracking-widest">LOGIN</h2>
+
+
+
+        {error && <div className="bg-red-500/20 border border-red-500 text-red-400 p-3 rounded mb-4 text-sm text-center">{error}</div>}
+
+
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+
+        <div>
+
+        <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Email</label>
+
+        <input
+
+        type="email"
+
+        className="w-full bg-black/50 border border-gray-700 p-3 rounded-lg text-white focus:ring-2 focus:ring-blue-600 outline-none transition"
+
+        value={email}
+
+        onChange={(e) => setEmail(e.target.value)}
+
+        required
+
+        />
+
+        </div>
+
+        <div>
+
+        <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Password</label>
+
+        <input
+
+        type="password"
+
+        className="w-full bg-black/50 border border-gray-700 p-3 rounded-lg text-white focus:ring-2 focus:ring-blue-600 outline-none transition"
+
+        value={password}
+
+        onChange={(e) => setPassword(e.target.value)}
+
+        required
+
+        />
+
+        </div>
+
+        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg uppercase tracking-widest transition shadow-lg shadow-blue-900/20">
+
+        Sign In
+
+        </button>
+
+        </form>
+
+
+
+        <div className="mt-6 text-center text-gray-400 text-sm">
+
+        Don't have an account?{" "}
+
+        <Link to="/register" className="text-blue-500 hover:underline font-bold">Register here</Link>
+
+        </div>
+
+        </div>
+
+        </div>
+
+    );
+
+}
+
+import { useState } from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+
+
+
+export default function Register() {
+
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({ name: "", email: "", password: "", confirmPassword: "" });
+
+    const [error, setError] = useState("");
+
+
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        setError("");
+
+
+
+        if (formData.password !== formData.confirmPassword) {
+
+            return setError("Passwords do not match");
+
+        }
+
+
+
+        try {
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+
+                method: "POST",
+
+                headers: { "Content-Type": "application/json" },
+
+                body: JSON.stringify({
+
+                    name: formData.name,
+
+                    email: formData.email,
+
+                    password: formData.password
+
+                }),
+
+            });
+
+
+
+            if (response.ok) {
+
+                navigate("/login");
+
+            } else {
+
+                const data = await response.json();
+
+                setError(data.detail || "Registration failed");
+
+            }
+
+        } catch (err) {
+
+            setError("Network error. Is the server running?");
+
+        }
+
+    };
+
+
+
+    return (
+
+        <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden px-6">
+
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-600 rounded-full blur-[120px] opacity-20"></div>
+
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500 rounded-full blur-[120px] opacity-20"></div>
+
+
+
+        <div className="relative z-10 bg-gray-900/80 backdrop-blur-xl p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-800">
+
+        <h2 className="text-3xl font-black text-white mb-6 text-center tracking-widest">REGISTER</h2>
+
+
+
+        {error && <div className="bg-red-500/20 border border-red-500 text-red-400 p-3 rounded mb-4 text-sm text-center">{error}</div>}
+
+
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+
+        <div>
+
+        <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Full Name</label>
+
+        <input
+
+        type="text"
+
+        className="w-full bg-black/50 border border-gray-700 p-3 rounded-lg text-white focus:ring-2 focus:ring-blue-600 outline-none transition"
+
+        onChange={(e) => setFormData({...formData, name: e.target.value})}
+
+        required
+
+        />
+
+        </div>
+
+        <div>
+
+        <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Email</label>
+
+        <input
+
+        type="email"
+
+        className="w-full bg-black/50 border border-gray-700 p-3 rounded-lg text-white focus:ring-2 focus:ring-blue-600 outline-none transition"
+
+        onChange={(e) => setFormData({...formData, email: e.target.value})}
+
+        required
+
+        />
+
+        </div>
+
+        <div>
+
+        <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Password</label>
+
+        <input
+
+        type="password"
+
+        className="w-full bg-black/50 border border-gray-700 p-3 rounded-lg text-white focus:ring-2 focus:ring-blue-600 outline-none transition"
+
+        onChange={(e) => setFormData({...formData, password: e.target.value})}
+
+        required
+
+        />
+
+        </div>
+
+        <div>
+
+        <label className="block text-gray-400 text-xs font-bold uppercase mb-1">Confirm Password</label>
+
+        <input
+
+        type="password"
+
+        className="w-full bg-black/50 border border-gray-700 p-3 rounded-lg text-white focus:ring-2 focus:ring-blue-600 outline-none transition"
+
+        onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
+
+        required
+
+        />
+
+        </div>
+
+        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg uppercase tracking-widest transition shadow-lg shadow-blue-900/20 mt-2">
+
+        Create Account
+
+        </button>
+
+        </form>
+
+
+
+        <div className="mt-6 text-center text-gray-400 text-sm">
+
+        Already have an account?{" "}
+
+        <Link to="/login" className="text-blue-500 hover:underline font-bold">Login here</Link>
+
+        </div>
+
+        </div>
+
+        </div>
+
+    );
+
+}
+
+To fix the 404 errors and the ${import.meta.env.VITE_API_URL} string issues, you must replace the double quotes (") with backticks (`) in all your template literal strings.
+
+In JavaScript, strings wrapped in double quotes do not perform variable substitution. By using backticks, you enable template literals, allowing Vite to correctly inject your VITE_API_URL during the build process.
+
+Required Code Corrections
+Please update these specific files in your frontend/src/pages/ directory:
+
+1. In Dashboard.jsx
+Update all fetch calls, for example:
+
+Change: fetch("${import.meta.env.VITE_API_URL}/api/vehicles", { ... })
+
+To: fetch(${import.meta.env.VITE_API_URL}/api/vehicles, { ... })
+(Apply this same backtick fix to all other fetch calls in Dashboard.jsx including the ones for /purchase, /restock, and /vehicles/${vehicleId}).
+
+2. In Login.jsx
+Update the handleSubmit function:
+
+JavaScript
+// Replace this:
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, { ... });
+// (Ensure the backticks are used as shown above)
+3. In Register.jsx
+Update the handleSubmit function:
+
+JavaScript
+// Replace this:
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, { ... });
+Important Deployment Steps
+After saving these changes, follow these steps to ensure Vercel picks up the new configuration:
+
+Commit and Push:
+
+Bash
+git add .
+git commit -m "fix: replace double quotes with backticks for API URLs"
+git push origin main
+Clean Redeploy on Vercel:
+
+Go to your Vercel Dashboard.
+
+Navigate to your project Deployments tab.
+
+Click the "..." menu on your latest commit and select Redeploy.
+
+CRITICAL: Ensure the box "Use existing Build Cache" is UNCHECKED. This forces Vercel to rebuild the project from scratch, which is necessary to inject the VITE_API_URL variable correctly.
+
+Once redeployed, the ${...} string will be replaced by your actual Render backend URL, and the 404 errors will be resolved.
+
+still got error
+
+( () => {
+
+    "use strict";
+
+    var e = {
+
+        65334(e, t) {
+
+            var s;
+
+            t.WatcherHandler = void 0,
+
+            function(e) {
+
+                e.onLoad = "onLoad",
+
+                e.onClick = "onClick",
+
+                e.onInputChange = "onInputChange",
+
+                e.onIframeLoaded = "onIframeLoaded",
+
+                e.onUrlChanged = "onUrlChanged",
+
+                e.onPostMessage = "onPostMessage",
+
+                e.onWindowLoad = "onWindowLoad",
+
+                e.onDomLoad = "onDomLoad",
+
+                e.onDomChanged = "onDomChanged",
+
+                e.onHttpRequest = "onHttpRequest",
+
+                e.onHttpResponse = "onHttpResponse",
+
+                e.onKeyDown = "onKeyDown"
+
+            }(s || (t.WatcherHandler = s = {}))
+
+        },
+
+        24769(e, t) {
+
+            t._$getRegex = void 0;
+
+            t._$getRegex = e => {
+
+                const t = "object" == typeof e;
+
+                try {
+
+                    return t ? new RegExp(e.regex,e.flags) : new RegExp(e,"i")
+
+                } catch {
+
+                    return t ? new RegExp(e.regex,"i") : new RegExp(e,"i")
+
+                }
+
+            }
+
+        },
+
+        57309(e, t) {
+
+            t._$InterceptorAdapter = t._$RequestValidator = void 0;
+
+            t._$RequestValidator = class {
+
+                _$onHttpRequest;
+
+                _$onHttpResponse
+
+            }
+
+            ;
+
+            t._$InterceptorAdapter = class {
+
+                static _$instance;
+
+                static _$init
+
+            }
+
+        },
+
+        35263(e, t, s) {
+
+            var n = this && this.__importDefault || function(e) {
+
+                return e && e.__esModule ? e : {
+
+                    default: e
+
+                }
+
+            }
+
+            ;
+
+            Object.defineProperty(t, "__esModule", {
+
+                value: !0
+
+            }),
+
+            t._$MessageScriptType = t._$MessageContentType = void 0;
+
+            const o = n(s(15913));
+
+            t._$MessageContentType = Object.freeze({
+
+                _$ECOMMERCE_INIT: (0,
+
+                o.default)("ECOMMERCE_INIT"),
+
+                _$ECOMMERCE_RE_INIT: (0,
+
+                o.default)("ECOMMERCE_RE_INIT"),
+
+                _$ECOMMERCE_TRACK: (0,
+
+                o.default)("ECOMMERCE_TRACK"),
+
+                _$ECOMMERCE_STORAGE_SAVE: (0,
+
+                o.default)("ECOMMERCE_STORAGE_SAVE"),
+
+                _$ECOMMERCE_STORAGE_REMOVE: (0,
+
+                o.default)("ECOMMERCE_STORAGE_REMOVE"),
+
+                _$ERROR_TRACE: (0,
+
+                o.default)("ERROR_TRACE"),
+
+                _$ECOMMERCE_INIT_SHOPIFY: (0,
+
+                o.default)("ECOMMERCE_INIT_SHOPIFY")
+
+            }),
+
+            t._$MessageScriptType = Object.freeze({
+
+                _$INIT_HTTP_CONFIG: (0,
+
+                o.default)("INIT_HTTP_CONFIG"),
+
+                _$HTTP_CONFIG_INJECTED: (0,
+
+                o.default)("HTTP_CONFIG_INJECTED"),
+
+                _$SAVE_HTTP_DATA: (0,
+
+                o.default)("SAVE_HTTP_DATA"),
+
+                _$CUSTOM_ON_URL_CHANGED: (0,
+
+                o.default)("CUSTOM_ON_URL_CHANGED"),
+
+                _$SHOPIFY_DETECTED: (0,
+
+                o.default)("SHOPIFY_DETECTED")
+
+            })
+
+        },
+
+        15913(e, t) {
+
+            Object.defineProperty(t, "__esModule", {
+
+                value: !0
+
+            }),
+
+            t.decodeString = void 0;
+
+            t.decodeString = e => e.toString(),
+
+            t.default = t.decodeString
+
+        }
+
+    }
+
+      , t = {};
+
+    function s(n) {
+
+        var o = t[n];
+
+        if (void 0 !== o)
+
+            return o.exports;
+
+        var a = t[n] = {
+
+            exports: {}
+
+        };
+
+        return e[n].call(a.exports, a, a.exports, s),
+
+        a.exports
+
+    }
+
+    ( () => {
+
+        const e = s(35263)
+
+          , t = s(57309)
+
+          , n = s(65334)
+
+          , o = s(24769);
+
+        (s => {
+
+            const a = t => {
+
+                const n = {
+
+                    _custom_type_: e._$MessageScriptType._$SAVE_HTTP_DATA,
+
+                    payload: JSON.parse(JSON.stringify(t))
+
+                };
+
+                s.postMessage(n)
+
+            }
+
+            ;
+
+            class r extends t._$RequestValidator {
+
+                _$validateRequest(e, t="GET") {
+
+                    return !!this._$onHttpRequest?.length && (this._$onHttpRequest.find(this._$httpMatherPredicate(e, t)) ?? !1)
+
+                }
+
+                _$validateResponse(e, t="GET") {
+
+                    return !!this._$onHttpResponse?.length && (this._$onHttpResponse.find(this._$httpMatherPredicate(e, t)) ?? !1)
+
+                }
+
+                _$setConfig(e, t) {
+
+                    this._$onHttpRequest = e,
+
+                    this._$onHttpResponse = t
+
+                }
+
+                _$httpMatherPredicate(e, t) {
+
+                    return ({regex: s, methods: n}) => {
+
+                        const a = (0,
+
+                        o._$getRegex)(s);
+
+                        return n.includes(t) && a.test(e)
+
+                    }
+
+                }
+
+            }
+
+            class _ extends t._$InterceptorAdapter {
+
+                validator;
+
+                constructor(e) {
+
+                    super(),
+
+                    this.validator = e,
+
+                    this._$initInterceptor()
+
+                }
+
+                static _$init(e) {
+
+                    this._$instance || (this._$instance = new _(e))
+
+                }
+
+                async _$interceptRequest(e, t) {
+
+                    const s = t?.method
+
+                      , o = this.validator._$validateRequest(e, s);
+
+                    o && a({
+
+                        payload: {
+
+                            url: e,
+
+                            params: t
+
+                        },
+
+                        handler: o,
+
+                        watcher: n.WatcherHandler.onHttpRequest
+
+                    })
+
+                }
+
+                async _$interceptResponse(e, [t,s]) {
+
+                    const n = s?.method
+
+                      , o = this.validator._$validateResponse(t, n);
+
+                    o && await this._$proceedResponse(e, o)
+
+                }
+
+                async _$proceedResponse(e, t) {
+
+                    const s = await e.clone()
+
+                      , o = e.headers.get("content-type");
+
+                    o && (o.includes("json") ? a({
+
+                        payload: await s.json(),
+
+                        handler: t,
+
+                        watcher: n.WatcherHandler.onHttpResponse
+
+                    }) : o.includes("text") && a({
+
+                        payload: await s.text(),
+
+                        handler: t,
+
+                        watcher: n.WatcherHandler.onHttpResponse
+
+                    }))
+
+                }
+
+                _$initInterceptor() {
+
+                    const e = s.fetch;
+
+                    s.fetch = async (...t) => {
+
+                        this._$interceptRequest(...t);
+
+                        const s = await e(...t);
+
+                        return this._$interceptResponse(s, t),
+
+                        s
+
+                    }
+
+                }
+
+            }
+
+            class i extends t._$InterceptorAdapter {
+
+                validator;
+
+                constructor(e) {
+
+                    super(),
+
+                    this.validator = e,
+
+                    this._$initInterceptor()
+
+                }
+
+                static _$init(e) {
+
+                    this._$instance || (this._$instance = new i(e))
+
+                }
+
+                async _$interceptRequest({method: e, url: t, body: s}) {
+
+                    const o = this.validator._$validateRequest(t, e);
+
+                    o && a({
+
+                        payload: {
+
+                            url: t,
+
+                            params: {
+
+                                method: e,
+
+                                body: s
+
+                            }
+
+                        },
+
+                        handler: o,
+
+                        watcher: n.WatcherHandler.onHttpRequest
+
+                    })
+
+                }
+
+                async _$interceptResponse({status: e, response: t, responseType: s, method: n, url: o}) {
+
+                    const a = this.validator._$validateResponse(o, n);
+
+                    `${e}`.startsWith("20") && a && this._$proceedResponse(t, s, a)
+
+                }
+
+                _$proceedResponse(e, t, s) {
+
+                    if ("json" === t)
+
+                        a({
+
+                            payload: e,
+
+                            handler: s,
+
+                            watcher: n.WatcherHandler.onHttpResponse
+
+                        });
+
+                    else if ("text" === t || "" === t) {
+
+                        let t;
+
+                        try {
+
+                            t = JSON.parse(e)
+
+                        } catch {
+
+                            t = e
+
+                        }
+
+                        a({
+
+                            payload: t,
+
+                            handler: s,
+
+                            watcher: n.WatcherHandler.onHttpResponse
+
+                        })
+
+                    }
+
+                }
+
+                _$initInterceptor() {
+
+                    const e = XMLHttpRequest.prototype.open
+
+                      , t = XMLHttpRequest.prototype.send
+
+                      , n = this;
+
+                    s.XMLHttpRequest.prototype.open = function(...t) {
+
+                        return this.__METHOD__ = t[0],
+
+                        this.__URL__ = t[1],
+
+                        this.addEventListener("load", function({target: e}) {
+
+                            n._$interceptResponse({
+
+                                status: e.status,
+
+                                response: e.response,
+
+                                responseType: e.responseType,
+
+                                method: t[0],
+
+                                url: t[1]
+
+                            })
+
+                        }),
+
+                        e.apply(this, t)
+
+                    }
+
+                    ,
+
+                    s.XMLHttpRequest.prototype.send = function(...e) {
+
+                        return n._$interceptRequest({
+
+                            method: this.__METHOD__,
+
+                            url: this.__URL__,
+
+                            body: e[0]
+
+                        }),
+
+                        t.apply(this, e)
+
+                    }
+
+                }
+
+            }
+
+            const p = new r;
+
+            _._$init(p),
+
+            i._$init(p),
+
+            s.addEventListener("message", t => {
+
+                if (t.data?._custom_type_ !== e._$MessageScriptType._$INIT_HTTP_CONFIG)
+
+                    return;
+
+                const {onHttpRequest: s, onHttpResponse: n} = t.data.payload;
+
+                p._$setConfig(s, n)
+
+            }
+
+            ),
+
+            s.postMessage({
+
+                _custom_type_: e._$MessageScriptType._$HTTP_CONFIG_INJECTED
+
+            })
+
+        }
+
+        )(window || globalThis)
+
+    }
+
+    )()
+
+}
+
+)();
+
+The code you pasted is a JavaScript Interceptor script. It is not your application code; rather, it is a piece of bundled third-party code (likely from a browser extension, a monitoring tool, or a tracking script) that is injecting itself into your application to "watch" your fetch and XMLHttpRequest calls.
+
+The reason you are seeing the ${import.meta.env.VITE_API_URL} error inside this interceptor is that this script is likely being injected into your page and is trying to process your network requests before your own application code has finished replacing those environment variables.
+
+Why this is happening:
+Race Condition: This script runs and tries to "hook" into your fetch calls. Because your frontend build didn't properly replace the ${import.meta.env.VITE_API_URL} string with the real URL, the string ${import.meta.env.VITE_API_URL} remains in your code as plain text.
+
+Interceptor Capture: This interceptor script is "seeing" that invalid URL and attempting to report it or use it, which is why it shows up in your logs.
+
+How to solve the underlying problem:
+Since we confirmed you have the correct syntax now (using backticks), the error persists because your Vercel deployment is still using the old, broken version of your site.
+
+Do NOT edit the code you just pasted. It is a compiled library and meant to be left alone.
+
+Clear the Vercel Cache: You must force Vercel to ignore its cache, or it will continue serving the old "broken" JavaScript files that contain the unreplaced ${import.meta.env.VITE_API_URL} strings.
+
+Go to Vercel Dashboard > Deployments.
+
+Click Redeploy on your latest commit.
+
+Crucial: Make sure the "Use existing Build Cache" checkbox is UNCHECKED.
+
+Verification Checklist:
+Check the Source: After redeploying, open your website in the browser, press F12 (DevTools), go to the Sources tab, and search for the file (e.g., Dashboard.jsx). Look at the actual code running in the browser.
+
+Does it show the real URL? If you see [https://your-api.onrender.com](https://your-api.onrender.com) in your code in the DevTools instead of ${import.meta.env.VITE_API_URL}, then your build is finally fixed.
+
+Refresh: If it still shows the old string, perform a "Hard Refresh" (Ctrl+F5 or Cmd+Shift+R) to ensure your browser isn't showing you a cached version of the page.
+
+If the build is successful and you are using backticks in your src files, the interceptor script will no longer "see" that invalid URL because your application will be using the correct, fully-replaced URL.
+
+Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login:1  Failed to load resource: the server responded with a status of 404 ()
+
+login:1  Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login:1  Failed to load resource: the server responded with a status of 404 ()
+
+$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login:1  Failed to load resource: the server responded with a status of 404 ()
+
+requests.js:1  POST https://kata-car-dealership-six.vercel.app/$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login 404 (Not Found)
+
+_$initInterceptor.s.fetch @ requests.js:1
+
+(anonymous) @ 200.js:1
+
+onSubmit @ index-w_wIKtFl.js:11
+
+yd @ index-w_wIKtFl.js:8
+
+(anonymous) @ index-w_wIKtFl.js:8
+
+hn @ index-w_wIKtFl.js:8
+
+wd @ index-w_wIKtFl.js:8
+
+up @ index-w_wIKtFl.js:9
+
+cp @ index-w_wIKtFl.js:9
+
+requests.js:1  POST https://kata-car-dealership-six.vercel.app/$%7Bimport.meta.env.VITE_API_URL%7D/api/auth/login 404 (Not Found)
+
+_$initInterceptor.s.fetch @ requests.js:1
+
+(anonymous) @ 200.js:1
+
+onSubmit @ index-w_wIKtFl.js:11
+
+await in onSubmit
+
+yd @ index-w_wIKtFl.js:8
+
+(anonymous) @ index-w_wIKtFl.js:8
+
+hn @ index-w_wIKtFl.js:8
+
+wd @ index-w_wIKtFl.js:8
+
+up @ index-w_wIKtFl.js:9
+
+cp @ index-w_wIKtFl.js:9
+
+
+
+still same error
+
+This persistent error confirms that your build process is still not injecting the environment variable. Vite is skipping the replacement, so your code remains ${import.meta.env.VITE_API_URL}.
+
+Since the syntax is now corrected to backticks and you have redeployed, this is almost certainly happening because Vercel does not have access to the VITE_API_URL variable during the build.
+
+Perform these 3 steps exactly to force the fix:
+1. Define the Variable in Vercel (Again)
+Vercel environment variables are not inherited from your local machine. They must be manually added to the project dashboard.
+
+Go to your Vercel project Settings.
+
+Navigate to Environment Variables.
+
+Add a new Variable:
+
+Key: VITE_API_URL
+
+Value: [https://your-backend-service.onrender.com](https://your-backend-service.onrender.com) (use your actual Render URL).
+
+Environment: Ensure Production is selected.
+
+Save and verify it appears in the list.
+
+2. Clear Vercel Cache (The "Nuclear" Option)
+Vercel is aggressively caching the old "broken" build. You must ignore it.
+
+Go to the Deployments tab.
+
+Click the ... (three dots) on the latest deployment and select Redeploy.
+
+DO NOT check "Use existing Build Cache".
+
+DO click the "Redeploy" button.
+
+3. Verify in the Browser
+After the new deployment succeeds, open your app in a New Incognito Window (to ensure no cached files are being loaded).
+
+Press F12 to open DevTools.
+
+Go to the Sources tab.
+
+Find Login.jsx (or the file containing the fetch).
+
+Look at the code in the browser.
+
+If you still see import.meta.env.VITE_API_URL, Vercel failed to inject the variable.
+
+If you see the literal URL (e.g., https://...), the build is correct, and the issue might be browser caching.
+
+If it still fails: The Hardcode Override
+If Vercel continues to ignore your environment variable, you can hardcode the URL to verify if it's just the environment variable system failing.
+
+Modify Login.jsx to this temporary test:
+
+JavaScript
+// TEMPORARY TEST: Hardcode the URL
+const API_URL = "https://your-backend-service.onrender.com"; 
+
+const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: formData,
+});
+If this temporary test works, the problem is definitively the Vercel Environment Variables setup. If this also fails, then there is a configuration error in your Vercel "Root Directory" settings that is causing Vercel to build the wrong project files.
+
+Does the hardcoded URL test work? (This will tell us if we need to fix Vercel settings or your code.)
+
+Add Environment Variable
+
+key
+
+VITE_API_URL
+
+value
+
+https://dealership-api-m991.onrender.com
+
+
+
+Note (Optional)
+
+Where to rotate, or who to contact
+
+Environments
+
+Branch
+
+
+
+This is the correct action. Now that you have added the variable, you must finalize the process so the build system actually registers it:
+
+Select the Environment: Make sure Production is checked under the "Environments" section.
+
+Save the Variable: Click the Save button.
+
+Trigger the Redeploy:
+
+Navigate to your project's Deployments tab.
+
+Select the latest deployment (or the most recent one on your main branch).
+
+Click the three dots (...) and choose Redeploy.
+
+Crucial: Ensure "Use existing Build Cache" is UNCHECKED.
+
+Why this works
+Adding the variable in the dashboard only makes it available for future builds. By clicking "Redeploy" and clearing the cache, you force Vercel to look at your Login.jsx file, see the VITE_API_URL variable, look up the value you just saved, and bake it into the code as [https://dealership-api-m991.onrender.com](https://dealership-api-m991.onrender.com) before the site goes live.
+
+Once the build completes, the ${import.meta.env.VITE_API_URL} string will be gone from your site's JavaScript, replaced by the actual URL, and your 404 errors will be resolved.
+
+Please try this redeploy now—does the new build succeed and fix the 404s?
+
+VITE_API_URL
+
+SensitiveProduction
+
+It looks like you have correctly added the VITE_API_URL environment variable in your Vercel project settings, and it is marked for Production.
+
+Because you are still seeing the 404 errors, your production environment is likely still running a previously built version of the site that doesn't "know" about this new variable yet.
+
+Final Step: Trigger the Redeploy
+Please follow these steps exactly in your Vercel Dashboard to apply the new variable:
+
+Go to the Deployments tab in your Vercel project dashboard.
+
+Find your latest deployment (it should be at the top of the list).
+
+Click the three dots (...) next to it.
+
+Select Redeploy.
+
+Very Important: A popup will appear. Make sure the checkbox for "Use existing Build Cache" is unchecked.
+
+Click Redeploy to start the new build.
+
+Why this is necessary
+Vite "bakes" environment variables into your application code during the build phase. If you added the variable after the last build finished, your site's JavaScript code literally doesn't have the URL inside it. By unchecking the "Build Cache" option, you force Vercel to look at your newly added Environment Variable and inject that URL into your Dashboard.jsx, Login.jsx, and Register.jsx files properly.
+
+Once this deployment finishes, your site should no longer show ${import.meta.env.VITE_API_URL} in the console and your API calls should reach your Render backend.
+
+Does the deployment succeed after you follow these steps?
+
+yes its success in incognito
+
+That is fantastic news! It works in Incognito because your browser finally received the fresh, correctly built files where the API URL is properly injected, free from your old local cache.
+
+To finish this up:
+Clear your regular browser cache: Now that you know it works, you can clear your main browser's cache (or just force-refresh with Ctrl + F5) so your standard browser session also uses the fixed version.
+
+Verify your work: Test the Login or Dashboard to ensure the API calls are actually reaching your Render backend without the 404 error.
+
+You have successfully:
+
+Separated your project correctly (Frontend on Vercel, Backend on Render).
+
+Corrected template literal syntax in your React code.
+
+Properly configured Vercel's Environment Variables and build process.
+
+Great persistence in tracking down those bugs! Is everything loading as expected in your dashboard now?
+
+
