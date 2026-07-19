@@ -81,7 +81,7 @@ export default function Dashboard() {
 
     const fetchVehicles = async (token) => {
         try {
-            const response = await fetch("http://localhost:8000/api/vehicles", {
+            const response = await fetch("${import.meta.env.VITE_API_URL}/api/vehicles", {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             if (response.ok) {
@@ -103,7 +103,7 @@ export default function Dashboard() {
     const handlePurchase = async (vehicleId) => {
         const token = localStorage.getItem("token");
         try {
-            const response = await fetch(`http://localhost:8000/api/vehicles/${vehicleId}/purchase`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}/purchase`, {
                 method: "POST",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -134,7 +134,7 @@ export default function Dashboard() {
         };
 
         try {
-            const response = await fetch("http://localhost:8000/api/vehicles", {
+            const response = await fetch("${import.meta.env.VITE_API_URL}/api/vehicles", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -176,7 +176,7 @@ export default function Dashboard() {
 
         const token = localStorage.getItem("token");
         try {
-            const response = await fetch(`http://localhost:8000/api/vehicles/${vehicleId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}`, {
                 method: "DELETE",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -210,7 +210,7 @@ export default function Dashboard() {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/vehicles/${vehicleId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -241,7 +241,7 @@ export default function Dashboard() {
     const handleRestock = async (vehicleId) => {
         const token = localStorage.getItem("token");
         try {
-            const response = await fetch(`http://localhost:8000/api/vehicles/${vehicleId}/restock`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${vehicleId}/restock`, {
                 method: "POST",
                 headers: { "Authorization": `Bearer ${token}` }
             });
