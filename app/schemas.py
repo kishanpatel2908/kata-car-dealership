@@ -18,6 +18,19 @@ class VehicleBase(BaseModel):
     category: str
     price: float
     quantity: int
+    @field_validator('make', 'model', 'category')
+    @classmethod
+    def must_not_be_empty(cls, v: str) -> str:
+        if not v or v.strip() == "":
+            raise ValueError('Field cannot be empty')
+        return v
+
+    @field_validator('price')
+    @classmethod
+    def price_must_be_positive(cls, v: float) -> float:
+        if v <= 0:
+            raise ValueError('Price must be greater than zero')
+        return v
 
 class VehicleCreate(VehicleBase):
     pass

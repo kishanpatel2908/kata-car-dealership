@@ -223,8 +223,13 @@ export default function Dashboard() {
             </div>
             <div className="flex-1 min-w-[150px]">
             <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Category</label>
-            <select className="w-full border p-2 rounded" value={newVehicle.category} onChange={e => setNewVehicle({...newVehicle, category: e.target.value})}>
-            <option value="">Select...</option>
+            <select
+            required
+            className="w-full border p-2 rounded"
+            value={newVehicle.category || ""}
+            onChange={e => setNewVehicle({...newVehicle, category: e.target.value})}
+            >
+            <option value="" disabled>Select Category</option>
             <option value="Sedan">Sedan</option>
             <option value="SUV">SUV</option>
             <option value="Sports">Sports</option>
@@ -297,7 +302,7 @@ export default function Dashboard() {
                 {/* Category Dropdown (Maintains position) */}
                 <select
                 className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded font-bold uppercase border border-gray-400"
-                value={editForm.category}
+                value={editForm.category || "Sedan"} // Default to "Sedan" if blank
                 onChange={e => setEditForm({...editForm, category: e.target.value})}
                 >
                 <option value="Sedan">Sedan</option>
@@ -305,7 +310,6 @@ export default function Dashboard() {
                 <option value="Sports">Sports</option>
                 <option value="Luxury">Luxury</option>
                 </select>
-                </div>
 
                 {/* ... rest of your price/stock inputs ... */}
                 </div>
