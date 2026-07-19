@@ -81,7 +81,7 @@ export default function Dashboard() {
 
     const fetchVehicles = async (token) => {
         try {
-            const response = await fetch("${import.meta.env.VITE_API_URL}/api/vehicles", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             if (response.ok) {
@@ -134,7 +134,7 @@ export default function Dashboard() {
         };
 
         try {
-            const response = await fetch("${import.meta.env.VITE_API_URL}/api/vehicles", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
