@@ -1,8 +1,4 @@
-Here is a complete, well-structured `README.md` template tailored to the application you just built. You can copy this directly into your repository.
 
----
-
-```markdown
 # Car Dealership Inventory System 🚗
 
 A full-stack, single-page application (SPA) and RESTful API built to manage a car dealership's inventory. This project was developed following Test-Driven Development (TDD) principles as part of a comprehensive software engineering Kata.
@@ -180,6 +176,4 @@ I utilized Gemini primarily as a pair-programmer for debugging, environment conf
 **Reflection:**
 Using AI significantly sped up the debugging process, especially when dealing with misleading error messages (like the fake CORS error). It acted as a highly effective sounding board that helped me pinpoint syntax errors and configuration gaps much faster than I would have by manually digging through documentation.
 
-```
 
-``` 
