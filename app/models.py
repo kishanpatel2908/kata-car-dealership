@@ -12,7 +12,6 @@ class User(Base):
 
 class Vehicle(Base):
     __tablename__ = "vehicles"
-
     id = Column(Integer, primary_key=True, index=True)
     make = Column(String, index=True, nullable=False)
     model = Column(String, index=True, nullable=False)

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict,field_validator
 from typing import Optional
 
 class UserCreate(BaseModel):
@@ -18,6 +18,7 @@ class VehicleBase(BaseModel):
     category: str
     price: float
     quantity: int
+
     @field_validator('make', 'model', 'category')
     @classmethod
     def must_not_be_empty(cls, v: str) -> str:

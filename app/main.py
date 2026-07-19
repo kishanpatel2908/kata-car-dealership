@@ -75,14 +75,37 @@ def login_user(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = D
 def get_vehicles(db: Session = Depends(database.get_db), current_user: models.User = Depends(auth.get_current_user)):
     return db.query(models.Vehicle).all()
 
+@app.get("/api/vehicles/search", response_model=List[schemas.VehicleResponse])
+def search_vehicles(
+    make: str = None,
+    model: str = None,
+    category: str = None,
+    min_price: float = None,
+    max_price: float = None,
+    db: Session = Depends(database.get_db)
+):
+    query = db.query(models.Vehicle)
+    if make: query = query.filter(models.Vehicle.make.ilike(f"%{make}%"))
+    if model: query = query.filter(models.Vehicle.model.ilike(f"%{model}%"))
+    if category: query = query.filter(models.Vehicle.category == category)
+    if min_price is not None: query = query.filter(models.Vehicle.price >= min_price)
+    if max_price is not None: query = query.filter(models.Vehicle.price <= max_price)
+    return query.all()
+
 @app.post("/api/vehicles", response_model=schemas.VehicleResponse)
 def create_vehicle(
     vehicle: schemas.VehicleCreate,
     db: Session = Depends(database.get_db),
-    current_admin: models.User = Depends(auth.get_current_admin)
+    # Ensure this parameter is named 'current_user', NOT 'current_admin'
+    current_user: models.User = Depends(auth.get_current_user)
 ):
-    # The get_current_admin dependency already handles the authorization check!
-    new_vehicle = models.Vehicle(**vehicle.model_dump())
+    vehicle_data = vehicle.model_dump()
+
+    # Now this will correctly reference the 'current_user' parameter
+    if not current_user.is_admin:
+        vehicle_data["quantity"] = 0
+
+    new_vehicle = models.Vehicle(**vehicle_data)
     db.add(new_vehicle)
     db.commit()
     db.refresh(new_vehicle)
@@ -113,18 +136,27 @@ def get_user_profile(current_user: models.User = Depends(auth.get_current_user))
         "is_admin": current_user.is_admin
     }
 
-@app.put("/api/vehicles/{vehicle_id}", response_model=schemas.VehicleResponse)
-def update_vehicle(vehicle_id: int, vehicle_update: schemas.VehicleUpdate, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
-    # ONLY Admins can edit
-    if not current_user.is_admin:
-        raise HTTPException(status_code=403, detail="Not authorized")
+# --- UPDATE VEHICLE ENDPOINTS ---
 
+@app.put("/api/vehicles/{vehicle_id}", response_model=schemas.VehicleResponse)
+def update_vehicle(
+    vehicle_id: int,
+    vehicle_update: schemas.VehicleUpdate,
+    db: Session = Depends(database.get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
     vehicle = db.query(models.Vehicle).filter(models.Vehicle.id == vehicle_id).first()
     if not vehicle:
         raise HTTPException(status_code=404, detail="Vehicle not found")
 
-    # Update only the provided fields
+    # Use model_dump() instead of dict() for Pydantic V2 compatibility
     update_data = vehicle_update.model_dump(exclude_unset=True)
+
+    # If NOT admin, prevent updating the 'quantity' field
+    if not current_user.is_admin and "quantity" in update_data:
+        raise HTTPException(status_code=403, detail="Only admins can modify stock quantity")
+
+    # Apply updates
     for key, value in update_data.items():
         setattr(vehicle, key, value)
 
@@ -145,3 +177,20 @@ def delete_vehicle(
     db.delete(vehicle)
     db.commit()
     return {"message": "Vehicle deleted successfully"}
+
+@app.post("/api/vehicles/{vehicle_id}/restock")
+def restock_vehicle(vehicle_id: int, quantity: int, db: Session = Depends(database.get_db), current_admin: models.User = Depends(auth.get_current_admin)):
+    vehicle = db.query(models.Vehicle).filter(models.Vehicle.id == vehicle_id).first()
+    if not vehicle:
+        raise HTTPException(status_code=404, detail="Vehicle not found")
+    vehicle.quantity += quantity
+    db.commit()
+    return {"message": "Restocked successfully", "new_quantity": vehicle.quantity}
+
+@app.get("/api/vehicles/search", response_model=List[schemas.VehicleResponse])
+def search_vehicles(make: str = None, model: str = None, category: str = None, db: Session = Depends(database.get_db)):
+    query = db.query(models.Vehicle)
+    if make: query = query.filter(models.Vehicle.make.ilike(f"%{make}%"))
+    if model: query = query.filter(models.Vehicle.model.ilike(f"%{model}%"))
+    if category: query = query.filter(models.Vehicle.category == category)
+    return query.all()
